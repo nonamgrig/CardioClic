@@ -9,6 +9,10 @@ import { WaitComponent } from './modules/shared/wait/wait.component';
 import { DialogboxComponent } from './modules/shared/dialogbox/dialogbox.component';
 import { PatientComponent } from './modules/patient/patient/patient.component';
 import { QuestionComponent } from './modules/question/question/question.component';
+import { PageQuestionComponent } from './modules/page-question/page-question.component';
+import { InfoComponent } from './modules/info/info.component';
+import { AboutComponent } from './modules/about/about.component';
+import { BackComponent } from './modules/shared/back/back.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { QuestionComponent } from './modules/question/question/question.componen
     WaitComponent,
     DialogboxComponent,
     PatientComponent,
-    QuestionComponent
+    QuestionComponent,
+    PageQuestionComponent,
+    InfoComponent,
+    AboutComponent,
+    BackComponent
   ],
   imports: [
     BrowserModule,

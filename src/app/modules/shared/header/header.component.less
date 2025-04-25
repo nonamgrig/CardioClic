@@ -1,0 +1,46 @@
+.navbar {
+    background-color: rgb(255, 209, 209);  /* Couleur de fond de la navbar */
+    padding: 0;  /* Enlève l'espacement pour contrôler précisément la hauteur */
+    height: 80px;  /* Fixe la hauteur de la barre de navigation */
+    display: flex;
+    align-items: center;  /* Centrer verticalement les éléments */
+    justify-content: space-between;  /* Placer le logo à gauche et le reste à droite */
+    padding: 0 20px;  /* Un peu de padding à gauche et à droite de la navbar */
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;  /* Centrer verticalement l'image */
+}
+
+.navbar-right {
+    list-style-type: none;  /* Enlever les puces des éléments de la liste */
+    display: flex;          /* Afficher les éléments en ligne */
+    margin: 0;              /* Enlever la marge par défaut */
+    padding: 0;             /* Enlever le padding */
+    justify-content: flex-end;  /* Placer les liens à droite */
+}
+
+.navbar-right li {
+    margin: 0 15px;  /* Espacement entre les éléments */
+}
+
+.navbar-logo {
+    width: auto;             /* Largeur automatique pour respecter le ratio */
+    height: 100%;            /* Force l'image à occuper 100% de la hauteur */
+    max-height: 80px;        /* Assurer que l'image ne dépasse pas 80px */
+    object-fit: contain;     /* Assure que l'image garde ses proportions sans déformation */
+}
+
+.navbar a {
+    color: black;           /* Couleur du texte des liens */
+    text-decoration: none;   /* Enlever le soulignement des liens */
+    font-size: 18px;
+    padding: 10px 15px;      /* Espacement autour des liens */
+    display: block;
+}
+
+.navbar a:hover {
+    background-color: #575757;  /* Couleur de fond au survol */
+    border-radius: 5px;        /* Arrondir les coins au survol */
+}

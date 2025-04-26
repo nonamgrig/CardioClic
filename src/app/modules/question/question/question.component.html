@@ -1,4 +1,12 @@
 <div class="question">
+    <form #question="ngForm" (ngSubmit)="onSubmitForm(question)">
+        <label for="question1">Quel est l'âge du patient ?</label>
+        <input type="texte" id="question1" name="reponse1" [(ngModel)]="reponse1">
+        <label for="question2">Quel est le sexe du patient ?</label>
+        <input type="texte" id="question1" name="reponse2" [(ngModel)]="reponse2">
+        <button type="submit">Valider</button>
+    </form>
+
     <h2 class="title">La question</h2>
     <p class="text">la première réponse</p>
     <p class="text">la deuxième réponse</p>

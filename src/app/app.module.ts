@@ -13,6 +13,7 @@ import { PageQuestionComponent } from './modules/page-question/page-question.com
 import { InfoComponent } from './modules/info/info.component';
 import { AboutComponent } from './modules/about/about.component';
 import { BackComponent } from './modules/shared/back/back.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BackComponent } from './modules/shared/back/back.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    FormsModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

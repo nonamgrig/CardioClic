@@ -23,7 +23,7 @@
 
     <div *ngIf="question.type == 'prop'">
         <div *ngFor="let response of getResponseArray()">
-          <button (click)="userAnswer = response.key; onAnswerSubmit()">{{response.label}}</button>
+          <button (click)="userAnswer = response.label; selectedAnswer = response.key;  onAnswerSubmit()">{{response.label}}</button>
         </div>
     </div>
 

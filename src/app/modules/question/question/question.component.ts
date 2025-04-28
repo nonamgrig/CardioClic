@@ -15,6 +15,7 @@ export class QuestionComponent implements OnInit, OnChanges {
   @Input() questionId: number = 0;
   question: Question | undefined;
   userAnswer: any = null;
+  selectedAnswer : any = null; 
 
   constructor(
     private router: Router,
@@ -33,6 +34,7 @@ export class QuestionComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // Si le questionId change, on recharge la question
     if (changes['questionId']) {
+      this.userAnswer=""; 
       this.loadQuestion();
     }
   }
@@ -53,16 +55,16 @@ export class QuestionComponent implements OnInit, OnChanges {
       return Object.keys(this.question.responses).map(key => {
         return { key: key, label: this.question?.responses? this.question.responses[key] : null };
       });
-    } else 
-    { return null}
+    } else {return null}
   }
 
   onAnswerSubmit(): void {
     if (this.questionId) {
       //enregistrer la réponse de l'utilisateur, utile ? 
-      this.texteService.saveUserAnswer(this.questionId.toString(), this.userAnswer);
+      console.log("réponse", this.userAnswer); 
+
       // Trouver la question suivante en fonction de la réponse
-      const nextQuestionId = this.texteService.getNextQuestion(this.questionId, this.userAnswer);
+      const nextQuestionId = this.texteService.getNextQuestion(this.questionId, this.selectedAnswer);
       if (nextQuestionId) {
         this.router.navigate(['/question', nextQuestionId]);
       } else {

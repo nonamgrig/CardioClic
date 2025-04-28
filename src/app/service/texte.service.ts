@@ -93,13 +93,15 @@ export class TexteService {
     let nextId;
 
     // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
+    // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
     if (next && typeof next === 'object') {
-      if (answer === 'reponse1') {
-        next = next.next1;  // Rediriger vers "next1" si la réponse 1 est choisie
+      if (answer == 'reponse1') {
+        next = next.next1;  
       } else if (answer === 'reponse2') {
-        next = next.next2;  // Rediriger vers "next2" si la réponse 2 est choisie
+        next = next.next2;  
+      } else if (answer === 'reponse3') {
+        next = next.next3;  
       }
-      
     } 
 
     nextId =  getIndexFromKey(this.questions, next) + 1
@@ -108,14 +110,7 @@ export class TexteService {
     return nextId ? nextId.toString() : null;
   }
 
-  // Fonction pour enregistrer la réponse de l'utilisateur à une question
-  saveUserAnswer(questionId: string, answer: string): void {
-    const question = this.questions.get(questionId);
-    console.log("question à enregistrer", question); 
-    if (question) {
-      question.userAnswer = answer;  // Sauvegarder la réponse
-    }
-  }
+  
 
   //récupérer un text spécifique en fonction de la clé
   getText(key: string): string {

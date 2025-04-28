@@ -29,18 +29,75 @@
             }, 
             "next": {
                 "next1": "apparition", 
-                "next2": "CKD"
+                "next2": "prevention"
             }
         },
         "apparition": {
             "question": "Année d'apparition du diabète ?", 
             "type": "text", 
-            "next": "CKD"
+            "next": "prevention"
         },
+        "prevention": {
+            "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
+            "type": "prop", 
+            "reponse": {
+                "reponse1": "Prévention Primaire", 
+                "reponse2": "Prévention Secondaire", 
+                "reponse3": "J'ai un doute, aidez moi !"
+            }, 
+            "next": {
+                "next1": "CKD", 
+                "next2": "TERCV", 
+                "next3": "aide"
+            }
+        }, 
         "CKD": {
-            "question": "Calcul de la clairance", 
+            "question": "Calcul de la clairance CKD EPI", 
+            "type": "text", 
+            "next": "ratio"
+        },
+        "aide": {
+            "question": "Aide pour établir la situation de prévention du patient", 
+            "type": "prop", 
+            "reponse": {
+                "reponse1": "Finalement Prévention Primaire", 
+                "reponse2": "Finalemnet Prévention Secondaire"
+            },
+            "next": {
+                "next1": "CKD", 
+                "next2": "TERCV"
+            }
+        },
+        "ratio": {
+            "question": "Quel est le ratio albumine/creatinine du patient ?", 
+            "type": "text", 
+            "next": "score"
+        },
+        "score": {
+            "question": "Calcul du SCORE 2 (attention en fonction du cas)", 
+            "type": "text", 
+            "next": "FRCV"
+        },
+        "TERCV": {
+            "question": "Votre patient a un risque cardiovasculaire très élévé", 
+            "type": "text", 
+            "next": ""
+        },
+        "ERCV": {
+            "question": "Votre patient a un risque cardiovasculaire élévé", 
+            "type": "text", 
+            "next": ""
+        },
+        "MRCV": {
+            "question": "Votre patient a un risque cardiovasculaire modéré", 
+            "type": "text", 
+            "next": ""
+        },
+        "FRCV": {
+            "question": "Votre patient a un risque cardiovasculaire faible", 
             "type": "text", 
             "next": ""
         }
+
     }
 }

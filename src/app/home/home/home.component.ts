@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TexteService } from '../../service/texte.service';
 
 @Component({
   selector: 'app-home',
@@ -8,13 +9,13 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.less'
 })
 export class HomeComponent {
-  constructor( private router: Router ) {
+  constructor( private router: Router, public texteService : TexteService) {
   }
 
   ngOnInit() {
   }
 
   onGo(event:Event) {
-    this.router.navigate(["question"]); 
+    this.router.navigate(["question/1"]); 
   }
 }

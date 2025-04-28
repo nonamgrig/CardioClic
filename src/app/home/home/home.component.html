@@ -1,12 +1,15 @@
 <app-header></app-header>
 <div class="home"> 
     <div class="headline">
-        <B><h2 class="title">Mon patient est-il à fort risque cardio-vasculaire ? </h2></B>
-        <B><h2 class="title">Je n'hésite plus, je fais le test</h2></B>
-        <p class="text">Cliquer sur le bouton ci-dessous pour commencer l'évaluation du risque cardique</p>
+        <h2 class="title">{{ texteService.getText('home.title')}} </h2>
+        <h2 class="title">{{ texteService.getText('home.subtitle')}}</h2>
+        <p class="text">{{ texteService.getText('home.text')}}</p>
     </div>
     <button class="btn" name="go" (click)="onGo($event)"> Commencer</button>
-    <app-info></app-info>
+    <app-info
+        [title]="'Test'"
+        [text]="'Ceci est l\'info'"
+    ></app-info>
 </div>
 
 

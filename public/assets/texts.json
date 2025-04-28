@@ -1,0 +1,46 @@
+{
+    "home": {
+        "title": "Mon patient est-il à fort risque cardio-vasculaire ?",
+        "subtitle": "Je n'hésite plus, je fais le test", 
+        "text": "Cliquer sur le bouton ci-dessous pour commencer l'évaluation du risque cardique", 
+        "information":"Informations sur comment va se dérouler le test, les données à avoir ..."
+    }, 
+    "questions" : {
+        "age": {
+            "question": "Quel est l'âge de votre patient ?", 
+            "type": "text", 
+            "next": "sexe"
+        }, 
+        "sexe": {
+            "question": "Quel est le sexe de votre patient ?",
+            "type": "prop", 
+            "reponse": {
+                "reponse1": "Homme", 
+                "reponse2": "Femme"
+            }, 
+            "next": "diabete"
+        }, 
+        "diabete": {
+            "question": "Votre patient est-il diabétique ?", 
+            "type": "prop", 
+            "reponse": {
+                "reponse1": "Oui", 
+                "reponse2": "Non"
+            }, 
+            "next": {
+                "next1": "apparition", 
+                "next2": "CKD"
+            }
+        },
+        "apparition": {
+            "question": "Année d'apparition du diabète ?", 
+            "type": "text", 
+            "next": "CKD"
+        },
+        "CKD": {
+            "question": "Calcul de la clairance", 
+            "type": "text", 
+            "next": ""
+        }
+    }
+}

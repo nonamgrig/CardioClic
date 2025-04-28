@@ -2,7 +2,10 @@
 <div class="container">
     <div class="left-section">
         <app-back (click)="goBack()"></app-back>
-        <app-question></app-question>
+        <app-question
+            *ngIf= "questionId" 
+            [questionId]="questionId">           
+        </app-question>
         <div class="centered-component">
             <app-info></app-info>
         </div>

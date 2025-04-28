@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-info',
@@ -8,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class InfoComponent {
 
+  @Input() title: string = ''; 
+  @Input() text: string = ''; 
 }

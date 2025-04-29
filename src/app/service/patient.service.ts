@@ -1,19 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { HomeComponent } from '../home/home/home.component';
 
 export interface Patient {
   age: number | null;
-  sexe : string | null; // homme ou femme 
-  diabetique : boolean | null; 
+  sexe : string | null; // Homme ou Femme 
+  diabetique : string | null; // Oui Non
   ageApparition : number| null; 
   prevention : string | null; //primaire ou secondaire
   creatinine : number | null; 
-  ascendance : number | null; // 0 = non; 1 = oui; 2 = ne se prononce pas
+  ascendance : string | null; // oui non ne se prononce pas 
   dfge: number | null; 
-  ratio : number | null; 
-  neuropathie : boolean | null; 
-  retinopathie : boolean | null; 
+  ratio : number | string | null; //soit la valeur, soit non dispo
+  rationondispo : string | null; 
+  neuropathie : string | null; // Oui Non
+  retinopathie : string | null; // Oui Non
   pa : number | null; 
   cholesTotal : number | null; 
   hdl : number | null; 
@@ -42,6 +44,7 @@ export class PatientService {
     ascendance: null,
     dfge: null,
     ratio: null,
+    rationondispo: null,
     neuropathie: null,
     retinopathie: null,
     pa: null,
@@ -86,22 +89,28 @@ export class PatientService {
   //TO DO
   patientKeys: (keyof Patient)[] = [
     'age', 'sexe', 'diabetique', 'ageApparition', 'prevention',
-    'creatinine', 'ascendance', 'dfge', 'ratio',
+    'creatinine', 'ascendance', 'dfge', 'ratio', 'rationondispo', 
     'neuropathie', 'retinopathie', 'pa', 'cholesTotal',
     'hdl', 'hba1c', 'fumeur', 'score2', 'score2op', 'score2diabet'
   ];
 
+  hidden :   (keyof Patient)[]  = [
+    
+  ]; 
+
   //pour mettre à jour un des champs de patient
   updateField(fieldName: string, value: any) {
-    if (this.patientKeys.includes(fieldName as keyof Patient)) {
-      const key = fieldName as keyof Patient;
+    const key = fieldName as keyof Patient;
+  
+    if (this.patientKeys.includes(key) && !this.hidden.includes(key)) {
       this.patientData[key] = value;
       this.patientSubject.next({ ...this.patientData });
       console.log(`Champ "${key}" mis à jour avec :`, value);
     } else {
-      console.warn('Clé patient inconnue :', fieldName);
+      console.warn('Mise à jour ignorée pour la clé :', key);
     }
   }
+  
   
 
   //pour récupérer le patient actuel
@@ -121,6 +130,7 @@ export class PatientService {
       ascendance: null,
       dfge: null,
       ratio: null,
+      rationondispo: null, 
       neuropathie: null,
       retinopathie: null,
       pa: null,
@@ -139,4 +149,45 @@ export class PatientService {
     console.log('Patient réinitialisé à null.');
   }
   
+  calculDFGe(): number {
+    console.log("lancement calcul dfge", this.patientData)
+
+    let k; 
+    let alpha; 
+    let fem; 
+    switch (this.patientData.sexe) {
+      case "Homme":
+        k = 79.6;
+        alpha = -0.411;
+        fem = 1; 
+        break;
+      case "Femme":
+        k = 61.9;
+        alpha = -0.329;
+        fem = 1.018; 
+        break;
+      default:
+        k = 0; 
+        alpha = 0; 
+        fem = 1; 
+        break;
+    }; 
+
+    let asc; 
+    switch (this.patientData.ascendance) {
+      case "Oui": //afro caribéen
+         asc= 1.159; 
+        break;
+      default : // non ou bien ne se prononce pas 
+        asc = 1;
+        break;
+    }
+
+    const CR = this.patientData.creatinine ? this.patientData.creatinine : 0; 
+    const age = this.patientData.age ? this.patientData.age : 0;
+
+    const DFGe = 141 * Math.pow(Math.min(CR/k, 1), alpha) * Math.pow(Math.max(CR/k, 1), -1.209)*Math.pow(0.993,age)* fem * asc; 
+
+    return DFGe 
+  }
 }

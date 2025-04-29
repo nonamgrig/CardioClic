@@ -113,6 +113,20 @@ export class QuestionComponent implements OnInit, OnChanges {
         })
       }
 
+      //pour les questions avec un calcul, on appelle la fonction de calcul dans patientService
+      switch (this.question?.title) {
+        case "CKD": //afro caribéen
+          let DFGe = this.patientService.calculDFGe().toFixed(2) //'avec 2 chiffres après la virgule
+          this.patientService.updateField("dfge", DFGe); 
+          break;
+        case "ratio": 
+          
+          break; 
+        default : 
+        
+          break;
+      }
+
       // Trouver la question suivante en fonction de la réponse
       const nextQuestionId = this.texteService.getNextQuestion(this.questionId, this.selectedAnswer);
       if (nextQuestionId) {

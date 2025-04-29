@@ -42,6 +42,10 @@
             "headline" : "Albumine/créatinine",
             "unit" : "mg/g"
         },
+        "rationondispo" : {
+            "headline" : "Albumine/créatinine", 
+            "unit" : ""
+        },
         "pa": {
             "headline" : "PA systolique",
             "unit" : "mmHg"
@@ -138,7 +142,7 @@
         }, 
         "CKD": {
             "question": "Calcul de la clairance par la formule CKD-EPI", 
-            "info": "Pourquoi c'est utile la clairance", 
+            "info": "Ne doit être utilisé que si la fonction rénale du patient est stable", 
             "type": "subquestion", 
             "subquestion" : {
                 "creatinine" : {
@@ -197,7 +201,23 @@
         },
         "ratio": {
             "question": "Quel est le ratio albumine/creatinine du patient ?", 
-            "type": "text", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "ratio" : {
+                    "question" : "Valeur du ratio",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "rationondispo" : {
+                    "question" : "", 
+                    "type": "prop", 
+                    "responses" : {
+                        "response1": "Non disponible"
+                    }, 
+                    "next": ""
+                }
+            },
             "next": "score"
         },
         "score": {
@@ -243,22 +263,22 @@
         },
         "TERCV": {
             "question": "Votre patient a un risque cardiovasculaire très élévé", 
-            "type": "text", 
+            "type": "", 
             "next": ""
         },
         "ERCV": {
             "question": "Votre patient a un risque cardiovasculaire élévé", 
-            "type": "text", 
+            "type": "", 
             "next": ""
         },
         "MRCV": {
             "question": "Votre patient a un risque cardiovasculaire modéré", 
-            "type": "text", 
+            "type": "", 
             "next": ""
         },
         "FRCV": {
             "question": "Votre patient a un risque cardiovasculaire faible", 
-            "type": "text", 
+            "type": "", 
             "next": ""
         }
 

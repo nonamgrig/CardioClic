@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Question } from './question.service';
+import { PatientService } from './patient.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class TexteService {
   public questions: Map<string, Question> = new Map();
   private isLoaded: boolean = false;  // Flag pour vérifier si les questions ont été chargées
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient, 
+    private patientService : PatientService, 
+  ) {}
 
   // Méthode pour charger les textes depuis le fichier JSON
   loadTexts(): Observable<any> {
@@ -89,6 +93,77 @@ export class TexteService {
       return null;  // Si la question n'existe pas, retourner null
     }
 
+    const currentPatient = this.patientService.getCurrentPatient()
+    console.log("le patient dans test", currentPatient)
+    
+    let nextParticulier; 
+    if (currentPatient.diabetique =="Non") {
+      //pour certaines questions, on doit influer sur la question suivante en fonction des réponses et des résultats
+      if (currentQuestion.title == "CKD") {
+        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 30 ) {
+          //directement vers très haut risque 
+          nextParticulier = "TERCV"; 
+        } else {
+          //vers ratio donc inchangé 
+        }
+      } else if (currentQuestion.title == "ratio") {
+        if (currentPatient.ratio && Number(currentPatient.ratio) < 300) {
+          //direct risque
+          nextParticulier = "ERCV"
+        } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+          //en fonction du dfge, on affiche pas le même message dans pop up
+          if (currentPatient.dfge && Number(currentPatient.dfge)< 45) {
+            //message 1
+          } else if (currentPatient.dfge && Number(currentPatient.dfge)< 60) {
+            //message 2
+          } else { //> 60 
+            //message 3
+          }
+        } else {
+          //vers score donc inchangé
+        }           
+      } else if (currentQuestion.title == "score") {
+        // en fonction du résultat du calcul du score et de l'âge 
+
+      }
+    } else { //diabétique 
+      //TO DO changer les valeurs 
+      if (currentPatient.neuropathie == "Oui" || currentPatient.retinopathie =="Oui") {
+        //vers haut risque direct
+        nextParticulier = "TERCV"
+      } else if (currentQuestion.title == "CKD") {
+        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 30 ) {
+          //directement vers très haut risque 
+          nextParticulier = "TERCV"; 
+        } else {
+          //vers ratio donc inchangé 
+        }
+      } else if (currentQuestion.title == "ratio") {
+        if (currentPatient.ratio && Number(currentPatient.ratio) < 300) {
+          //direct risque
+          nextParticulier = "TERCV"
+        } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+          //en fonction du dfge, on affiche pas le même message dans pop up
+          if (currentPatient.dfge && Number(currentPatient.dfge)< 45) {
+            //message 1
+          } else if (currentPatient.dfge && Number(currentPatient.dfge)< 60) {
+            //message 2
+          } else { //> 60 
+            //message 3
+          }
+        } else {
+          //vers score donc inchangé
+        }           
+      } else if (currentQuestion.title == "score") {
+        // en fonction du résultat du calcul du score et de l'âge 
+
+      }
+
+
+
+    }
+    
+
     let next = currentQuestion.nextQuestionKey; //on récupère le next de cette question
     
     let nextId;
@@ -105,8 +180,15 @@ export class TexteService {
       }
     } 
 
-    nextId =  getIndexFromKey(this.questions, next) + 1
-
+    if (nextParticulier) {
+      console.log("new nextid"); 
+      nextId = getIndexFromKey(this.questions, nextParticulier) + 1
+    } else {
+      nextId =  getIndexFromKey(this.questions, next) + 1
+    }
+    console.log("questions", this.questions); 
+    console.log("nextid", nextId);
+    
     return nextId ? nextId.toString() : null;
   }
 

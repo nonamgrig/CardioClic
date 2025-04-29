@@ -6,6 +6,7 @@ export interface Question {
   id: number;
   title: string;
   question: string;
+  info : string; 
   subquestion: { [key: string]: Question } | null;
   type: string;
   nextQuestionKey: string | { [key: string]: string } | null;

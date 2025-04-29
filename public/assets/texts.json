@@ -92,6 +92,7 @@
         }, 
         "diabetique": {
             "question": "Votre patient est-il diabétique ?", 
+            "info" : "Infos pour décrire les critères pour dire que quelqu'un est diabétique\nIl doit être ceci\nil doit être cela\n- valeur 1\n- valeur 2",
             "type": "prop", 
             "responses": {
                 "response1": "Oui", 
@@ -137,6 +138,7 @@
         }, 
         "CKD": {
             "question": "Calcul de la clairance par la formule CKD-EPI", 
+            "info": "Pourquoi c'est utile la clairance", 
             "type": "subquestion", 
             "subquestion" : {
                 "creatinine" : {

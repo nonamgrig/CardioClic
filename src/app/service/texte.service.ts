@@ -52,6 +52,7 @@ export class TexteService {
             id: index,  // Utiliser la clé comme identifiant unique
             title: key,
             question: item.question,
+            info : item.info, 
             subquestion : item.subquestion? item.subquestion : null, 
             type: item.type,
             nextQuestionKey: nextQuestionKey,

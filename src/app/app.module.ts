@@ -16,6 +16,7 @@ import { InfoComponent } from './modules/info/info.component';
 import { AboutComponent } from './modules/about/about.component';
 import { BackComponent } from './modules/shared/back/back.component';
 import { FormsModule } from '@angular/forms';
+import { FormatInfoTextPipe } from './pipe/format-info-text.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     PageQuestionComponent,
     InfoComponent,
     AboutComponent,
-    BackComponent
+    BackComponent,
+    FormatInfoTextPipe
   ],
   imports: [
     BrowserModule,

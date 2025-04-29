@@ -9,8 +9,8 @@ import { Patient, PatientService } from '../../../service/patient.service';
 })
 export class PatientComponent implements OnInit {
 
-  @Input() patient! : Patient ; 
-  situation : any; 
+  @Input() patient! : Patient; //on récupère le patient 
+  situation : any; //pour récupérer les infos autour de patient
 
   //les attributs de patient 
   patientKeys: (keyof Patient)[] = [

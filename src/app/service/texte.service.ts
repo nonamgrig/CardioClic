@@ -81,7 +81,6 @@ export class TexteService {
   // Fonction pour obtenir l'ID de la question suivante en fonction de la réponse
   getNextQuestion(currentQuestionId: number, answer: string): string | null {
     //current id est le numéro de la question
-    console.log("current Id", currentQuestionId)
     const currentQuestion = getQuestionById(this.questions, currentQuestionId); // Récupérer l'objet Question de la Map
     console.log("current question", currentQuestion); 
 
@@ -107,7 +106,6 @@ export class TexteService {
 
     nextId =  getIndexFromKey(this.questions, next) + 1
 
-    console.log("nextId", nextId); 
     return nextId ? nextId.toString() : null;
   }
 
@@ -117,7 +115,6 @@ export class TexteService {
   getText(key: string): string {
     const keys = key.split('.'); 
     let result = this.texts; 
-    console.log("keys", keys); 
     for (let k of keys) {
       result = result[k]; 
     }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TexteService } from '../../../service/texte.service';
 import { QuestionService } from '../../../service/question.service';
 import { Question } from '../../../service/question.service'
+import { PatientService } from '../../../service/patient.service';
 
 @Component({
   selector: 'app-question',
@@ -23,17 +24,16 @@ export class QuestionComponent implements OnInit, OnChanges {
     private router: Router,
     private texteService: TexteService,
     private questionService: QuestionService,
+    private patientService: PatientService,
   ) { }
 
   ngOnInit(): void {
-    console.log("Component initialized");
     // Charger les questions dès le début si ce n'est pas déjà fait
     this.texteService.loadQuestions().subscribe(() => {
       this.loadQuestion();
       //pour initialiser les questions supplémentaires
       this.initSubquestions();
     });
-    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,8 +53,6 @@ export class QuestionComponent implements OnInit, OnChanges {
     // Charger la question via le service
     const index = this.questionId - 1;  // index basé sur le questionId
     this.question = getQuestionByIndex(this.texteService.questions, index);
-
-    console.log("this question", this.question);
   }
 
   // Fonction pour transformer l'objet responses en tableau
@@ -68,13 +66,11 @@ export class QuestionComponent implements OnInit, OnChanges {
 
   //pour transformer les réponses d'une subquestion en tableau
   getResponseArraySubquestion(subquestion : Question) {
-    console.log('getResponseArraySubquestion - Subquestion reçue :', subquestion);
 
     if (subquestion?.responses){
       const array = Object.keys(subquestion.responses).map(key => {
         return { key: key, label: subquestion?.responses? subquestion.responses[key] : null };
       });
-      console.log("getResponse ArraySubquestion : ", array); 
       return array;
     } else {
       console.warn('getResponseArraySubquestion - Pas de réponses dispo')
@@ -84,22 +80,17 @@ export class QuestionComponent implements OnInit, OnChanges {
   //Fonction pour transformer subquestion en tableau
   initSubquestions() {
     const subquestions = this.question?.subquestion;
-    console.log('initSubquestions - Début', this.question);
     if (subquestions) {
       this.subquestionsArray = Object.keys(subquestions).map((key) => {
         const question = {
           ...subquestions[key],
           key: key
         };
-        console.log(`initSubquestions - Subquestion ajoutée : ${key}`, question);
         return question;
       });
     }
-  
-    console.log('initSubquestions - Fin', this.subquestionsArray);
   }
   
-
 
   onAnswerSubmit(): void {
     if (this.questionId) {
@@ -107,7 +98,20 @@ export class QuestionComponent implements OnInit, OnChanges {
       console.log('onAnswerSubmit - Réponse utilisateur :', this.userAnswer);
       console.log('onAnswerSubmit - Clé sélectionnée :', this.selectedAnswer);
       //on a stocké les réponses aux questions dans les subquestions directement
-      console.log("subquestion with answer", this.subquestionsArray); 
+      console.log("subquestion with answer", this.subquestionsArray);
+      console.log("key", this.question?.title); 
+
+      const key = this.question?.title ? this.question.title : "titre vide";
+
+      if (this.subquestionsArray.length == 0 ) {
+        //on a une seule question sur la page 
+        this.patientService.updateField(key, this.userAnswer);
+      } else {
+        //il y a plusieurs réponses à enregistrer
+        this.subquestionsArray.forEach(subquestion => {
+          this.patientService.updateField(subquestion.key, subquestion.userAnswer);
+        })
+      }
 
       // Trouver la question suivante en fonction de la réponse
       const nextQuestionId = this.texteService.getNextQuestion(this.questionId, this.selectedAnswer);

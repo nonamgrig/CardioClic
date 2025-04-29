@@ -5,6 +5,76 @@
         "text": "Cliquer sur le bouton ci-dessous pour commencer l'évaluation du risque cardique", 
         "information":"Informations sur comment va se dérouler le test, les données à avoir ..."
     }, 
+    "patient": {
+        "age": {
+            "headline" : "Age",
+            "unit" : "ans"
+        },
+        "sexe" : {
+            "headline" : "Sexe",
+            "unit" : ""
+        },
+        "diabetique": {
+            "headline" : "Diabétique",
+            "unit" : ""
+        },
+        "apparition": {
+            "headline" : "Apparition",
+            "unit" : "ans"
+        },
+        "prevention": {
+            "headline" : "Prévention",
+            "unit" : ""
+        },
+        "creatinine": {
+            "headline" : "Créatinine",
+            "unit" : "µmol/L"
+        },
+        "ascendance": {
+            "headline" : "Ascendance afro-caribéenne",
+            "unit" : ""
+        },
+        "dfge": {
+            "headline" : "DFGe (CKD-EPI)",
+            "unit" : "mL/min/1.73 m2"
+        },
+        "ratio": {
+            "headline" : "Albumine/créatinine",
+            "unit" : "mg/g"
+        },
+        "pa": {
+            "headline" : "PA systolique",
+            "unit" : "mmHg"
+        },
+        "cholesTotal": {
+            "headline" : "Cholestérol total",
+            "unit" : "mmol/L"
+        },
+        "hdl": {
+            "headline" : "HDL",
+            "unit" : "mmol/L"
+        },
+        "hba1c": {
+            "headline" : "HbA1c",
+            "unit" : "mmol/mol"
+        },
+        "fumeur": {
+            "headline" : "Fumeur actif",
+            "unit" : ""
+        },
+        "score2": {
+            "headline" : "SCORE2",
+            "unit" : "%"
+        },
+        "score2op": {
+            "headline" : "SCORE2 OP",
+            "unit" : "%"
+        },
+        "score2diabet": {
+            "headline" : "SCORE2 DIABET",
+            "unit" : "%"
+        }
+    },
     "questions" : {
         "age": {
             "question": "Quel est l'âge de votre patient ?", 
@@ -18,9 +88,9 @@
                 "response1": "Homme", 
                 "response2": "Femme"
             }, 
-            "next": "diabete"
+            "next": "diabetique"
         }, 
-        "diabete": {
+        "diabetique": {
             "question": "Votre patient est-il diabétique ?", 
             "type": "prop", 
             "responses": {
@@ -69,13 +139,13 @@
             "question": "Calcul de la clairance par la formule CKD-EPI", 
             "type": "subquestion", 
             "subquestion" : {
-                "subquestion1" : {
+                "creatinine" : {
                     "question" : "Créatinine",
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
-                "subquestion2" : {
+                "ascendance" : {
                     "question" : "Ascendance afro-caribéenne ?", 
                     "type": "prop", 
                     "responses" : {
@@ -132,31 +202,31 @@
             "question": "Calcul du SCORE 2 (attention en fonction du cas)", 
             "type": "subquestion", 
             "subquestion" : {
-                "subquestion1" : {
+                "pa" : {
                     "question" : "PA systolique (100-255mmHg)",
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
-                "subquestion2" : {
+                "cholesTotal" : {
                     "question" : "Cholestérol total (3-9 mmol/L)",
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
-                "subquestion3" : {
+                "hdl" : {
                     "question" : "HDL (0.65-1.94 mmol/L)",
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
-                "subquestion4" : {
+                "hba1c" : {
                     "question" : "HbA1c (1 - 150 mmom/mol)",
                     "type":"text", 
                     "responses": "",   
                     "next": ""
                 },
-                "subquestion5" : {
+                "fumeur" : {
                     "question" : "Fumeur actif ?",
                     "type":"prop", 
                     "responses": {

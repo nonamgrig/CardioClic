@@ -14,18 +14,18 @@
         "sexe": {
             "question": "Quel est le sexe de votre patient ?",
             "type": "prop", 
-            "reponse": {
-                "reponse1": "Homme", 
-                "reponse2": "Femme"
+            "responses": {
+                "response1": "Homme", 
+                "response2": "Femme"
             }, 
             "next": "diabete"
         }, 
         "diabete": {
             "question": "Votre patient est-il diabétique ?", 
             "type": "prop", 
-            "reponse": {
-                "reponse1": "Oui", 
-                "reponse2": "Non"
+            "responses": {
+                "response1": "Oui", 
+                "response2": "Non"
             }, 
             "next": {
                 "next1": "apparition", 
@@ -33,17 +33,31 @@
             }
         },
         "apparition": {
-            "question": "Année d'apparition du diabète ?", 
-            "type": "text", 
+            "question": "Répondez à l'une des deux questions ci-dessous", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "Quelle est l'année d'apparition du diabète ?",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "subquestion2" : {
+                    "question" : "Quel âge avait votre patient à l'apparition du diabète ?", 
+                    "type": "text", 
+                    "responses" : "",
+                    "next": ""
+                }
+            },           
             "next": "prevention"
         },
         "prevention": {
             "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
             "type": "prop", 
-            "reponse": {
-                "reponse1": "Prévention Primaire", 
-                "reponse2": "Prévention Secondaire", 
-                "reponse3": "J'ai un doute, aidez moi !"
+            "responses": {
+                "response1": "Prévention Primaire", 
+                "response2": "Prévention Secondaire", 
+                "response3": "J'ai un doute, aidez moi !"
             }, 
             "next": {
                 "next1": "CKD", 
@@ -52,17 +66,58 @@
             }
         }, 
         "CKD": {
-            "question": "Calcul de la clairance CKD EPI", 
-            "type": "text", 
+            "question": "Calcul de la clairance par la formule CKD-EPI", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "Créatinine",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "subquestion2" : {
+                    "question" : "Ascendance afro-caribéenne ?", 
+                    "type": "prop", 
+                    "responses" : {
+                        "response1": "Oui", 
+                        "response2": "Non", 
+                        "response3": "Ne souhaite pas répondre"
+                    }, 
+                    "next": ""
+                }
+            },             
             "next": "ratio"
         },
         "aide": {
-            "question": "Aide pour établir la situation de prévention du patient", 
-            "type": "prop", 
-            "reponse": {
-                "reponse1": "Finalement Prévention Primaire", 
-                "reponse2": "Finalemnet Prévention Secondaire"
-            },
+            "question": "Pour déterminer la situation de prévention de votre patient, cocher les cases ci-dessous quand la réponse est OUI", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "Votre patient présente-il les antécédents suivants ?",
+                    "type":"prop", 
+                    "responses" : {
+                        "response1": "Infarctus et/ou stent coronaire", 
+                        "response2": "Stent ou pontage ilio-démoral ou AOMI symptomatique", 
+                        "response3": "AVC ischémique, AIT ou endarteriectomie carotidienne"
+                    }, 
+                    "next": ""
+                },
+                "subquestion2" : {
+                    "question" : "Votre pateint présente-il des lésions qualifiantes de la 'présention secondaire' suite à un des examens suivants ?", 
+                    "type": "prop", 
+                    "responses" : {
+                        "response1": "Coronarographie ou coro-TDM", 
+                        "response2": "Doppler TSA ou doppler artériel des MI", 
+                        "response3": "Score calcique coronaire"
+                    }, 
+                    "descriptions": {
+                        "description1": "Atteinte coronaire tri-tronculaire OU Lésion significative >50% du tronc commun coronaire gauche OU Lésion significative >70% de l'iVA proximale", 
+                        "description2": "Sténose artérielle significative >50%",
+                        "description3": ">400 UA"
+                    },
+                    "next": ""
+                }
+            }, 
             "next": {
                 "next1": "CKD", 
                 "next2": "TERCV"
@@ -75,7 +130,43 @@
         },
         "score": {
             "question": "Calcul du SCORE 2 (attention en fonction du cas)", 
-            "type": "text", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "PA systolique (100-255mmHg)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "subquestion2" : {
+                    "question" : "Cholestérol total (3-9 mmol/L)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "subquestion3" : {
+                    "question" : "HDL (0.65-1.94 mmol/L)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "subquestion4" : {
+                    "question" : "HbA1c (1 - 150 mmom/mol)",
+                    "type":"text", 
+                    "responses": "",   
+                    "next": ""
+                },
+                "subquestion5" : {
+                    "question" : "Fumeur actif ?",
+                    "type":"prop", 
+                    "responses": {
+                        "response1": "Oui", 
+                        "response2": "Non"
+                    },  
+                    "next": ""
+                }
+                
+            },   
             "next": "FRCV"
         },
         "TERCV": {

@@ -3,22 +3,22 @@ import { Observable, of } from 'rxjs';
 
 
 export interface Question {
-  id: number;  // La clé de la question dans le JSON (ex: "age")
-  title: string;  // Le nom de la question
-  question: string;  // La question à afficher
-  type: string;  // Le type de la question (text, prop, etc.)
-  nextQuestionKey: string | { next1: string; next2: string; next3: string } | null;  // L'ID de la question suivante
-  responses?: { [key: string]: string };  // Réponses possibles (le cas échéant)
-  userAnswer?: string | null;  // Réponse de l'utilisateur
+  id: number;
+  title: string;
+  question: string;
+  subquestion: { [key: string]: Question } | null;
+  type: string;
+  nextQuestionKey: string | { [key: string]: string } | null;
+  responses?: { [key: string]: string };
+  userAnswer?: string | null;
 }
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
 
- 
-
-  constructor() { }
+  constructor() {}
 
 }

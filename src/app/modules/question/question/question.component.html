@@ -1,25 +1,5 @@
-<!-- <div class="question">
-    
-    <form #question="ngForm" (ngSubmit)="onSubmitForm(question)">
-        <label for="question1">Quel est l'âge du patient ?</label>
-        <input type="texte" id="question1" name="reponse1" [(ngModel)]="reponse1">
-        <label for="question2">Quel est le sexe du patient ?</label>
-        <input type="texte" id="question1" name="reponse2" [(ngModel)]="reponse2">
-        <button type="submit">Valider</button>
-    </form>
-
-    <h2 class="title">La question</h2>
-    <p class="text">la première réponse</p>
-    <p class="text">la deuxième réponse</p>
-</div> -->
-
 <div *ngIf="question">
     <h2>{{question.question}}</h2>
-
-    <div *ngIf="question.type == 'yesno'">
-        <button (click)="userAnswer = 'oui'; onAnswerSubmit()">Oui</button>
-        <button (click)="userAnswer = 'non'; onAnswerSubmit()">Non</button>
-    </div>
 
     <div *ngIf="question.type == 'prop'">
         <div *ngFor="let response of getResponseArray()">
@@ -31,4 +11,22 @@
         <input [(ngModel)]="userAnswer" placeholder="">
         <button (click)="onAnswerSubmit()">Valider</button>
     </div>
+
+    <div *ngIf="question.type == 'subquestion'">
+
+        <div *ngFor="let subquestion of subquestionsArray">
+            <p>{{subquestion.question}}</p>
+
+            <div *ngIf="subquestion.type == 'prop'">
+                <div *ngFor="let response of getResponseArraySubquestion(subquestion)">
+                  <button (click)="subquestion.userAnswer = response.label">{{response.label}}</button>
+                </div>
+            </div>
+        
+            <div *ngIf="subquestion.type == 'text'">
+                <input [(ngModel)]="subquestion.userAnswer" placeholder="">
+            </div>
+        </div>
+        <button (click)="onAnswerSubmit()">Valider</button>
+    </div>    
 </div>

@@ -52,9 +52,10 @@ export class TexteService {
             id: index,  // Utiliser la clé comme identifiant unique
             title: key,
             question: item.question,
+            subquestion : item.subquestion? item.subquestion : null, 
             type: item.type,
             nextQuestionKey: nextQuestionKey,
-            responses: item.reponse || undefined  // Si les réponses sont définies, les ajouter
+            responses: item.responses || undefined  // Si les réponses sont définies, les ajouter
           };
 
           // Ajouter chaque question à la Map
@@ -95,12 +96,12 @@ export class TexteService {
     // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
     // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
     if (next && typeof next === 'object') {
-      if (answer == 'reponse1') {
-        next = next.next1;  
-      } else if (answer === 'reponse2') {
-        next = next.next2;  
-      } else if (answer === 'reponse3') {
-        next = next.next3;  
+      if (answer == 'response1') {
+        next = next['next1'];  
+      } else if (answer === 'response2') {
+        next = next['next2'];  
+      } else if (answer === 'response3') {
+        next = next['next3'];  
       }
     } 
 

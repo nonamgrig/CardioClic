@@ -228,23 +228,23 @@ export class TexteService {
             nextParticulier = "TERCV"
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             // message pop up pour aller quand même au score
-            nextParticulier = "scorediabete"
+            nextParticulier = "score2diabete"
 
           } else {
             //vers score diabete
-            nextParticulier = "scorediabete"
+            nextParticulier = "score2diabete"
           } 
        
         } else { // >=60 
           if (currentPatient.ratio && Number(currentPatient.ratio) < 30) {
             //vers score diabete
-            nextParticulier = "scorediabete"
+            nextParticulier = "score2diabete"
           } else if (currentPatient.ratio && Number(currentPatient.ratio) < 300) { //entre 30 et 300
             //direct risque
             nextParticulier = "lesion"
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             // message pop up pour aller quand même au score diabete
-            nextParticulier = "scorediabete"
+            nextParticulier = "score2diabete"
           } else { // >= 300
             //direct risque
             nextParticulier = "TERCV"
@@ -257,18 +257,18 @@ export class TexteService {
           nextParticulier = "TERCV"
         } else {
           //vers score diabete
-            nextParticulier = "scorediabete"
+            nextParticulier = "score2diabete"
         }
-      } else if (currentQuestion.title == "scorediabete") {
+      } else if (currentQuestion.title == "score2diabete") {
         // en fonction du résultat du calcul du score et de l'âge 
-        if (currentPatient.score2diabet && Number(currentPatient.score2diabet) < 5) {
+        if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 5) {
           //direct risque
           nextParticulier = "FRCV"
-        } else if (currentPatient.score2diabet && Number(currentPatient.score2diabet) < 10) {
+        } else if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 10) {
           //direct risque
           nextParticulier = "MRCV"
         } 
-        else if (currentPatient.score2diabet && Number(currentPatient.score2diabet) < 20) {
+        else if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 20) {
           //direct risque
           nextParticulier = "ERCV"
         }else { //>= 20

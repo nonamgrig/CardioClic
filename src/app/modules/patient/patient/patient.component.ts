@@ -17,7 +17,7 @@ export class PatientComponent implements OnInit {
     'age', 'sexe', 'diabetique', 'ageApparition', 'prevention',
     'creatinine', 'ascendance', 'dfge', 'ratio',
     'rationondispo', 'neuropathie', 'retinopathie', 'pa', 'cholesTotal',
-    'hdl', 'hba1c', 'fumeur', 'score2', 'score2op', 'score2diabet'
+    'hdl', 'hba1c', 'fumeur', 'score2', 'score2op', 'score2diabete'
   ];
   
   constructor(
@@ -38,10 +38,4 @@ export class PatientComponent implements OnInit {
       }
     });
   }
-  
-
-  
-  
-
-
 }

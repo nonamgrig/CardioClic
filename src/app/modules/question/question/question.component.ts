@@ -127,19 +127,23 @@ export class QuestionComponent implements OnInit, OnChanges {
           
           break;
         case "CKD": 
-          let DFGe = this.patientService.calculDFGe().toFixed(2); //'avec 2 chiffres après la virgule
+          let DFGe = arrondirSiNecessaire(this.patientService.calculDFGe()); //'avec 2 chiffres après la virgule
+          if (DFGe == "0"){
+            DFGe = ""; 
+          }
           this.patientService.updateField("dfge", DFGe); 
           break;
         case "score2": 
-          let score2 = this.patientService.calculscore2().toFixed(2); 
+          let score2 = arrondirSiNecessaire(this.patientService.calculscore2()); 
           this.patientService.updateField("score2", score2); 
           break;
         case "score2op": 
-          let score2op = this.patientService.calculscore2op().toFixed(2); 
-          this.patientService.updateField("score2", score2op); 
+          let score2op = arrondirSiNecessaire(this.patientService.calculscore2op()); 
+          this.patientService.updateField("score2op", score2op); 
           break;  
-        case "scorediabet": 
-        
+        case "score2diabete": 
+          let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet()); 
+          this.patientService.updateField("score2diabete", score2diabete); 
         break; 
         default : 
         
@@ -162,4 +166,9 @@ function getQuestionByIndex(map: Map<string, Question>, index: number): Question
   const entriesArray = Array.from(map);
   const entry = entriesArray[index];
   return entry ? entry[1] : undefined;
+}
+
+function arrondirSiNecessaire(val : number) {
+  const arrondi = Math.round(val * 100) / 100;
+  return Number.isInteger(arrondi) ? arrondi.toString() : arrondi.toFixed(2);
 }

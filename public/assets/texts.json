@@ -18,7 +18,7 @@
             "headline" : "Diabétique",
             "unit" : ""
         },
-        "apparition": {
+        "ageApparition": {
             "headline" : "Apparition",
             "unit" : "ans"
         },
@@ -111,13 +111,13 @@
             "question": "Répondez à l'une des deux questions ci-dessous", 
             "type": "subquestion", 
             "subquestion" : {
-                "subquestion1" : {
+                "anneeApparition" : {
                     "question" : "Quelle est l'année d'apparition du diabète ?",
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
-                "subquestion2" : {
+                "ageApparition" : {
                     "question" : "Quel âge avait votre patient à l'apparition du diabète ?", 
                     "type": "text", 
                     "responses" : "",
@@ -220,8 +220,106 @@
             },
             "next": "score"
         },
-        "score": {
-            "question": "Calcul du SCORE 2 (attention en fonction du cas)", 
+        "lesion": {
+            "question": "Votre patient présente-il les pathologies suivantes ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "neuropathie" : {
+                    "question" : "Neuropathie diabétique ?",
+                    "type":"prop", 
+                    "responses" : {
+                        "response1": "Oui", 
+                        "response2": "Non", 
+                        "response3": "Ne sais pas"
+                    }, 
+                    "next": ""
+                },
+                "retinopathie" : {
+                    "question" : "Rétinopathie diabétique ?", 
+                    "type": "prop", 
+                    "responses" : {
+                        "response1": "Oui", 
+                        "response2": "Non", 
+                        "response3": "Ne sais pas"
+                    },  
+                    "next": ""
+                }
+            },
+            "next": "score"
+        },
+        "score2": {
+            "question": "Calcul du SCORE 2", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "pa" : {
+                    "question" : "PA systolique (100-255mmHg)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "cholesTotal" : {
+                    "question" : "Cholestérol total (3-9 mmol/L)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "hdl" : {
+                    "question" : "HDL (0.65-1.94 mmol/L)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "fumeur" : {
+                    "question" : "Fumeur actif ?",
+                    "type":"prop", 
+                    "responses": {
+                        "response1": "Oui", 
+                        "response2": "Non"
+                    },  
+                    "next": ""
+                }
+                
+            },   
+            "next": "FRCV"
+        },
+        
+        "score2op": {
+            "question": "Calcul du SCORE 2 OP", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "pa" : {
+                    "question" : "PA systolique (100-255mmHg)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "cholesTotal" : {
+                    "question" : "Cholestérol total (3-9 mmol/L)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "hdl" : {
+                    "question" : "HDL (0.65-1.94 mmol/L)",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "fumeur" : {
+                    "question" : "Fumeur actif ?",
+                    "type":"prop", 
+                    "responses": {
+                        "response1": "Oui", 
+                        "response2": "Non"
+                    },  
+                    "next": ""
+                }
+                
+            },   
+            "next": "FRCV"
+        },
+        "score2diabete": {
+            "question": "Calcul du SCORE 2 Diabete", 
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {
@@ -259,7 +357,7 @@
                 }
                 
             },   
-            "next": "FRCV"
+            "next": ""
         },
         "TERCV": {
             "question": "Votre patient a un risque cardiovasculaire très élévé", 

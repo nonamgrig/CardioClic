@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HomeComponent } from '../home/home/home.component';
+import { StmtModifier } from '@angular/compiler';
 
 export interface Patient {
   age: number | null;
@@ -20,7 +21,7 @@ export interface Patient {
   cholesTotal : number | null; 
   hdl : number | null; 
   hba1c : number | null; 
-  fumeur : number | null;  
+  fumeur : string | null;  // Oui Non
   score2 : number | null;
   score2op : number | null; 
   score2diabet : number | null;  //stocke le score en fonction de la méthode de calul 
@@ -103,6 +104,11 @@ export class PatientService {
     const key = fieldName as keyof Patient;
   
     if (this.patientKeys.includes(key) && !this.hidden.includes(key)) {
+      // Remplacer la virgule par un point si c'est une chaîne contenant une virgule
+      if (typeof value === 'string' && value.includes(',')) {
+        value = value.replace(',', '.');
+      }
+    
       this.patientData[key] = value;
       this.patientSubject.next({ ...this.patientData });
       console.log(`Champ "${key}" mis à jour avec :`, value);
@@ -110,6 +116,7 @@ export class PatientService {
       console.warn('Mise à jour ignorée pour la clé :', key);
     }
   }
+  
   
   
 
@@ -147,6 +154,15 @@ export class PatientService {
     this.patientSubject.next({ ...this.patientData });
   
     console.log('Patient réinitialisé à null.');
+  }
+
+  calculAgeApparition(anneeApparition :string): number {
+    let age =0; 
+    //TO DO a finir 
+    const anneeEnCours = new Date().getFullYear();
+    const anneeNaissance = Number(anneeEnCours) - Number(this.patientData.age); 
+    age = Number(anneeApparition) - Number(anneeNaissance); 
+    return age; 
   }
   
   calculDFGe(): number {
@@ -189,5 +205,247 @@ export class PatientService {
     const DFGe = 141 * Math.pow(Math.min(CR/k, 1), alpha) * Math.pow(Math.max(CR/k, 1), -1.209)*Math.pow(0.993,age)* fem * asc; 
 
     return DFGe 
+  }
+
+
+  calculscore2() : number{
+    let score = 0; 
+
+    /**
+     * On transforme les données utiles du patient 
+     */
+    const cage = (Number(this.patientData.age)-60)/5; 
+    const csbp = (Number(this.patientData.pa)-120)/20; 
+    const ctchol = (Number(this.patientData.cholesTotal)-6)/1; 
+    const chdl = (Number(this.patientData.hdl)-1.3)/0.5; 
+
+    let smoking = 0; 
+    if (this.patientData.fumeur == "Oui") {
+      smoking = 1; 
+    } 
+    /**
+     * On multiplie les transformations par cage
+     */
+    const smokingcage = smoking * cage; 
+    const csbpcage = csbp * cage; 
+    const ctcholcage = ctchol * cage; 
+    const chdlcage = chdl * cage; 
+    
+    /**
+     * On crée une liste avec tous les infos 
+     */
+    const transf = [
+      cage, 
+      smoking,
+      csbp, 
+      ctchol, 
+      chdl, 
+      smokingcage, 
+      csbpcage, 
+      ctcholcage, 
+      chdlcage
+    ]
+
+    /**
+     * On a la liste des logSHR par élément pour homme et femme
+     * l'ordre : age, smoking, csbp, ctchol, cthdl, smokingcage, csbpcage, ctcholcage, cthdlcage, baselin survival
+     */
+
+    const logSHRHomme = [
+      0.3742, 
+      0.6012, 
+      0.2777,
+      0.1458,
+      -0.2698,
+      -0.0755,
+      -0.0255,
+      -0.0281,
+      0.0426,
+      
+    ]; 
+
+    const logSHRFemme = [
+      0.4648,
+      0.7744,
+      0.3131,
+      0.1002,
+      -0.2606,
+      -0.1088,
+      -0.0277,
+      -0.0226,
+      0.0613,
+      
+    ]
+    console.log('logSHR', logSHRHomme[0]); 
+
+
+    /**
+     * Mutiplier logSHR et les valeurs transformées pour calculer le linear predictor
+     * on renseigne egalement les paramètres en fonction du sexe
+     * les scale utilisés sont ceux de la zone à faible risque
+     */
+    let linearPredictor = 0; 
+    let baselinsurvival =0;
+    let scale1 = 0; 
+    let scale2 =0; 
+    if (this.patientData.sexe == "Homme"){
+      baselinsurvival=0.9605; 
+      scale1 = -0.5699; 
+      scale2 = 0.7476; 
+
+      logSHRHomme.forEach((log, index) => {
+        linearPredictor = linearPredictor + log * transf[index]; 
+      })
+    } else if (this.patientData.sexe == "Femme"){
+      baselinsurvival = 0.9776; 
+      scale1 = -0.738; 
+      scale2 = 0.7019; 
+
+      logSHRFemme.forEach((log, index) => {
+        linearPredictor = linearPredictor + log * transf[index]; 
+      })
+    }
+
+    console.log("Linear Predictor", linearPredictor); 
+
+    /**
+     * On calcule le 10 year risk estimation
+     */
+    const risk10 = 1 - Math.pow(baselinsurvival,Math.exp(linearPredictor)); 
+    console.log("10 year risk", risk10); 
+
+    /**
+     * On calcule calibrated 10yrs risk
+     */
+
+    const risk10cal = 1 - Math.exp(-Math.exp(scale1 + scale2 * Math.log(-Math.log(1-risk10)))); 
+    console.log("risk 10 cal", risk10cal); 
+
+    /**
+     * Le score final est le pourcentage obtenu
+     */
+    score = risk10cal*100; 
+    return score; 
+  }
+
+  calculscore2op() : number{
+    let score = 0; 
+
+    /**
+     * On transforme les données utiles du patient 
+     */
+    const cage = Number(this.patientData.age)-73; 
+    const csbp = Number(this.patientData.pa)-150; 
+    const ctchol = Number(this.patientData.cholesTotal)-6; 
+    const chdl = Number(this.patientData.hdl)-1.4; 
+
+    let smoking = 0; 
+    if (this.patientData.fumeur == "Oui") {
+      smoking = 1; 
+    } 
+    /**
+     * On multiplie les transformations par cage
+     */
+    const smokingcage = smoking * cage; 
+    const csbpcage = csbp * cage; 
+    const ctcholcage = ctchol * cage; 
+    const chdlcage = chdl * cage; 
+    
+    /**
+     * On crée une liste avec tous les infos 
+     */
+    const transf = [
+      cage, 
+      smoking,
+      csbp, 
+      ctchol, 
+      chdl, 
+      smokingcage, 
+      csbpcage, 
+      ctcholcage, 
+      chdlcage
+    ]
+
+    /**
+     * On a la liste des logSHR par élément pour homme et femme
+     * l'ordre : age, smoking, csbp, ctchol, cthdl, smokingcage, csbpcage, ctcholcage, cthdlcage, baselin survival
+     */
+
+    const logSHRHomme = [
+      0.0634, 
+      0.3524,
+      0.0094,
+      0.085,
+      -0.3564,
+      -0.0247,
+      -0.0005,
+      0.0073,
+      0.0091
+    ]; 
+
+    const logSHRFemme = [
+      0.0789,
+      0.4921,
+      0.0102,
+      0.0605,
+      -0.304,
+      -0.0255,
+      -0.0004,
+      -0.0009,
+      0.0154      
+    ]
+    console.log('logSHR', logSHRHomme[0]); 
+
+
+    /**
+     * Mutiplier logSHR et les valeurs transformées pour calculer le linear predictor
+     * on renseigne egalement les paramètres en fonction du sexe
+     * les scale utilisés sont ceux de la zone à faible risque
+     */
+    let linearPredictor = 0; 
+    let baselinsurvival = 0;
+    let scale1 = 0; 
+    let scale2 =0; 
+    let k =0; 
+    if (this.patientData.sexe == "Homme"){
+      baselinsurvival=0.7576; 
+      scale1 = -0.34; 
+      scale2 = 1.19; 
+      k=0.0929; 
+
+      logSHRHomme.forEach((log, index) => {
+        linearPredictor = linearPredictor + log * transf[index]; 
+      })
+    } else if (this.patientData.sexe == "Femme"){
+      baselinsurvival = 0.8082; 
+      scale1 = -0.52; 
+      scale2 = 1.01; 
+      k=0.229; 
+
+      logSHRFemme.forEach((log, index) => {
+        linearPredictor = linearPredictor + log * transf[index]; 
+      })
+    }
+
+    console.log("Linear Predictor", linearPredictor); 
+
+    /**
+     * On calcule le 10 year risk estimation
+     */
+    const risk10 = 1 - Math.pow(baselinsurvival,Math.exp(linearPredictor-k)); 
+    console.log("10 year risk", risk10); 
+
+    /**
+     * On calcule calibrated 10yrs risk
+     */
+
+    const risk10cal = 1 - Math.exp(-Math.exp(scale1 + scale2 * Math.log(-Math.log(1-risk10)))); 
+    console.log("risk 10 cal", risk10cal); 
+
+    /**
+     * Le score final est le pourcentage obtenu
+     */
+    score = risk10cal*100; 
+    return score; 
   }
 }

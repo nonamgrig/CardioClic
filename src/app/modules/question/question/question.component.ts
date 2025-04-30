@@ -115,13 +115,32 @@ export class QuestionComponent implements OnInit, OnChanges {
 
       //pour les questions avec un calcul, on appelle la fonction de calcul dans patientService
       switch (this.question?.title) {
-        case "CKD": //afro caribéen
-          let DFGe = this.patientService.calculDFGe().toFixed(2) //'avec 2 chiffres après la virgule
+        case "apparition": //calculer l'age à l'apparition du diabète 
+        //si une année d'apparition a été renseignée, elle prévaut ?
+        //TO DO : choisir qui prévaut l'age ou l'année si les deux sont enregistrées 
+          if (this.subquestionsArray[0].userAnswer) {
+            console.log("annee d'apparition donnée", this.subquestionsArray[0].userAnswer); 
+            let ageApparition = this.patientService.calculAgeApparition(this.subquestionsArray[0].userAnswer).toString()
+            console.log("age apparition diabete", ageApparition); 
+            this.patientService.updateField("ageApparition", ageApparition); 
+          }
+          
+          break;
+        case "CKD": 
+          let DFGe = this.patientService.calculDFGe().toFixed(2); //'avec 2 chiffres après la virgule
           this.patientService.updateField("dfge", DFGe); 
           break;
-        case "ratio": 
-          
-          break; 
+        case "score2": 
+          let score2 = this.patientService.calculscore2().toFixed(2); 
+          this.patientService.updateField("score2", score2); 
+          break;
+        case "score2op": 
+          let score2op = this.patientService.calculscore2op().toFixed(2); 
+          this.patientService.updateField("score2", score2op); 
+          break;  
+        case "scorediabet": 
+        
+        break; 
         default : 
         
           break;

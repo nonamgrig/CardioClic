@@ -95,80 +95,13 @@ export class TexteService {
 
     const currentPatient = this.patientService.getCurrentPatient()
     console.log("le patient dans test", currentPatient)
-    
-    let nextParticulier; 
-    if (currentPatient.diabetique =="Non") {
-      //pour certaines questions, on doit influer sur la question suivante en fonction des réponses et des résultats
-      if (currentQuestion.title == "CKD") {
-        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 30 ) {
-          //directement vers très haut risque 
-          nextParticulier = "TERCV"; 
-        } else {
-          //vers ratio donc inchangé 
-        }
-      } else if (currentQuestion.title == "ratio") {
-        if (currentPatient.ratio && Number(currentPatient.ratio) < 300) {
-          //direct risque
-          nextParticulier = "ERCV"
-        } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
-          //en fonction du dfge, on affiche pas le même message dans pop up
-          if (currentPatient.dfge && Number(currentPatient.dfge)< 45) {
-            //message 1
-          } else if (currentPatient.dfge && Number(currentPatient.dfge)< 60) {
-            //message 2
-          } else { //> 60 
-            //message 3
-          }
-        } else {
-          //vers score donc inchangé
-        }           
-      } else if (currentQuestion.title == "score") {
-        // en fonction du résultat du calcul du score et de l'âge 
-
-      }
-    } else { //diabétique 
-      //TO DO changer les valeurs 
-      if (currentPatient.neuropathie == "Oui" || currentPatient.retinopathie =="Oui") {
-        //vers haut risque direct
-        nextParticulier = "TERCV"
-      } else if (currentQuestion.title == "CKD") {
-        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 30 ) {
-          //directement vers très haut risque 
-          nextParticulier = "TERCV"; 
-        } else {
-          //vers ratio donc inchangé 
-        }
-      } else if (currentQuestion.title == "ratio") {
-        if (currentPatient.ratio && Number(currentPatient.ratio) < 300) {
-          //direct risque
-          nextParticulier = "TERCV"
-        } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
-          //en fonction du dfge, on affiche pas le même message dans pop up
-          if (currentPatient.dfge && Number(currentPatient.dfge)< 45) {
-            //message 1
-          } else if (currentPatient.dfge && Number(currentPatient.dfge)< 60) {
-            //message 2
-          } else { //> 60 
-            //message 3
-          }
-        } else {
-          //vers score donc inchangé
-        }           
-      } else if (currentQuestion.title == "score") {
-        // en fonction du résultat du calcul du score et de l'âge 
-
-      }
-
-
-
-    }
-    
-
+  
     let next = currentQuestion.nextQuestionKey; //on récupère le next de cette question
-    
-    let nextId;
 
-    // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
+    /*---------------------------------------------
+    Pour les questions qui s'enchainent en fonction de la réponse de la question précédente 
+    on regarde la valeur des différents next (il n'y pas pas de cacul ou de comparaison de la valeur)
+    */
     // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
     if (next && typeof next === 'object') {
       if (answer == 'response1') {
@@ -180,14 +113,181 @@ export class TexteService {
       }
     } 
 
+    /*---------------------------------------------
+    Pour les questions qui nécessite de calculer un score et ou la valeur obtenu influe sur la question suivante
+    on utilise l'algorithme si dessous pour déterminer le nextParticulier à la situation en fonction de la question
+     */
+    let nextParticulier; 
+
+    //en fonction de l'âge, on doit diriger vers score2 ou score2op
+    let scoreUtil; 
+    if (Number(currentPatient.age)<70){
+      scoreUtil = "score2";
+    } else {
+      scoreUtil = "score2op"; 
+    }
+
+
+    if (currentPatient.diabetique =="Non") {
+      //pour certaines questions, on doit influer sur la question suivante en fonction des réponses et des résultats
+      if (currentQuestion.title == "CKD") {
+        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 30 ) {
+          //directement vers très haut risque 
+          nextParticulier = "TERCV"; 
+        } else {
+          //vers ratio donc inchangé 
+        }
+      } else if (currentQuestion.title == "ratio") {
+        if (currentPatient.dfge && Number(currentPatient.dfge)<= 45) { //entre 30 et 45
+          if (currentPatient.ratio && Number(currentPatient.ratio) <= 30) {
+            //direct risque
+            nextParticulier = "ERCV"
+          } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
+            //direct risque
+            nextParticulier = "TERCV"
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+            //TO DO message pop up à faire ++
+          }
+        } else if (currentPatient.dfge && Number(currentPatient.dfge) <= 60) { //entre 45 et 60
+          if (currentPatient.ratio && Number(currentPatient.ratio) <= 30) {
+            //vers score donc inchangé
+            nextParticulier = scoreUtil; 
+          } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
+            //direct risque
+            nextParticulier = "ERCV"
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+            //TO DO message pop up à faire 
+          }
+        } else { //> 60 
+          if (currentPatient.ratio && Number(currentPatient.ratio) <= 300) {
+            //vers score donc inchangé
+            nextParticulier = scoreUtil;
+          } else if (currentPatient.ratio && Number(currentPatient.ratio) > 300) {
+            //direct risque
+            nextParticulier = "ERCV"
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+            //TO DO message pop up à considérer
+          }
+        }
+                    
+      } else if (currentQuestion.title == "score2" || currentQuestion.title == "score2op" ) {
+        // en fonction du résultat du calcul du score 2 ou score 2 OP et de l'âge 
+        if (currentPatient.age && Number(currentPatient.age)< 70){
+          //on regarde le résultat du score 2
+          if (Number(currentPatient.age) <50) {
+            if (currentPatient.score2 && Number(currentPatient.score2) < 2.5) {
+              //direct risque
+              nextParticulier = "FRCV"
+            } else if (currentPatient.score2 && Number(currentPatient.score2) < 7.5) {
+              //direct risque
+              nextParticulier = "MRCV"
+            } else { //>= 7.5
+              //direct risque
+              nextParticulier = "ERCV"
+            }
+          } else { //age entre 50 et 69
+            if (currentPatient.score2 && Number(currentPatient.score2) < 5) {
+              //direct risque
+              nextParticulier = "FRCV"
+            } else if (currentPatient.score2 && Number(currentPatient.score2) < 10) {
+              //direct risque
+              nextParticulier = "MRCV"
+            } else { //>= 10
+              //direct risque
+              nextParticulier = "ERCV"
+            }
+          }
+        } else { // age >=70 avec score2op
+          if (currentPatient.score2op && Number(currentPatient.score2op) < 7.5) {
+            //direct risque
+            nextParticulier = "FRCV"
+          } else if (currentPatient.score2op && Number(currentPatient.score2op) < 15) {
+            //direct risque
+            nextParticulier = "MRCV"
+          } else { //>= 15
+            //direct risque
+            nextParticulier = "ERCV"
+          }
+        }
+
+      }
+    } else { //diabétique OUI
+      
+      if (currentQuestion.title == "CKD") {
+        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 45 ) {
+          //directement vers très haut risque 
+          nextParticulier = "TERCV"; 
+        } else {
+          //vers ratio donc inchangé 
+        }
+      } else if (currentQuestion.title == "ratio") {
+        //on doit changer la direction de toutes les questions vers scorediabete
+        if (currentPatient.dfge && Number(currentPatient.dfge)< 60) { //entre 45 et 60
+          if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
+            //direct risque
+            nextParticulier = "TERCV"
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+            // message pop up pour aller quand même au score
+            nextParticulier = "scorediabete"
+
+          } else {
+            //vers score diabete
+            nextParticulier = "scorediabete"
+          } 
+       
+        } else { // >=60 
+          if (currentPatient.ratio && Number(currentPatient.ratio) < 30) {
+            //vers score diabete
+            nextParticulier = "scorediabete"
+          } else if (currentPatient.ratio && Number(currentPatient.ratio) < 300) { //entre 30 et 300
+            //direct risque
+            nextParticulier = "lesion"
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+            // message pop up pour aller quand même au score diabete
+            nextParticulier = "scorediabete"
+          } else { // >= 300
+            //direct risque
+            nextParticulier = "TERCV"
+          } 
+        }
+        
+      } else if (currentQuestion.title == "lesion") {
+        if (currentPatient.neuropathie == "Oui" && currentPatient.retinopathie =="Oui") {
+          //vers haut risque direct
+          nextParticulier = "TERCV"
+        } else {
+          //vers score diabete
+            nextParticulier = "scorediabete"
+        }
+      } else if (currentQuestion.title == "scorediabete") {
+        // en fonction du résultat du calcul du score et de l'âge 
+        if (currentPatient.score2diabet && Number(currentPatient.score2diabet) < 5) {
+          //direct risque
+          nextParticulier = "FRCV"
+        } else if (currentPatient.score2diabet && Number(currentPatient.score2diabet) < 10) {
+          //direct risque
+          nextParticulier = "MRCV"
+        } 
+        else if (currentPatient.score2diabet && Number(currentPatient.score2diabet) < 20) {
+          //direct risque
+          nextParticulier = "ERCV"
+        }else { //>= 20
+          //direct risque
+          nextParticulier = "TERCV"
+        }
+      }
+    }
+
+    
+    let nextId; //représente l'id de la question suivante dans la liste des questions
+
+    //si un nextPartiuclier existe il est prioritaire par rapport au next d'origine
     if (nextParticulier) {
       console.log("new nextid"); 
       nextId = getIndexFromKey(this.questions, nextParticulier) + 1
     } else {
       nextId =  getIndexFromKey(this.questions, next) + 1
     }
-    console.log("questions", this.questions); 
-    console.log("nextid", nextId);
     
     return nextId ? nextId.toString() : null;
   }

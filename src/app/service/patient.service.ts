@@ -4,6 +4,15 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HomeComponent } from '../home/home/home.component';
 import { StmtModifier } from '@angular/compiler';
 
+import ds from '../../../public/assets/texts.json'
+
+type QPatient = typeof ds.patient
+// TO DO Recréer l' interface patient à partir de qPatient
+
+// const test: QPatient = {
+  
+// }
+
 export interface Patient {
   age: number | null;
   sexe : string | null; // Homme ou Femme 
@@ -57,6 +66,7 @@ export class PatientService {
     score2op: null,
     score2diabet: null
   };
+  
 
   constructor(private http: HttpClient) {}
 
@@ -88,6 +98,7 @@ export class PatientService {
 
   //les attributs de patient (doublon avec plastron component)
   //TO DO
+  //parcourir le fichier json par les attributs pour créer le patientKeys 
   patientKeys: (keyof Patient)[] = [
     'age', 'sexe', 'diabetique', 'ageApparition', 'prevention',
     'creatinine', 'ascendance', 'dfge', 'ratio', 'rationondispo', 

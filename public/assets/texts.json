@@ -281,8 +281,7 @@
                 
             },   
             "next": "FRCV"
-        },
-        
+        }, 
         "score2op": {
             "question": "Calcul du SCORE 2 OP", 
             "type": "subquestion", 

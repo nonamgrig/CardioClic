@@ -55,18 +55,18 @@ export class TexteService {
           } else if (item.next) {
             nextQuestionKey = item.next;  
           }
-
           // Créer l'objet Question
           const question: Question = {
             id: index,  // Utiliser la clé comme identifiant unique
             title: key,
             question: item.question,
+            units : item.units ? Object.values(item.units) : null, //pour créer une liste avec les unités 
             info : item.info, 
             subquestion : item.subquestion? item.subquestion : null, 
             type: item.type,
             nextQuestionKey: nextQuestionKey,
             responses: item.responses || undefined,  // Si les réponses sont définies, les ajouter
-            message : item.message ? Object.values(item.message) : null, 
+            message : item.message ? Object.values(item.message) : null, //pour créer une liste à partir des messages 
           };
 
           // Ajouter chaque question à la Map

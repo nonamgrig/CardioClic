@@ -17,6 +17,7 @@ export class QuestionComponent implements OnInit, OnChanges {
   question: Question | undefined;
   userAnswer: any = null;
   selectedAnswer : any = null; 
+  selectedUnit: string = '';
 
   subquestionsArray: (Question & { key: string })[] = [];
 
@@ -86,19 +87,29 @@ export class QuestionComponent implements OnInit, OnChanges {
       return null}
   }
 
+
   //Fonction pour transformer subquestion en tableau
   initSubquestions() {
     const subquestions = this.question?.subquestion;
+  
     if (subquestions) {
       this.subquestionsArray = Object.keys(subquestions).map((key) => {
         const question = {
           ...subquestions[key],
           key: key
         };
+  
+        // Si la question a des unités (clé 'units'), extraire les valeurs de l'objet et les convertir en tableau
+        if (question.units && typeof question.units === 'object') {
+          const unitsArray = Object.values(question.units);
+          question.units =unitsArray; // Extraire les valeurs et les mettre dans un tableau
+          question.selectedUnit = unitsArray[0]; // Sélectionner par défaut la première unité
+        }
         return question;
       });
     }
   }
+  
 
   //on récupère la réponse de la case conchée 
   onCheckboxChangeSubquestion(event: Event, response: any, subquestion : Question) {
@@ -170,6 +181,10 @@ export class QuestionComponent implements OnInit, OnChanges {
           this.patientService.updateField(subquestion.key, subquestion.userAnswer);
         })
       }
+      //pour envoyer l'unité utilisé au service pour les calculs
+      let cholesTotalUnit;
+      let hdlUnit;
+      let hba1cUnit 
 
       //pour les questions avec un calcul, on appelle la fonction de calcul dans patientService
       switch (this.question?.title) {
@@ -191,23 +206,32 @@ export class QuestionComponent implements OnInit, OnChanges {
           // Met à jour selected global (Oui si au moins 1 case cochée/ vide)
           this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
           break; 
-        case "CKD": 
-          let DFGe = arrondirSiNecessaire(this.patientService.calculDFGe()); //'avec 2 chiffres après la virgule
+        case "CKD":
+          const creatinineUnit = this.subquestionsArray[0].selectedUnit ? this.subquestionsArray[0].selectedUnit : ''; 
+          let DFGe = arrondirSiNecessaire(this.patientService.calculDFGe(creatinineUnit)); //'avec 2 chiffres après la virgule
           if (DFGe == "0"){
             DFGe = ""; 
           }
           this.patientService.updateField("dfge", DFGe); 
           break;
         case "score2": 
-          let score2 = arrondirSiNecessaire(this.patientService.calculscore2()); 
+          //Attention dépend de l'ordre du json
+          cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+          hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
+          let score2 = arrondirSiNecessaire(this.patientService.calculscore2(cholesTotalUnit, hdlUnit)); 
           this.patientService.updateField("score2", score2); 
           break;
         case "score2op": 
-          let score2op = arrondirSiNecessaire(this.patientService.calculscore2op()); 
+          cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+          hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
+          let score2op = arrondirSiNecessaire(this.patientService.calculscore2op(cholesTotalUnit, hdlUnit)); 
           this.patientService.updateField("score2op", score2op); 
           break;  
         case "score2diabete": 
-          let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet()); 
+        cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+        hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
+        hba1cUnit = this.subquestionsArray[3].selectedUnit ? this.subquestionsArray[3].selectedUnit : ''; 
+          let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet(cholesTotalUnit, hdlUnit, hba1cUnit)); 
           this.patientService.updateField("score2diabete", score2diabete); 
         break; 
         default : 

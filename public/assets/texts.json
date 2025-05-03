@@ -155,6 +155,10 @@
             "subquestion" : {
                 "creatinine" : {
                     "question" : "Créatinine",
+                    "units" : {
+                        "unit1" : "µmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
@@ -271,18 +275,29 @@
             "subquestion" : {
                 "pa" : {
                     "question" : "PA systolique (100-255mmHg)",
+                    "units" : {
+                        "unit1" : "mmHg"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
                 "cholesTotal" : {
-                    "question" : "Cholestérol total (3-9 mmol/L)",
+                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL (0.65-1.94 mmol/L)",
+                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
@@ -306,18 +321,29 @@
             "subquestion" : {
                 "pa" : {
                     "question" : "PA systolique (100-255mmHg)",
+                    "units" : {
+                        "unit1" : "mmHg"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
                 "cholesTotal" : {
-                    "question" : "Cholestérol total (3-9 mmol/L)",
+                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL (0.65-1.94 mmol/L)",
+                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
@@ -341,24 +367,39 @@
             "subquestion" : {
                 "pa" : {
                     "question" : "PA systolique (100-255mmHg)",
+                    "units" : {
+                        "unit1" : "mmHg"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
                 "cholesTotal" : {
-                    "question" : "Cholestérol total (3-9 mmol/L)",
+                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL (0.65-1.94 mmol/L)",
+                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
-                }, 
+                },
                 "hba1c" : {
-                    "question" : "HbA1c (1 - 150 mmom/mol)",
+                    "question" : "HbA1c (1 - 150 mmol/mol)",
+                    "units" : {
+                        "unit1" : "mmol/mol", 
+                        "unit2" : "%"
+                    },
                     "type":"text", 
                     "responses": "",   
                     "next": ""

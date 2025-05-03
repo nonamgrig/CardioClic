@@ -8,10 +8,12 @@ export interface Question {
   question: string;
   info : string; 
   subquestion: { [key: string]: Question } | null;
+  units : string[] | null; 
   type: string;
   nextQuestionKey: string | { [key: string]: string } | null;
   responses?: { [key: string]: string };
   userAnswer?: string | string[] | null;
+  selectedUnit? : string | null; 
   message : string[] | null
 }
 

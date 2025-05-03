@@ -25,6 +25,28 @@ p {
     
 
 
+.input-container {
+    display: flex;              // Utilise flex pour aligner horizontalement
+    align-items: center;        // Aligne verticalement au centre
+    gap: 10px;                  // Espacement entre le champ texte et le dropdown
+    
+    .form-control {
+      flex: 1;                   // L'input prend toute la place restante
+      width: auto;              // Garde la largeur automatique du champ de texte (ne prend pas toute la place)
+      width : 100px; 
+    }
+    
+    .unit-select-container {
+      width: auto;               // Assure que le select n'occupe que l'espace nécessaire
+    }
+  
+    .form-select {
+      width: auto;               // Largeur automatique pour le select, juste ce qu'il faut
+      min-width: 100px;          // Ajoute une largeur minimale si besoin
+    }
+  }
+
+
 .input-button-group {
     display: flex;
     flex-direction: column;

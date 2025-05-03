@@ -7,8 +7,18 @@
         </div>
     </div>
 
-    <div *ngIf="question.type == 'text'">
-        <input [(ngModel)]="userAnswer" placeholder="">
+    <div *ngIf="question.type == 'text'" >
+        <div class="input-container">
+            <input [(ngModel)]="userAnswer" placeholder="">
+            
+            <div *ngIf="question.units" class="unit-select-container">
+                <select [(ngModel)]="selectedUnit" class="form-select">
+                    <option *ngFor="let unit of question.units" [value]="unit">{{ unit }}</option>
+                </select>
+            </div>
+    </div>
+        
+    
         <button class="valider" (click)="onAnswerSubmit()">Valider</button>
     </div>
 
@@ -23,9 +33,17 @@
                 </div>
             </div>
         
-            <div *ngIf="subquestion.type == 'text'">
-                <input [(ngModel)]="subquestion.userAnswer" placeholder="">
+            <div *ngIf="subquestion.type == 'text'" >
+                <div class="input-container">
+                    <input [(ngModel)]="subquestion.userAnswer" placeholder="">
+                    <div *ngIf="subquestion.units" class="unit-select-container">
+                        <select [(ngModel)]="subquestion.selectedUnit" class="form-select">
+                            <option *ngFor="let unit of subquestion.units" [value]="unit">{{ unit }}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
+
 
 
             <div *ngIf="subquestion.type == 'checkboxmultipleaide'" class="checkbox-group">

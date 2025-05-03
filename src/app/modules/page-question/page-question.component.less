@@ -4,19 +4,22 @@
     height : 100vh; 
     margin-left: 50px;
     margin-right: 50px;
+    min-width: 700px; // ou plus, si nécessaire
 
-    .left-section{
-        flex-grow: 1 ; //cette section prend l'espace restant
-        padding: 20px; 
+    .left-section {
+        flex: 1 1 auto;
+        min-width: 0;              // ← important pour éviter que le contenu déborde
+        overflow: hidden;          // ou auto si tu veux scroller
+        padding: 20px;
         background-color: rgb(249, 243, 243);
-        
-    }
+      }
     
-    .right-section{
-        width: 300px; 
-        padding: 20px; 
+    .right-section {
+        width: 300px;
+        flex-shrink: 0; // ← empêche le redimensionnement automatique
+        padding: 15px;
         background-color: rgb(123, 84, 113);
-    }  
+    }
     
     .centered-component{
         display : flex; 

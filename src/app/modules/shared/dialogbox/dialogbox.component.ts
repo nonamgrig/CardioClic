@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-dialogbox',
@@ -7,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrl: './dialogbox.component.less'
 })
 export class DialogboxComponent {
+
+  @Input() message: string = '';
+  @Input() visible: boolean = false;
+  @Output() close = new EventEmitter<void>();
+
+  onClose() {
+    this.visible = false;
+    this.close.emit();
+  }
+
+  @Output() confirm = new EventEmitter<void>();
+
+  onConfirm() {
+    this.visible = false;
+    this.confirm.emit();
+  }
 
 }

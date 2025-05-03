@@ -11,7 +11,8 @@ export interface Question {
   type: string;
   nextQuestionKey: string | { [key: string]: string } | null;
   responses?: { [key: string]: string };
-  userAnswer?: string | null;
+  userAnswer?: string | string[] | null;
+  message : string[] | null
 }
 
 

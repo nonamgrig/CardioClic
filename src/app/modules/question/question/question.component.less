@@ -14,4 +14,55 @@
         font-size : 14px; 
         color : black;  
     }
+
+    
+      
 }
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .custom-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* Case personnalisée */
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    box-sizing: border-box;
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  /* ✔ stylisé avec ::after */
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    content: '✔';
+    color: white !important; /* Forcer la couleur blanche avec !important */
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, sans-serif; /* S'assurer qu'on utilise une police standard */
+  }
+  
+  /* Fond de la case cochée */
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: rgb(123, 84, 113);
+    border-color: rgb(123, 84, 113);
+  }
+  
+  

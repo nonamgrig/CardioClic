@@ -77,6 +77,14 @@
         "score2diabete": {
             "headline" : "SCORE2 DIABET",
             "unit" : "%"
+        },
+        "neuropathie": {
+            "headline" : "Neuropathie",
+            "unit" : ""
+        },
+        "retinopathie": {
+            "headline" : "Rétinopathie",
+            "unit" : ""
         }
     },
     "questions" : {
@@ -153,7 +161,7 @@
                 },
                 "ascendance" : {
                     "question" : "Ascendance afro-caribéenne ?", 
-                    "type": "prop", 
+                    "type": "checkboxsingle", 
                     "responses" : {
                         "response1": "Oui", 
                         "response2": "Non", 
@@ -161,7 +169,10 @@
                     }, 
                     "next": ""
                 }
-            },             
+            },   
+            "message" : {
+                "message1" : "L'ascendance de votre patient n'a pas été précisée, on suppose alors qu'il n'a pas d'ascendance afro-caribéenne car c'est le pire cas (A DIRE AUTREMENT)"
+            },          
             "next": "ratio"
         },
         "aide": {
@@ -170,7 +181,7 @@
             "subquestion" : {
                 "subquestion1" : {
                     "question" : "Votre patient présente-il les antécédents suivants ?",
-                    "type":"prop", 
+                    "type":"checkboxmultipleaide", 
                     "responses" : {
                         "response1": "Infarctus et/ou stent coronaire", 
                         "response2": "Stent ou pontage ilio-démoral ou AOMI symptomatique", 
@@ -180,7 +191,7 @@
                 },
                 "subquestion2" : {
                     "question" : "Votre pateint présente-il des lésions qualifiantes de la 'présention secondaire' suite à un des examens suivants ?", 
-                    "type": "prop", 
+                    "type": "checkboxmultipleaide", 
                     "responses" : {
                         "response1": "Coronarographie ou coro-TDM", 
                         "response2": "Doppler TSA ou doppler artériel des MI", 
@@ -194,10 +205,11 @@
                     "next": ""
                 }
             }, 
-            "next": {
-                "next1": "CKD", 
-                "next2": "TERCV"
-            }
+            "message" : {
+                "message1" : "Votre patient est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient n'est dans aucune des situations décrités, il est en Prévention Primaire"
+            },
+            "next": "CKD"
         },
         "ratio": {
             "question": "Quel est le ratio albumine/creatinine du patient ?", 
@@ -211,12 +223,18 @@
                 },
                 "rationondispo" : {
                     "question" : "", 
-                    "type": "prop", 
+                    "type": "checkboxsingle", 
                     "responses" : {
                         "response1": "Non disponible"
                     }, 
                     "next": ""
                 }
+            },
+            "message" : {
+                "message1" : "Ratio à faire ++", 
+                "message2" : "Ratio à faire",
+                "message3": "Ratio à considérer", 
+                "message4": "Vore patient étant diabétique, il est préférable de calculer le SCORE 2 Diabétique même si la ratio albumine/créatinine n'est pas disponible"
             },
             "next": "score"
         },
@@ -226,7 +244,7 @@
             "subquestion" : {
                 "neuropathie" : {
                     "question" : "Neuropathie diabétique ?",
-                    "type":"prop", 
+                    "type":"checkboxsingle", 
                     "responses" : {
                         "response1": "Oui", 
                         "response2": "Non", 
@@ -236,7 +254,7 @@
                 },
                 "retinopathie" : {
                     "question" : "Rétinopathie diabétique ?", 
-                    "type": "prop", 
+                    "type": "checkboxsingle", 
                     "responses" : {
                         "response1": "Oui", 
                         "response2": "Non", 
@@ -271,7 +289,7 @@
                 },
                 "fumeur" : {
                     "question" : "Fumeur actif ?",
-                    "type":"prop", 
+                    "type":"checkboxsingle", 
                     "responses": {
                         "response1": "Oui", 
                         "response2": "Non"
@@ -306,7 +324,7 @@
                 },
                 "fumeur" : {
                     "question" : "Fumeur actif ?",
-                    "type":"prop", 
+                    "type":"checkboxsingle", 
                     "responses": {
                         "response1": "Oui", 
                         "response2": "Non"
@@ -347,7 +365,7 @@
                 },
                 "fumeur" : {
                     "question" : "Fumeur actif ?",
-                    "type":"prop", 
+                    "type":"checkboxsingle", 
                     "responses": {
                         "response1": "Oui", 
                         "response2": "Non"

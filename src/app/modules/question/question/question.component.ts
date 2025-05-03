@@ -20,6 +20,10 @@ export class QuestionComponent implements OnInit, OnChanges {
 
   subquestionsArray: (Question & { key: string })[] = [];
 
+  //pour gérer les pop up
+  showDialog = false;
+  dialogMessage = '';
+
   constructor(
     private router: Router,
     private texteService: TexteService,
@@ -33,6 +37,11 @@ export class QuestionComponent implements OnInit, OnChanges {
       this.loadQuestion();
       //pour initialiser les questions supplémentaires
       this.initSubquestions();
+
+      this.texteService.dialog$.subscribe((msg: string) => {
+      this.dialogMessage = msg;
+      this.showDialog = true;
+    });
     });
   }
 
@@ -90,9 +99,58 @@ export class QuestionComponent implements OnInit, OnChanges {
       });
     }
   }
-  
 
-  onAnswerSubmit(): void {
+  //on récupère la réponse de la case conchée 
+  onCheckboxChangeSubquestion(event: Event, response: any, subquestion : Question) {
+    const checkbox = event.target as HTMLInputElement;
+  
+    if (checkbox.checked) {
+      subquestion.userAnswer = response.label;
+      console.log("question selected", this.userAnswer)
+    } else {
+      subquestion.userAnswer = '';
+    }
+  }
+
+  //pour la question aide on doit sélectionner plusieurs réponses 
+  aideSelections: Set<string> = new Set(); // pour suivre les cases cochées
+  onAideCheckboxChange(event: Event, response: any, subquestion: Question) {
+    const checkbox = event.target as HTMLInputElement;
+  
+    // Initialiser le tableau si vide
+    if (!Array.isArray(subquestion.userAnswer)) {
+      subquestion.userAnswer = [];
+    }
+  
+    if (checkbox.checked) {
+      // Ajouter si pas déjà présent
+      if (!subquestion.userAnswer.includes(response.label)) {
+        subquestion.userAnswer.push(response.label);
+      }
+      this.aideSelections.add(response.label);
+    } else {
+      // Retirer si décoché
+      subquestion.userAnswer = subquestion.userAnswer.filter(label => label !== response.label);
+      this.aideSelections.delete(response.label);
+    }
+  
+   
+  }
+
+  //pour tester si subquestion.userAnswer est un array et si la reponse est dans la liste des réponses
+  isChecked(subquestion: any, label: string | null): boolean {
+    if (label === null) return false;
+    return Array.isArray(subquestion.userAnswer) && subquestion.userAnswer.includes(label);
+  }
+
+  //pour ferrmer la dialogue box
+  onDialogConfirm() {
+    this.showDialog = false;
+    this.texteService.confirmDialog();
+  }
+
+
+  async onAnswerSubmit() {
     if (this.questionId) {
       //enregistrer la réponse de l'utilisateur, utile ? 
       console.log('onAnswerSubmit - Réponse utilisateur :', this.userAnswer);
@@ -120,12 +178,19 @@ export class QuestionComponent implements OnInit, OnChanges {
         //TO DO : choisir qui prévaut l'age ou l'année si les deux sont enregistrées 
           if (this.subquestionsArray[0].userAnswer) {
             console.log("annee d'apparition donnée", this.subquestionsArray[0].userAnswer); 
-            let ageApparition = this.patientService.calculAgeApparition(this.subquestionsArray[0].userAnswer).toString()
+            let ageApparition = this.patientService.calculAgeApparition(this.subquestionsArray[0].userAnswer as string).toString()
             console.log("age apparition diabete", ageApparition); 
             this.patientService.updateField("ageApparition", ageApparition); 
           }
           
           break;
+
+        case "aide": //la réponse de user
+        //TO DO trancher si on veut ou pas stocker les réponses à l'aide (pour l'instant nan)
+        //Lorsqu'on retourne en arrière on n'efface pas les réponses mais elles n'apparaissent pas een déjà cochée non plus 
+          // Met à jour selected global (Oui si au moins 1 case cochée/ vide)
+          this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
+          break; 
         case "CKD": 
           let DFGe = arrondirSiNecessaire(this.patientService.calculDFGe()); //'avec 2 chiffres après la virgule
           if (DFGe == "0"){
@@ -150,8 +215,9 @@ export class QuestionComponent implements OnInit, OnChanges {
           break;
       }
 
+
       // Trouver la question suivante en fonction de la réponse
-      const nextQuestionId = this.texteService.getNextQuestion(this.questionId, this.selectedAnswer);
+      const nextQuestionId = await this.texteService.getNextQuestion(this.questionId, this.selectedAnswer);
       if (nextQuestionId) {
         this.router.navigate(['/question', nextQuestionId]);
       } else {

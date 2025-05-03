@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { Question } from './question.service';
 import { PatientService } from './patient.service';
 
@@ -11,6 +11,11 @@ export class TexteService {
   private texts: any; 
   public questions: Map<string, Question> = new Map();
   private isLoaded: boolean = false;  // Flag pour vérifier si les questions ont été chargées
+
+  //pour gérer les pop up
+  private dialogTrigger = new Subject<string>();
+  dialog$ = this.dialogTrigger.asObservable();
+  private dialogResolver: (() => void) | null = null;
 
   constructor(
     private http: HttpClient, 
@@ -60,7 +65,8 @@ export class TexteService {
             subquestion : item.subquestion? item.subquestion : null, 
             type: item.type,
             nextQuestionKey: nextQuestionKey,
-            responses: item.responses || undefined  // Si les réponses sont définies, les ajouter
+            responses: item.responses || undefined,  // Si les réponses sont définies, les ajouter
+            message : item.message ? Object.values(item.message) : null, 
           };
 
           // Ajouter chaque question à la Map
@@ -83,8 +89,28 @@ export class TexteService {
     return this.questions;
   }
 
+  //pour ouvrir une pop up avec un certain message 
+  triggerDialog(message: string) {
+    this.dialogTrigger.next(message);
+  }
+
+  //pou attendre l'action sur la dialogue box
+  waitForDialogConfirmation(message: string): Promise<void> {
+    this.triggerDialog(message);
+  
+    return new Promise<void>((resolve) => {
+      this.dialogResolver = resolve;
+    });
+  }
+  confirmDialog(): void {
+    if (this.dialogResolver) {
+      this.dialogResolver();
+      this.dialogResolver = null;
+    }
+  }
+
   // Fonction pour obtenir l'ID de la question suivante en fonction de la réponse
-  getNextQuestion(currentQuestionId: number, answer: string): string | null {
+  async getNextQuestion(currentQuestionId: number, answer: string): Promise<string | null> {
     //current id est le numéro de la question
     const currentQuestion = getQuestionById(this.questions, currentQuestionId); // Récupérer l'objet Question de la Map
     console.log("current question", currentQuestion); 
@@ -112,6 +138,22 @@ export class TexteService {
         next = next['next3'];  
       }
     } 
+
+    //POur la question aide, on a doit answer soit "Oui" soit "Non"
+  if (currentQuestion.title == "aide" ) {
+      if (answer == "Oui"){
+        if(currentQuestion.message) {
+          await this.waitForDialogConfirmation(currentQuestion.message[0]);
+        }
+      next = "TERCV"
+    } else {
+      if(currentQuestion.message) {
+        await this.waitForDialogConfirmation(currentQuestion.message[1]);
+      }
+      //next CKD donc inchangé 
+    }
+  }
+    
 
     /*---------------------------------------------
     Pour les questions qui nécessite de calculer un score et ou la valeur obtenu influe sur la question suivante
@@ -147,6 +189,9 @@ export class TexteService {
             nextParticulier = "TERCV"
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             //TO DO message pop up à faire ++
+            if(currentQuestion.message) {
+              await this.waitForDialogConfirmation(currentQuestion.message[0]);
+            }
           }
         } else if (currentPatient.dfge && Number(currentPatient.dfge) <= 60) { //entre 45 et 60
           if (currentPatient.ratio && Number(currentPatient.ratio) <= 30) {
@@ -157,6 +202,9 @@ export class TexteService {
             nextParticulier = "ERCV"
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             //TO DO message pop up à faire 
+            if(currentQuestion.message) {
+              await this.waitForDialogConfirmation(currentQuestion.message[1]);
+            }
           }
         } else { //> 60 
           if (currentPatient.ratio && Number(currentPatient.ratio) <= 300) {
@@ -167,6 +215,9 @@ export class TexteService {
             nextParticulier = "ERCV"
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             //TO DO message pop up à considérer
+            if(currentQuestion.message) {
+              await this.waitForDialogConfirmation(currentQuestion.message[2]);
+            }
           }
         }
                     
@@ -229,7 +280,9 @@ export class TexteService {
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             // message pop up pour aller quand même au score
             nextParticulier = "score2diabete"
-
+            if(currentQuestion.message) {
+              await this.waitForDialogConfirmation(currentQuestion.message[0]);
+            }
           } else {
             //vers score diabete
             nextParticulier = "score2diabete"
@@ -245,6 +298,9 @@ export class TexteService {
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
             // message pop up pour aller quand même au score diabete
             nextParticulier = "score2diabete"
+            if(currentQuestion.message) {
+              await this.waitForDialogConfirmation(currentQuestion.message[0]);
+            }
           } else { // >= 300
             //direct risque
             nextParticulier = "TERCV"

@@ -12,6 +12,12 @@
         <button (click)="onAnswerSubmit()">Valider</button>
     </div>
 
+    
+
+    
+      
+      
+
     <div *ngIf="question.type == 'subquestion'">
 
         <div *ngFor="let subquestion of subquestionsArray">
@@ -26,7 +32,50 @@
             <div *ngIf="subquestion.type == 'text'">
                 <input [(ngModel)]="subquestion.userAnswer" placeholder="">
             </div>
+
+
+            <div *ngIf="subquestion.type == 'checkboxmultipleaide'" class="checkbox-group">
+                <div *ngFor="let response of getResponseArraySubquestion(subquestion)" class="checkbox-wrapper">
+                    
+                    <label class="custom-checkbox">
+                        <input
+                        type="checkbox"
+                        name="aideAnswer"
+                        [value]="response.label"
+                        (change)="onAideCheckboxChange($event, response, subquestion)"
+                        [checked]="isChecked(subquestion, response.label)"
+                        />
+                        <span class="checkmark"></span>
+                        <span class="label-text">{{ response.label }}</span>
+                    </label>
+                        
+                </div>
+            </div>
+
+            <div *ngIf="subquestion.type == 'checkboxsingle'" class="checkbox-group">
+                <div *ngFor="let response of getResponseArraySubquestion(subquestion)" class="checkbox-wrapper">
+                  <label class="custom-checkbox">
+                    <input
+                      type="checkbox"
+                      [value]="response.label"
+                      (change)="onCheckboxChangeSubquestion($event, response, subquestion)"
+                      [checked]="subquestion.userAnswer == response.label"
+                    />
+                    <span class="checkmark"></span>
+                    <span class="label-text">{{ response.label }}</span>
+                  </label>
+                </div>
+              </div>
+
+
         </div>
         <button (click)="onAnswerSubmit()">Valider</button>
     </div>    
 </div>
+
+<app-dialogbox
+  [visible]="showDialog"
+  [message]="dialogMessage"
+  (close)="showDialog = false"
+  (confirm)="onDialogConfirm()">
+</app-dialogbox>

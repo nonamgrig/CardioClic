@@ -418,23 +418,31 @@
             "next": ""
         },
         "TERCV": {
-            "question": "Votre patient a un risque cardiovasculaire très élévé", 
-            "type": "", 
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Très Élevé",
+            "preconisation" : "Préconisations adaptées au cas ?", 
             "next": ""
         },
         "ERCV": {
-            "question": "Votre patient a un risque cardiovasculaire élévé", 
-            "type": "", 
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Élevé",
+            "preconisation" : "Préconisations adaptées au cas ?",  
             "next": ""
         },
         "MRCV": {
-            "question": "Votre patient a un risque cardiovasculaire modéré", 
-            "type": "", 
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Modéré",
+            "preconisation" : "Préconisations adaptées au cas ?", 
             "next": ""
         },
         "FRCV": {
-            "question": "Votre patient a un risque cardiovasculaire faible", 
-            "type": "", 
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Faible", 
+            "preconisation" : "Préconisations adaptées au cas ?", 
             "next": ""
         }
 

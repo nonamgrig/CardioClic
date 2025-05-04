@@ -14,7 +14,9 @@ export interface Question {
   responses?: { [key: string]: string };
   userAnswer?: string | string[] | null;
   selectedUnit? : string | null; 
-  message : string[] | null
+  message : string[] | null; 
+  preconisation : string; 
+  rcv : string; 
 }
 
 

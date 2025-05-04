@@ -1,0 +1,7 @@
+<div *ngIf="question">
+    <div class="preconisation" *ngIf='question.preconisation'>
+      <h2 class="title">Préconisations</h2>
+      <p class="text" [innerHTML]="question.preconisation | formatInfoText"></p>
+    </div>
+</div>
+  

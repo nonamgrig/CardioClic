@@ -67,6 +67,8 @@ export class TexteService {
             nextQuestionKey: nextQuestionKey,
             responses: item.responses || undefined,  // Si les réponses sont définies, les ajouter
             message : item.message ? Object.values(item.message) : null, //pour créer une liste à partir des messages 
+            preconisation : item.preconisation, 
+            rcv : item.rcv, 
           };
 
           // Ajouter chaque question à la Map

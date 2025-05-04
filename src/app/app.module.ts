@@ -17,6 +17,7 @@ import { AboutComponent } from './modules/about/about.component';
 import { BackComponent } from './modules/shared/back/back.component';
 import { FormsModule } from '@angular/forms';
 import { FormatInfoTextPipe } from './pipe/format-info-text.pipe';
+import { PreconisationComponent } from './modules/preconisation/preconisation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FormatInfoTextPipe } from './pipe/format-info-text.pipe';
     InfoComponent,
     AboutComponent,
     BackComponent,
-    FormatInfoTextPipe
+    FormatInfoTextPipe,
+    PreconisationComponent
   ],
   imports: [
     BrowserModule,

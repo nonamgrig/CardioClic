@@ -24,7 +24,7 @@ export class TexteService {
 
   // Méthode pour charger les textes depuis le fichier JSON
   loadTexts(): Observable<any> {
-    return this.http.get('/assets/texts.json'); 
+    return this.http.get<any>('/assets/texts.json').pipe(); 
   }
 
   // Méthode pour charger les questions depuis le fichier JSON

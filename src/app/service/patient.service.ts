@@ -4,14 +4,14 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HomeComponent } from '../home/home/home.component';
 import { StmtModifier } from '@angular/compiler';
 
-import ds from '../../assets/texts.json'
+// import ds from '../../assets/texts.json'
 
-type QPatient = typeof ds.patient
-// TO DO Recréer l' interface patient à partir de qPatient
+// type QPatient = typeof ds.patient
+// // TO DO Recréer l' interface patient à partir de qPatient
 
-// const test: QPatient = {
+// // const test: QPatient = {
   
-// }
+// // }
 
 export interface Patient {
   age: number | null;

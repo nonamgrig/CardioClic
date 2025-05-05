@@ -10,6 +10,7 @@ import { PatientService } from '../../service/patient.service';
   styleUrl: './home.component.less'
 })
 export class HomeComponent {
+  text : any; 
   constructor( 
     private router: Router, 
     public texteService : TexteService, 
@@ -17,6 +18,13 @@ export class HomeComponent {
   }
 
   ngOnInit() {
+    //Charger les textes au démarrage de l'application
+    this.texteService.loadTexts().subscribe(texts => {
+      this.texteService.setTexts(texts); 
+      this.text=texts; 
+      console.log('texte chargé', this.text)
+    });
+    
   }
 
   onGo(event:Event) {

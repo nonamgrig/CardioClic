@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="home"> 
-    <div class="headline">
-        <h2 class="title">{{ texteService.getText('home.title')}} </h2>
-        <h2 class="title">{{ texteService.getText('home.subtitle')}}</h2>
-        <p class="text">{{ texteService.getText('home.text')}}</p>
+    <div class="headline" *ngIf='text'>
+        <h2 class="title">{{ text.home.title}} </h2>
+        <h2 class="title">{{ text.home.subtitle}}</h2>
+        <p class="text">{{ text.home.text}}</p>
     </div>
     <button class="btn" name="go" (click)="onGo($event)"> Commencer</button>
     <div class="info">

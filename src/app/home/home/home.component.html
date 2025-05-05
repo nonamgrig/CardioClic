@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="home"> 
-    <div class="headline" *ngIf='text'>
-        <h2 class="title">Mon patient est-il à fort risque cardio-vasculaire ?</h2>
-        <h2 class="title">Je n'hésite plus, je fais le test</h2>
-        <p class="text">Cliquer sur le bouton ci-dessous pour commencer l'évaluation du risque cardique</p>    </div>
+    <div class="headline">
+        <h2 class="title">{{texteService.getText('home.title')}}</h2>
+        <h2 class="title">{{texteService.getText('home.subtitle')}}</h2>
+        <p class="text">{{texteService.getText('home.text')}}</p>    </div>
     <button class="btn" name="go" (click)="onGo($event)"> Commencer</button>
     <div class="info">
         <h2 class="title">Comment se déroule le test ?</h2>

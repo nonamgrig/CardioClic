@@ -1,0 +1,450 @@
+{
+    "home": {
+        "title": "Mon patient est-il à fort risque cardio-vasculaire ?",
+        "subtitle": "Je n'hésite plus, je fais le test", 
+        "text": "Cliquer sur le bouton ci-dessous pour commencer l'évaluation du risque cardique", 
+        "information":"Informations sur comment va se dérouler le test, les données à avoir ..."
+    }, 
+    "patient": {
+        "age": {
+            "headline" : "Age",
+            "unit" : "ans"
+        },
+        "sexe" : {
+            "headline" : "Sexe",
+            "unit" : ""
+        },
+        "diabetique": {
+            "headline" : "Diabétique",
+            "unit" : ""
+        },
+        "ageApparition": {
+            "headline" : "Apparition",
+            "unit" : "ans"
+        },
+        "prevention": {
+            "headline" : "Prévention",
+            "unit" : ""
+        },
+        "creatinine": {
+            "headline" : "Créatinine",
+            "unit" : "µmol/L"
+        },
+        "ascendance": {
+            "headline" : "Ascendance afro-caribéenne",
+            "unit" : ""
+        },
+        "dfge": {
+            "headline" : "DFGe (CKD-EPI)",
+            "unit" : "mL/min/1.73 m2"
+        },
+        "ratio": {
+            "headline" : "Albumine/créatinine",
+            "unit" : "mg/g"
+        },
+        "rationondispo" : {
+            "headline" : "Albumine/créatinine", 
+            "unit" : ""
+        },
+        "pa": {
+            "headline" : "PA systolique",
+            "unit" : "mmHg"
+        },
+        "cholesTotal": {
+            "headline" : "Cholestérol total",
+            "unit" : "mmol/L"
+        },
+        "hdl": {
+            "headline" : "HDL",
+            "unit" : "mmol/L"
+        },
+        "hba1c": {
+            "headline" : "HbA1c",
+            "unit" : "mmol/mol"
+        },
+        "fumeur": {
+            "headline" : "Fumeur actif",
+            "unit" : ""
+        },
+        "score2": {
+            "headline" : "SCORE2",
+            "unit" : "%"
+        },
+        "score2op": {
+            "headline" : "SCORE2 OP",
+            "unit" : "%"
+        },
+        "score2diabete": {
+            "headline" : "SCORE2 DIABET",
+            "unit" : "%"
+        },
+        "neuropathie": {
+            "headline" : "Neuropathie",
+            "unit" : ""
+        },
+        "retinopathie": {
+            "headline" : "Rétinopathie",
+            "unit" : ""
+        }
+    },
+    "questions" : {
+        "age": {
+            "question": "Quel est l'âge de votre patient ?", 
+            "type": "text", 
+            "next": "sexe"
+        }, 
+        "sexe": {
+            "question": "Quel est le sexe de votre patient ?",
+            "type": "prop", 
+            "responses": {
+                "response1": "Homme", 
+                "response2": "Femme"
+            }, 
+            "next": "diabetique"
+        }, 
+        "diabetique": {
+            "question": "Votre patient est-il diabétique ?", 
+            "info" : "Infos pour décrire les critères pour dire que quelqu'un est diabétique\nIl doit être ceci\nil doit être cela\n- valeur 1\n- valeur 2",
+            "type": "prop", 
+            "responses": {
+                "response1": "Oui", 
+                "response2": "Non"
+            }, 
+            "next": {
+                "next1": "apparition", 
+                "next2": "prevention"
+            }
+        },
+        "apparition": {
+            "question": "Répondez à l'une des deux questions ci-dessous", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "anneeApparition" : {
+                    "question" : "Quelle est l'année d'apparition du diabète ?",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "ageApparition" : {
+                    "question" : "Quel âge avait votre patient à l'apparition du diabète ?", 
+                    "type": "text", 
+                    "responses" : "",
+                    "next": ""
+                }
+            },           
+            "next": "prevention"
+        },
+        "prevention": {
+            "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
+            "type": "prop", 
+            "responses": {
+                "response1": "Prévention Primaire", 
+                "response2": "Prévention Secondaire", 
+                "response3": "J'ai un doute, aidez moi !"
+            }, 
+            "next": {
+                "next1": "CKD", 
+                "next2": "TERCV", 
+                "next3": "aide"
+            }
+        }, 
+        "CKD": {
+            "question": "Calcul de la clairance par la formule CKD-EPI", 
+            "info": "Ne doit être utilisé que si la fonction rénale du patient est stable", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "creatinine" : {
+                    "question" : "Créatinine",
+                    "units" : {
+                        "unit1" : "µmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "ascendance" : {
+                    "question" : "Ascendance afro-caribéenne ?", 
+                    "type": "checkboxsingle", 
+                    "responses" : {
+                        "response1": "Oui", 
+                        "response2": "Non", 
+                        "response3": "Ne souhaite pas répondre"
+                    }, 
+                    "next": ""
+                }
+            },   
+            "message" : {
+                "message1" : "L'ascendance de votre patient n'a pas été précisée, on suppose alors qu'il n'a pas d'ascendance afro-caribéenne car c'est le pire cas (A DIRE AUTREMENT)"
+            },          
+            "next": "ratio"
+        },
+        "aide": {
+            "question": "Pour déterminer la situation de prévention de votre patient, cocher les cases ci-dessous quand la réponse est OUI", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "Votre patient présente-il les antécédents suivants ?",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Infarctus et/ou stent coronaire", 
+                        "response2": "Stent ou pontage ilio-démoral ou AOMI symptomatique", 
+                        "response3": "AVC ischémique, AIT ou endarteriectomie carotidienne"
+                    }, 
+                    "next": ""
+                },
+                "subquestion2" : {
+                    "question" : "Votre pateint présente-il des lésions qualifiantes de la 'présention secondaire' suite à un des examens suivants ?", 
+                    "type": "checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Coronarographie ou coro-TDM", 
+                        "response2": "Doppler TSA ou doppler artériel des MI", 
+                        "response3": "Score calcique coronaire"
+                    }, 
+                    "descriptions": {
+                        "description1": "Atteinte coronaire tri-tronculaire OU Lésion significative >50% du tronc commun coronaire gauche OU Lésion significative >70% de l'iVA proximale", 
+                        "description2": "Sténose artérielle significative >50%",
+                        "description3": ">400 UA"
+                    },
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient n'est dans aucune des situations décrités, il est en Prévention Primaire"
+            },
+            "next": "CKD"
+        },
+        "ratio": {
+            "question": "Quel est le ratio albumine/creatinine du patient ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "ratio" : {
+                    "question" : "Valeur du ratio",
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "rationondispo" : {
+                    "question" : "", 
+                    "type": "checkboxsingle", 
+                    "responses" : {
+                        "response1": "Non disponible"
+                    }, 
+                    "next": ""
+                }
+            },
+            "message" : {
+                "message1" : "Ratio à faire ++", 
+                "message2" : "Ratio à faire",
+                "message3": "Ratio à considérer", 
+                "message4": "Vore patient étant diabétique, il est préférable de calculer le SCORE 2 Diabétique même si la ratio albumine/créatinine n'est pas disponible"
+            },
+            "next": "score"
+        },
+        "lesion": {
+            "question": "Votre patient présente-il les pathologies suivantes ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "neuropathie" : {
+                    "question" : "Neuropathie diabétique ?",
+                    "type":"checkboxsingle", 
+                    "responses" : {
+                        "response1": "Oui", 
+                        "response2": "Non", 
+                        "response3": "Ne sais pas"
+                    }, 
+                    "next": ""
+                },
+                "retinopathie" : {
+                    "question" : "Rétinopathie diabétique ?", 
+                    "type": "checkboxsingle", 
+                    "responses" : {
+                        "response1": "Oui", 
+                        "response2": "Non", 
+                        "response3": "Ne sais pas"
+                    },  
+                    "next": ""
+                }
+            },
+            "next": "score"
+        },
+        "score2": {
+            "question": "Calcul du SCORE 2", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "pa" : {
+                    "question" : "PA systolique (100-255mmHg)",
+                    "units" : {
+                        "unit1" : "mmHg"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "cholesTotal" : {
+                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "hdl" : {
+                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "fumeur" : {
+                    "question" : "Fumeur actif ?",
+                    "type":"checkboxsingle", 
+                    "responses": {
+                        "response1": "Oui", 
+                        "response2": "Non"
+                    },  
+                    "next": ""
+                }
+                
+            },   
+            "next": "FRCV"
+        }, 
+        "score2op": {
+            "question": "Calcul du SCORE 2 OP", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "pa" : {
+                    "question" : "PA systolique (100-255mmHg)",
+                    "units" : {
+                        "unit1" : "mmHg"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "cholesTotal" : {
+                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "hdl" : {
+                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "fumeur" : {
+                    "question" : "Fumeur actif ?",
+                    "type":"checkboxsingle", 
+                    "responses": {
+                        "response1": "Oui", 
+                        "response2": "Non"
+                    },  
+                    "next": ""
+                }
+                
+            },   
+            "next": "FRCV"
+        },
+        "score2diabete": {
+            "question": "Calcul du SCORE 2 Diabete", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "pa" : {
+                    "question" : "PA systolique (100-255mmHg)",
+                    "units" : {
+                        "unit1" : "mmHg"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "cholesTotal" : {
+                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                }, 
+                "hdl" : {
+                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "units" : {
+                        "unit1" : "mmol/L", 
+                        "unit2" : "mg/dL"
+                    },
+                    "type":"text", 
+                    "responses": "", 
+                    "next": ""
+                },
+                "hba1c" : {
+                    "question" : "HbA1c (1 - 150 mmol/mol)",
+                    "units" : {
+                        "unit1" : "mmol/mol", 
+                        "unit2" : "%"
+                    },
+                    "type":"text", 
+                    "responses": "",   
+                    "next": ""
+                },
+                "fumeur" : {
+                    "question" : "Fumeur actif ?",
+                    "type":"checkboxsingle", 
+                    "responses": {
+                        "response1": "Oui", 
+                        "response2": "Non"
+                    },  
+                    "next": ""
+                }
+                
+            },   
+            "next": ""
+        },
+        "TERCV": {
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Très Élevé",
+            "preconisation" : "Préconisations adaptées au cas ?", 
+            "next": ""
+        },
+        "ERCV": {
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Élevé",
+            "preconisation" : "Préconisations adaptées au cas ?",  
+            "next": ""
+        },
+        "MRCV": {
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Modéré",
+            "preconisation" : "Préconisations adaptées au cas ?", 
+            "next": ""
+        },
+        "FRCV": {
+            "question": "Votre patient a un risque cardiovasculaire", 
+            "type": "RCV", 
+            "rcv" : "RCV Faible", 
+            "preconisation" : "Préconisations adaptées au cas ?", 
+            "next": ""
+        }
+
+    }
+}

@@ -1,0 +1,117 @@
+body {
+	background-color:white;
+}
+
+table {
+	border: 1px solid green;
+	color:forestgreen;
+	width: 90%;
+}
+
+.list {
+	width: 90%;
+}
+
+tr{
+	background-color:white;
+	color:forestgreen;
+}
+
+td{
+	border:1px solid green;
+	color:forestgreen;
+}
+
+td.centered {
+	text-align:center;
+}
+
+th{
+	background-color:yellowgreen;
+	color:white;
+}
+
+.main {
+    display: table-cell;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+	margin: 0 0 10px;
+	font-size: 20px;
+	font-weight: bold;
+	color:green;
+}
+
+p {
+	width: inherit;
+	margin: 5px 0;
+	color: #999;
+} 
+
+p.success {
+	color: #83BD41; 
+	margin-bottom: 10px;
+	text-shadow: 1px 1px rgba(0,0,0,.1);
+}
+
+form.login {
+	margin: 100px auto 0;
+	width: 300px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.3);
+	text-align: center;
+}
+
+img.icon {
+	display: inline;
+	width: 20px;
+}
+
+button.icon {
+	display: inline;
+	width: 32px;
+	font-size: 14px;
+}
+
+button.large {
+	display: block;
+	width: 100%;
+	padding: 2px auto;
+	background-color: green;
+	color:white;
+	border: 1px solid green;
+	border-radius: 5px;
+	font-size: 14px;
+	cursor: pointer;
+	text-align: center;
+}
+
+select.large {
+	display: block;
+	width: 100%;
+}
+
+p.error {
+	color: red;
+	font-size: 20px;
+	margin-bottom: 10px;
+	text-shadow: 1px 1px rgba(0,0,0,.1);
+}
+
+input {
+	display: block;
+	width: inherit;
+	padding: 2px;
+	background: rgba(0,0,0,.05);
+	border: 1px solid rgba(0,0,0,.15);
+	box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+	border-radius: 3px;
+	font-size: 14px;
+	&:invalid:not(:focus) {
+		border-color: red;
+	}
+}

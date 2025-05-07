@@ -14,6 +14,7 @@ import { StmtModifier } from '@angular/compiler';
 // // }
 
 export interface Patient {
+  [key: string]: any;
   age: number | null;
   sexe : string | null; // Homme ou Femme 
   diabetique : string | null; // Oui Non

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { TexteService } from '../../../service/texte.service';
 import { QuestionService } from '../../../service/question.service';
 import { Question } from '../../../service/question.service'
-import { PatientService } from '../../../service/patient.service';
+import { Patient, PatientService } from '../../../service/patient.service';
 
 @Component({
   selector: 'app-question',
@@ -20,6 +20,8 @@ export class QuestionComponent implements OnInit, OnChanges {
   selectedUnit: string = '';
 
   subquestionsArray: (Question & { key: string })[] = [];
+
+  @Input() patient! : Patient; //on récupère le patient 
 
   //pour gérer les pop up
   showDialog = false;
@@ -117,7 +119,6 @@ export class QuestionComponent implements OnInit, OnChanges {
   
     if (checkbox.checked) {
       subquestion.userAnswer = response.label;
-      console.log("question selected", this.userAnswer)
     } else {
       subquestion.userAnswer = '';
     }
@@ -150,8 +151,11 @@ export class QuestionComponent implements OnInit, OnChanges {
 
   //pour tester si subquestion.userAnswer est un array et si la reponse est dans la liste des réponses
   isChecked(subquestion: any, label: string | null): boolean {
-    if (label === null) return false;
-    return Array.isArray(subquestion.userAnswer) && subquestion.userAnswer.includes(label);
+    console.log("check",this.patient[subquestion.key]);
+    console.log("label",label);
+    if (this.patient[subquestion.key] == label) return true; 
+    if (label === null) return false; 
+    return (Array.isArray(subquestion.userAnswer) && subquestion.userAnswer.includes(label));
   }
 
   //pour ferrmer la dialogue box
@@ -174,11 +178,13 @@ export class QuestionComponent implements OnInit, OnChanges {
 
       if (this.subquestionsArray.length == 0 ) {
         //on a une seule question sur la page 
-        this.patientService.updateField(key, this.userAnswer);
+        if (this.userAnswer == "") { //si la personne n'a rempli aucune valeur il n'y a rien à modifier
+        } else {this.patientService.updateField(key, this.userAnswer);}
       } else {
         //il y a plusieurs réponses à enregistrer
         this.subquestionsArray.forEach(subquestion => {
-          this.patientService.updateField(subquestion.key, subquestion.userAnswer);
+          if (subquestion.userAnswer == "") { //si la personne n'a rempli aucune valeur il n'y a rien à modifier
+          } else {this.patientService.updateField(subquestion.key, subquestion.userAnswer);}
         })
       }
       //pour envoyer l'unité utilisé au service pour les calculs

@@ -4,7 +4,8 @@
         <app-back (click)="goBack()"></app-back>
         <app-question
             *ngIf= "questionId" 
-            [questionId]="questionId">           
+            [questionId]="questionId" 
+            [patient]="patient">           
         </app-question>
         <div class="centered-component">
             <app-info

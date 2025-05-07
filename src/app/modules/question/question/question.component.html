@@ -9,7 +9,7 @@
 
     <div *ngIf="question.type == 'text'" >
         <div class="input-container">
-            <input [(ngModel)]="userAnswer" placeholder="">
+            <input [(ngModel)]="userAnswer" [placeholder]="patient[question.title] ? patient[question.title] : 'Entrez une valeur'">
             
             <div *ngIf="question.units" class="unit-select-container">
                 <select [(ngModel)]="selectedUnit" class="form-select">
@@ -48,7 +48,7 @@
         
             <div *ngIf="subquestion.type == 'text'" >
                 <div class="input-container">
-                    <input [(ngModel)]="subquestion.userAnswer" placeholder="">
+                    <input [(ngModel)]="subquestion.userAnswer" [placeholder]="patient[subquestion.key] ? patient[subquestion.key] : 'Entrez une valeur'">
                     <div *ngIf="subquestion.units" class="unit-select-container">
                         <select [(ngModel)]="subquestion.selectedUnit" class="form-select">
                             <option *ngFor="let unit of subquestion.units" [value]="unit">{{ unit }}</option>

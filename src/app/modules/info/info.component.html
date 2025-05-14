@@ -1,7 +1,14 @@
 <div *ngIf="question">
     <div class="info" *ngIf='question.info'>
-      <h2 class="title">Informations</h2>
-      <p class="text" [innerHTML]="question.info | formatInfoText"></p>
+      <h2 class="title">Rappels</h2>
+      
+      <!--Utilisation de sanitizedInfo pour afficher le contenu HTML-->
+      <p class="text"  *ngIf="sanitizedInfo" [innerHTML]="sanitizedInfo" (click)="handleImageClick($event)"></p>
+
+      <!-- Popup modal-->
+      <div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
+        <img [src]="modalImageSrc" (click)="$event.stopPropagation()" alt="Image d'information" />
+      </div> 
     </div>
 </div>
   

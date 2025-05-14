@@ -1,6 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, PipeTransform, SimpleChanges } from '@angular/core';
 import { Question } from '../../service/question.service';
 import { TexteService } from '../../service/texte.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { FormatInfoTextPipe } from '../../pipe/format-info-text.pipe';
 
 @Component({
   selector: 'app-info',
@@ -15,6 +17,8 @@ export class InfoComponent implements OnInit, OnChanges {
 
   constructor(
     private texteService: TexteService,
+    private sanitizer: DomSanitizer,  // Injecter DomSanitizer
+    private formatInfoTextPipe: FormatInfoTextPipe  // Injection de ton pipe
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +39,39 @@ export class InfoComponent implements OnInit, OnChanges {
     // Charger la question via le service
     const index = this.questionId - 1;  // index basé sur le questionId
     this.question = getQuestionByIndex(this.texteService.questions, index);
+    console.log("question", this.question);
+    // Appliquer le pipe formatInfoText et marquer comme safe
+    if (this.question?.info) {
+      const formattedInfo = this.formatInfoTextPipe.transform(this.question.info); // Applique ton pipe ici
+      this.sanitizedInfo = this.sanitizer.bypassSecurityTrustHtml(formattedInfo);  // Marque le contenu comme "safe"
+      console.log("sani", this.sanitizedInfo); 
+    }
+  }
+
+  //pour gérer l'affichage des images dans infos
+  sanitizedInfo : SafeHtml = ''; 
+  showImageModal = false;
+  modalImageSrc = '';
+
+  handleImageClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const linkElement = target.closest('.image-link');
+    console.log("link", linkElement);
+     if (linkElement) {
+      event.preventDefault();
+      const imgPath = linkElement.getAttribute('data-img');
+      console.log('Image cliquée :', imgPath);
+
+      if (imgPath) {
+        this.modalImageSrc = imgPath;
+        this.showImageModal = true;
+      }
+    }
+  }
+
+  closeImageModal(): void {
+    this.showImageModal = false;
+    this.modalImageSrc = '';
   }
 
 }

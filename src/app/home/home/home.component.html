@@ -3,11 +3,12 @@
     <div class="headline">
         <h2 class="title">{{texteService.getText('home.title')}}</h2>
         <h2 class="title">{{texteService.getText('home.subtitle')}}</h2>
-        <p class="text">{{texteService.getText('home.text')}}</p>    </div>
+        
+    </div>
     <button class="btn" name="go" (click)="onGo($event)"> Commencer</button>
     <div class="info">
         <h2 class="title">Comment se déroule le test ?</h2>
-        <p class="text">Listes les infos à donner et dire ce que l'on va avoir à la fin</p>
+        <p class="text" [innerHTML]="texteService.getText('home.information') | formatInfoText"></p>
     </div>
     
 </div>

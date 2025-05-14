@@ -141,8 +141,23 @@ export class TexteService {
       }
     } 
 
-    //POur la question aide, on a doit answer soit "Oui" soit "Non"
-  if (currentQuestion.title == "aide" ) {
+    //Pour la question aide1, on a doit answer soit "Oui" soit "Non"
+  if (currentQuestion.title == "aide1") {
+      if (answer == "Oui"){
+        if(currentQuestion.message) {
+          await this.waitForDialogConfirmation(currentQuestion.message[0]);
+        }
+      next = "TERCV"
+    } else {
+      if(currentQuestion.message) {
+        //TODO
+        
+      }
+      //next aide2 donc inchangé 
+    }
+  }
+    //Pour la question aide, on a doit answer soit "Oui" soit "Non"
+  if (currentQuestion.title == "aide2") {
       if (answer == "Oui"){
         if(currentQuestion.message) {
           await this.waitForDialogConfirmation(currentQuestion.message[0]);
@@ -151,6 +166,7 @@ export class TexteService {
     } else {
       if(currentQuestion.message) {
         await this.waitForDialogConfirmation(currentQuestion.message[1]);
+        
       }
       //next CKD donc inchangé 
     }
@@ -171,6 +187,8 @@ export class TexteService {
       scoreUtil = "score2op"; 
     }
 
+    //TO DO : si les datas ne sont pas complétées, on ne doit pas pouvoir récupérer un risque à la fin 
+    //utiliser la page, info manquante, ou des contrôles sur les champs textes ? 
 
     if (currentPatient.diabetique =="Non") {
       //pour certaines questions, on doit influer sur la question suivante en fonction des réponses et des résultats
@@ -224,46 +242,51 @@ export class TexteService {
         }
                     
       } else if (currentQuestion.title == "score2" || currentQuestion.title == "score2op" ) {
-        // en fonction du résultat du calcul du score 2 ou score 2 OP et de l'âge 
-        if (currentPatient.age && Number(currentPatient.age)< 70){
-          //on regarde le résultat du score 2
-          if (Number(currentPatient.age) <50) {
-            if (currentPatient.score2 && Number(currentPatient.score2) < 2.5) {
-              //direct risque
-              nextParticulier = "FRCV"
-            } else if (currentPatient.score2 && Number(currentPatient.score2) < 7.5) {
-              //direct risque
-              nextParticulier = "MRCV"
-            } else { //>= 7.5
-              //direct risque
-              nextParticulier = "ERCV"
+        if(currentQuestion.title == "score2" && (currentPatient.score2?.toString() == "")){
+          nextParticulier = "infomissing"
+        } else if (currentQuestion.title == "score2op" && (currentPatient.score2op?.toString() == "")){
+          nextParticulier = "infomissing"
+        } else 
+          // en fonction du résultat du calcul du score 2 ou score 2 OP et de l'âge 
+          if (currentPatient.age && Number(currentPatient.age)< 70){
+            //on regarde le résultat du score 2
+            if (Number(currentPatient.age) <50) {
+              if (currentPatient.score2 && Number(currentPatient.score2) < 2.5) {
+                //direct risque
+                nextParticulier = "FRCV"
+              } else if (currentPatient.score2 && Number(currentPatient.score2) < 7.5) {
+                //direct risque
+                nextParticulier = "MRCV"
+              } else { //>= 7.5
+                //direct risque
+                nextParticulier = "ERCV"
+              }
+            } else { //age entre 50 et 69
+              if (currentPatient.score2 && Number(currentPatient.score2) < 5) {
+                //direct risque
+                nextParticulier = "FRCV"
+              } else if (currentPatient.score2 && Number(currentPatient.score2) < 10) {
+                //direct risque
+                nextParticulier = "MRCV"
+              } else { //>= 10
+                //direct risque
+                nextParticulier = "ERCV"
+              }
             }
-          } else { //age entre 50 et 69
-            if (currentPatient.score2 && Number(currentPatient.score2) < 5) {
+          } else { // age >=70 avec score2op
+            if (currentPatient.score2op && Number(currentPatient.score2op) < 7.5) {
               //direct risque
               nextParticulier = "FRCV"
-            } else if (currentPatient.score2 && Number(currentPatient.score2) < 10) {
+            } else if (currentPatient.score2op && Number(currentPatient.score2op) < 15) {
               //direct risque
               nextParticulier = "MRCV"
-            } else { //>= 10
+            } else { //>= 15
               //direct risque
               nextParticulier = "ERCV"
             }
           }
-        } else { // age >=70 avec score2op
-          if (currentPatient.score2op && Number(currentPatient.score2op) < 7.5) {
-            //direct risque
-            nextParticulier = "FRCV"
-          } else if (currentPatient.score2op && Number(currentPatient.score2op) < 15) {
-            //direct risque
-            nextParticulier = "MRCV"
-          } else { //>= 15
-            //direct risque
-            nextParticulier = "ERCV"
-          }
-        }
 
-      }
+        }
     } else { //diabétique OUI
       
       if (currentQuestion.title == "CKD") {
@@ -283,7 +306,7 @@ export class TexteService {
             // message pop up pour aller quand même au score
             nextParticulier = "score2diabete"
             if(currentQuestion.message) {
-              await this.waitForDialogConfirmation(currentQuestion.message[0]);
+              await this.waitForDialogConfirmation(currentQuestion.message[3]);
             }
           } else {
             //vers score diabete
@@ -301,7 +324,7 @@ export class TexteService {
             // message pop up pour aller quand même au score diabete
             nextParticulier = "score2diabete"
             if(currentQuestion.message) {
-              await this.waitForDialogConfirmation(currentQuestion.message[0]);
+              await this.waitForDialogConfirmation(currentQuestion.message[3]);
             }
           } else { // >= 300
             //direct risque
@@ -318,8 +341,12 @@ export class TexteService {
             nextParticulier = "score2diabete"
         }
       } else if (currentQuestion.title == "score2diabete") {
+        if (currentPatient.score2diabete?.toString() == ""){
+          nextParticulier = "infomissing"
+        } else 
         // en fonction du résultat du calcul du score et de l'âge 
-        if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 5) {
+        if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 5) 
+        {
           //direct risque
           nextParticulier = "FRCV"
         } else if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 10) {

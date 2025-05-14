@@ -242,7 +242,7 @@ export class PatientService {
     }
     if (hdlUnit=="mmol/L") {
       convertHDL = 1; 
-    } else if (cholesTotalUnit == "mg/dL") {
+    } else if (hdlUnit == "mg/dL") {
       convertHDL =  0.02586; 
     }
 
@@ -376,7 +376,7 @@ export class PatientService {
     }
     if (hdlUnit=="mmol/L") {
       convertHDL = 1; 
-    } else if (cholesTotalUnit == "mg/dL") {
+    } else if (hdlUnit == "mg/dL") {
       convertHDL =  0.02586; 
     }
 
@@ -512,7 +512,7 @@ export class PatientService {
     }
     if (hdlUnit=="mmol/L") {
       convertHDL = 1; 
-    } else if (cholesTotalUnit == "mg/dL") {
+    } else if (hdlUnit == "mg/dL") {
       convertHDL =  0.02586; 
     }
 

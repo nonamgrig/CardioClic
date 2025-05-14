@@ -205,13 +205,38 @@ export class QuestionComponent implements OnInit, OnChanges {
           }
           
           break;
-
-        case "aide": //la réponse de user
+        case "prevention": 
+          if (this.userAnswer = "J'ai un doute") {
+            //si la réponse est j'ai un doute, on ne doit pas l'enregistrer 
+            this.patientService.updateField("prevention", null); 
+          }
+          break; 
+        case "aide1": //la réponse de user
         //TO DO trancher si on veut ou pas stocker les réponses à l'aide (pour l'instant nan)
         //Lorsqu'on retourne en arrière on n'efface pas les réponses mais elles n'apparaissent pas een déjà cochée non plus 
-          // Met à jour selected global (Oui si au moins 1 case cochée/ vide)
+          // Met à jour selected global (Oui si au moins 1 case cochée sinon vide)
           this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
+          if (this.selectedAnswer == 'Oui') {
+            //prévention secondaire 
+            this.patientService.updateField("prevention", "secondaire")
+          } else {
+            //on passe à l'aide 2
+            //this.patientService.updateField("prevention", "primaire")
+          }
           break; 
+        case "aide2": //la réponse de user
+        //TO DO trancher si on veut ou pas stocker les réponses à l'aide (pour l'instant nan)
+        //Lorsqu'on retourne en arrière on n'efface pas les réponses mais elles n'apparaissent pas een déjà cochée non plus 
+          // Met à jour selected global (Oui si au moins 1 case cochée sinon vide)
+          this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
+          if (this.selectedAnswer == 'Oui') {
+            //prévention secondaire
+            this.patientService.updateField("prevention", "secondaire")
+          } else {
+            //prévention primaire
+            this.patientService.updateField("prevention", "primaire")
+          }
+          break;
         case "CKD":
           const creatinineUnit = this.subquestionsArray[0].selectedUnit ? this.subquestionsArray[0].selectedUnit : ''; 
           let DFGe = arrondirSiNecessaire(this.patientService.calculDFGe(creatinineUnit)); //'avec 2 chiffres après la virgule
@@ -225,20 +250,23 @@ export class QuestionComponent implements OnInit, OnChanges {
           cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
           hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
           let score2 = arrondirSiNecessaire(this.patientService.calculscore2(cholesTotalUnit, hdlUnit)); 
-          this.patientService.updateField("score2", score2); 
+          if (score2 == "NaN") {this.patientService.updateField("score2", "")}
+          else {this.patientService.updateField("score2", score2);} 
           break;
         case "score2op": 
           cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
           hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
           let score2op = arrondirSiNecessaire(this.patientService.calculscore2op(cholesTotalUnit, hdlUnit)); 
-          this.patientService.updateField("score2op", score2op); 
+          if (score2op == "NaN") {this.patientService.updateField("score2op", "")}
+          else {this.patientService.updateField("score2op", score2op);} 
           break;  
         case "score2diabete": 
-        cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
-        hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
-        hba1cUnit = this.subquestionsArray[3].selectedUnit ? this.subquestionsArray[3].selectedUnit : ''; 
+          cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+          hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
+          hba1cUnit = this.subquestionsArray[3].selectedUnit ? this.subquestionsArray[3].selectedUnit : ''; 
           let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet(cholesTotalUnit, hdlUnit, hba1cUnit)); 
-          this.patientService.updateField("score2diabete", score2diabete); 
+          if (score2diabete == "NaN") {this.patientService.updateField("score2diabete", "")}
+          else {this.patientService.updateField("score2diabete", score2diabete);} 
         break; 
         default : 
         

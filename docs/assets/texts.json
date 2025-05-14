@@ -1,9 +1,8 @@
 {
     "home": {
-        "title": "Mon patient est-il à fort risque cardio-vasculaire ?",
-        "subtitle": "Je n'hésite plus, je fais le test", 
-        "text": "Cliquer sur le bouton ci-dessous pour commencer l'évaluation du risque cardique", 
-        "information":"Informations sur comment va se dérouler le test, les données à avoir ..."
+        "title": "Quel est le risque cardiovasclaire de mon patient ?",
+        "subtitle": "Evaluons-le en quelques clics", 
+        "information":"Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé de 40 à 90 ans.\nLe nécessaire : créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif)."
     }, 
     "patient": {
         "age": {
@@ -39,11 +38,11 @@
             "unit" : "mL/min/1.73 m2"
         },
         "ratio": {
-            "headline" : "Albumine/créatinine",
+            "headline" : "RAC",
             "unit" : "mg/g"
         },
         "rationondispo" : {
-            "headline" : "Albumine/créatinine", 
+            "headline" : "RAC", 
             "unit" : ""
         },
         "pa": {
@@ -104,7 +103,7 @@
         }, 
         "diabetique": {
             "question": "Votre patient est-il diabétique ?", 
-            "info" : "Infos pour décrire les critères pour dire que quelqu'un est diabétique\nIl doit être ceci\nil doit être cela\n- valeur 1\n- valeur 2",
+            "info" : "Critères diag du diabète : \n- Glycémie à jeun >= 7.0 mmol/L (>= 1.26 g/L) OU\n- HbA1c >= 6.5",
             "type": "prop", 
             "responses": {
                 "response1": "Oui", 
@@ -136,6 +135,7 @@
         },
         "prevention": {
             "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
+            "info" : "underline=Primaire : end n'a jamais présenté d'événement cardivasculaire.\nunderline=Secondaire : end a déjà présenté un événement CV (syndrome coronarien, AVC...)",
             "type": "prop", 
             "responses": {
                 "response1": "Prévention Primaire", 
@@ -145,12 +145,12 @@
             "next": {
                 "next1": "CKD", 
                 "next2": "TERCV", 
-                "next3": "aide"
+                "next3": "aide1"
             }
         }, 
         "CKD": {
             "question": "Calcul de la clairance par la formule CKD-EPI", 
-            "info": "Ne doit être utilisé que si la fonction rénale du patient est stable", 
+            "info": "L'ascendance est nécessaire pour calculer la clairance selon la formule CKD-EPI (disponible ici text=Lien Formule WikiMedi link=https://wikimedi.ca/wiki/CKD-EPI_(formule) ).\nSi vous cochez \"ne souhaite pas répondre\", on utilisera par défaut la variable donnant le risque CV le moins péjoratif (c'est-à-dire XX)", 
             "type": "subquestion", 
             "subquestion" : {
                 "creatinine" : {
@@ -179,12 +179,12 @@
             },          
             "next": "ratio"
         },
-        "aide": {
-            "question": "Pour déterminer la situation de prévention de votre patient, cocher les cases ci-dessous quand la réponse est OUI", 
+        "aide1": {
+            "question": "Votre patient présente-il les antécédents suivants ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "subquestion1" : {
-                    "question" : "Votre patient présente-il les antécédents suivants ?",
+                    "question" : "",
                     "type":"checkboxmultipleaide", 
                     "responses" : {
                         "response1": "Infarctus et/ou stent coronaire", 
@@ -192,20 +192,42 @@
                         "response3": "AVC ischémique, AIT ou endarteriectomie carotidienne"
                     }, 
                     "next": ""
-                },
-                "subquestion2" : {
-                    "question" : "Votre pateint présente-il des lésions qualifiantes de la 'présention secondaire' suite à un des examens suivants ?", 
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient n'est dans aucune des situations décrités, il est en Prévention Primaire"
+            },
+            "next": "aide2"
+        },
+        "aide2": {
+            "question": "Votre pateint présente-il des lésions qualifiantes de la 'présention secondaire' suite à un des examens suivants ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "Coronarographie ou coro-TDM", 
                     "type": "checkboxmultipleaide", 
                     "responses" : {
-                        "response1": "Coronarographie ou coro-TDM", 
-                        "response2": "Doppler TSA ou doppler artériel des MI", 
-                        "response3": "Score calcique coronaire"
-                    }, 
-                    "descriptions": {
-                        "description1": "Atteinte coronaire tri-tronculaire OU Lésion significative >50% du tronc commun coronaire gauche OU Lésion significative >70% de l'iVA proximale", 
-                        "description2": "Sténose artérielle significative >50%",
-                        "description3": ">400 UA"
+                        "response1": "Atteinte coronaire tri-tronculaire",
+                        "response2": "Lésion significative >50% du tronc commun coronaire gauche",
+                        "response3": "Lésion significative >70% de l'iVA proximale"
                     },
+                    "next": ""
+                }, 
+                "subquestion2" : {
+                    "question" : "Doppler TSA ou doppler artériel des MI", 
+                    "type": "checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Sténose artérielle significative >50%"
+                    }, 
+                    "next": ""
+                }, 
+                "subquestion3" : {
+                    "question" : "Score calcique coronaire", 
+                    "type": "checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": ">400 UA"
+                    }, 
                     "next": ""
                 }
             }, 
@@ -216,11 +238,15 @@
             "next": "CKD"
         },
         "ratio": {
-            "question": "Quel est le ratio albumine/creatinine du patient ?", 
+            "question": "Quel est le ratio albumine/creatinine (RAC) du patient ?",            
+            "info" : "Si vous ne disposez pas du ratio, nous utiliserons par défaut le cas le plus favorable, à savoir l'absence de protéinurie (RAC < 30mg/L) pour la suite. \nNous vous invitons dans ce cas à proposer le dosage urinaire au patient ( name=Imprimer l'ordonnance pré-remplie image=assets/img/ordonnancev0.png ) et à revenir calculer le RCV si jamais celui-ci revient positif.",
             "type": "subquestion", 
             "subquestion" : {
                 "ratio" : {
                     "question" : "Valeur du ratio",
+                    "units" : {
+                        "unit1" : "mg/g"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
@@ -270,7 +296,8 @@
             "next": "score"
         },
         "score2": {
-            "question": "Calcul du SCORE 2", 
+            "question": "Calcul du SCORE2", 
+            "info" : "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2 est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2 risk prediction algorithms link=https://doi.org/10.1093/eurheartj/ehab309 \n\n name=Table SCORE2 image=assets/img/score2.png",
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {
@@ -316,7 +343,8 @@
             "next": "FRCV"
         }, 
         "score2op": {
-            "question": "Calcul du SCORE 2 OP", 
+            "question": "Calcul du SCORE2-OP", 
+            "info": "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2-OP est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2-OP risk prediction algorithms link=https://doi.org/10.1093/eurheartj/ehab312 \n\n name=Table SCORE2-OP image=assets/img/score2.png",
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {
@@ -363,6 +391,7 @@
         },
         "score2diabete": {
             "question": "Calcul du SCORE 2 Diabete", 
+            "info": "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2-OP est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2-OP risk prediction algorithms link=https://doi.org/10.1093/eurheartj/ehab312 \n\n name=Table SCORE2 DIABETE image=assets/img/score2diabete.png",
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {
@@ -444,6 +473,19 @@
             "rcv" : "RCV Faible", 
             "preconisation" : "Préconisations adaptées au cas ?", 
             "next": ""
+        }, 
+        "infomissing": {
+            "question": "Des informations sont manquantes, le risque cardiovasculaire ne peut pas être évalué", 
+            "info" : "S'il manque l'une des données patient, vous pourrez recommencer le test une fois les examens nécessaires réalisés",
+            "type": "prop", 
+            "responses": {
+                "response1": "Revenir à la question précédente", 
+                "response2": "Terminer l'évaluation"
+            }, 
+            "next": {
+                "next1": "back", 
+                "next2": "home"
+            }
         }
 
     }

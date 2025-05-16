@@ -190,7 +190,7 @@ export class QuestionComponent implements OnInit, OnChanges {
       //pour envoyer l'unité utilisé au service pour les calculs
       let cholesTotalUnit;
       let hdlUnit;
-      let hba1cUnit 
+      let hba1cUnit; 
 
       //pour les questions avec un calcul, on appelle la fonction de calcul dans patientService
       switch (this.question?.title) {
@@ -206,7 +206,7 @@ export class QuestionComponent implements OnInit, OnChanges {
           
           break;
         case "prevention": 
-          if (this.userAnswer = "J'ai un doute") {
+          if (this.userAnswer == "J'ai un doute, aidez moi !") {
             //si la réponse est j'ai un doute, on ne doit pas l'enregistrer 
             this.patientService.updateField("prevention", null); 
           }
@@ -218,7 +218,7 @@ export class QuestionComponent implements OnInit, OnChanges {
           this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
           if (this.selectedAnswer == 'Oui') {
             //prévention secondaire 
-            this.patientService.updateField("prevention", "secondaire")
+            this.patientService.updateField("prevention", "Secondaire")
           } else {
             //on passe à l'aide 2
             //this.patientService.updateField("prevention", "primaire")
@@ -231,10 +231,10 @@ export class QuestionComponent implements OnInit, OnChanges {
           this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
           if (this.selectedAnswer == 'Oui') {
             //prévention secondaire
-            this.patientService.updateField("prevention", "secondaire")
+            this.patientService.updateField("prevention", "Secondaire")
           } else {
             //prévention primaire
-            this.patientService.updateField("prevention", "primaire")
+            this.patientService.updateField("prevention", "Primaire")
           }
           break;
         case "CKD":

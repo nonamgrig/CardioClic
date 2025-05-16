@@ -13,6 +13,10 @@
             "headline" : "Sexe",
             "unit" : ""
         },
+        "prevention": {
+            "headline" : "Prévention",
+            "unit" : ""
+        },
         "diabetique": {
             "headline" : "Diabétique",
             "unit" : ""
@@ -20,10 +24,6 @@
         "ageApparition": {
             "headline" : "Apparition",
             "unit" : "ans"
-        },
-        "prevention": {
-            "headline" : "Prévention",
-            "unit" : ""
         },
         "creatinine": {
             "headline" : "Créatinine",
@@ -99,7 +99,22 @@
                 "response1": "Homme", 
                 "response2": "Femme"
             }, 
-            "next": "diabetique"
+            "next": "prevention"
+        }, 
+        "prevention": {
+            "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
+            "info" : "underline=Primaire : end n'a jamais présenté d'événement cardiovasculaire.\nunderline=Secondaire : end a déjà présenté un événement CV (syndrome coronarien, AVC...)",
+            "type": "prop", 
+            "responses": {
+                "response1": "Primaire", 
+                "response2": "Secondaire", 
+                "response3": "J'ai un doute, aidez moi !"
+            }, 
+            "next": {
+                "next1": "diabetique", 
+                "next2": "TERCV", 
+                "next3": "aide1"
+            }
         }, 
         "diabetique": {
             "question": "Votre patient est-il diabétique ?", 
@@ -111,9 +126,9 @@
             }, 
             "next": {
                 "next1": "apparition", 
-                "next2": "prevention"
+                "next2": "CKD"
             }
-        },
+        },        
         "apparition": {
             "question": "Répondez à l'une des deux questions ci-dessous", 
             "type": "subquestion", 
@@ -131,23 +146,8 @@
                     "next": ""
                 }
             },           
-            "next": "prevention"
+            "next": "CKD"
         },
-        "prevention": {
-            "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
-            "info" : "underline=Primaire : end n'a jamais présenté d'événement cardivasculaire.\nunderline=Secondaire : end a déjà présenté un événement CV (syndrome coronarien, AVC...)",
-            "type": "prop", 
-            "responses": {
-                "response1": "Prévention Primaire", 
-                "response2": "Prévention Secondaire", 
-                "response3": "J'ai un doute, aidez moi !"
-            }, 
-            "next": {
-                "next1": "CKD", 
-                "next2": "TERCV", 
-                "next3": "aide1"
-            }
-        }, 
         "CKD": {
             "question": "Calcul de la clairance par la formule CKD-EPI", 
             "info": "L'ascendance est nécessaire pour calculer la clairance selon la formule CKD-EPI (disponible ici text=Lien Formule WikiMedi link=https://wikimedi.ca/wiki/CKD-EPI_(formule) ).\nSi vous cochez \"ne souhaite pas répondre\", on utilisera par défaut la variable donnant le risque CV le moins péjoratif (c'est-à-dire XX)", 

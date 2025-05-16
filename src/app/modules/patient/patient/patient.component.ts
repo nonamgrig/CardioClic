@@ -14,7 +14,7 @@ export class PatientComponent implements OnInit {
 
   //les attributs de patient 
   patientKeys: (keyof Patient)[] = [
-    'age', 'sexe', 'diabetique', 'ageApparition', 'prevention',
+    'age', 'sexe', 'prevention', 'diabetique', 'ageApparition', 
     'creatinine', 'ascendance', 'dfge', 'ratio',
     'rationondispo', 'neuropathie', 'retinopathie', 'pa', 'cholesTotal',
     'hdl', 'hba1c', 'fumeur', 'score2', 'score2op', 'score2diabete'

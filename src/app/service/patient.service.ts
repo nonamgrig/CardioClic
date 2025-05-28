@@ -177,7 +177,7 @@ export class PatientService {
     return age; 
   }
   
-  calculDFGe(creatineUnit : string): number {
+  calculDFGe(creatinineUnit : string): number {
     let k; 
     let alpha; 
     let fem; 
@@ -201,21 +201,17 @@ export class PatientService {
 
     let asc; 
     switch (this.patientData.ascendance) {
-      case "Oui": //afro caribéen
-         asc= 1.159; 
+      case "Non": // pas afro caribéen
+         asc= 1; 
         break;
-      default : // non ou bien ne se prononce pas 
-        asc = 1;
+      default : // oui ou bien ne se prononce pas 
+        asc= 1.159;
         break;
     }
 
     //pour convertir la valeur en fonction de l'unité sélectionnée
     let convert = 1; 
-    if (creatineUnit=="µmol/L") {
-      convert = 1; 
-    } else if (creatineUnit == "mg/dL") {
-      convert = 88.4
-    }
+
 
     const CR = this.patientData.creatinine ? this.patientData.creatinine * convert : 0; 
     if (CR == 0) {
@@ -232,27 +228,13 @@ export class PatientService {
   calculscore2(cholesTotalUnit : string, hdlUnit : string) : number{
     let score = 0; 
 
-    //pour convertir la valeur en fonction de l'unité sélectionnée
-    let convertCholesTotal = 1; 
-    let convertHDL =1; 
-    if (cholesTotalUnit=="mmol/L") {
-      convertCholesTotal = 1; 
-    } else if (cholesTotalUnit == "mg/dL") {
-      convertCholesTotal = 0.02586; 
-    }
-    if (hdlUnit=="mmol/L") {
-      convertHDL = 1; 
-    } else if (hdlUnit == "mg/dL") {
-      convertHDL =  0.02586; 
-    }
-
     /**
      * On transforme les données utiles du patient 
      */
     const cage = (Number(this.patientData.age)-60)/5; 
     const csbp = (Number(this.patientData.pa)-120)/20; 
-    const ctchol = (Number(this.patientData.cholesTotal) * convertCholesTotal-6)/1; 
-    const chdl = (Number(this.patientData.hdl) * convertHDL-1.3)/0.5; 
+    const ctchol = (Number(this.patientData.cholesTotal)-6)/1; 
+    const chdl = (Number(this.patientData.hdl)-1.3)/0.5; 
 
     let smoking = 0; 
     if (this.patientData.fumeur == "Oui") {
@@ -366,27 +348,14 @@ export class PatientService {
   calculscore2op(cholesTotalUnit : string , hdlUnit: string) : number{
     let score = 0; 
 
-    //pour convertir la valeur en fonction de l'unité sélectionnée
-    let convertCholesTotal = 1; 
-    let convertHDL =1; 
-    if (cholesTotalUnit=="mmol/L") {
-      convertCholesTotal = 1; 
-    } else if (cholesTotalUnit == "mg/dL") {
-      convertCholesTotal = 0.02586; 
-    }
-    if (hdlUnit=="mmol/L") {
-      convertHDL = 1; 
-    } else if (hdlUnit == "mg/dL") {
-      convertHDL =  0.02586; 
-    }
 
     /**
      * On transforme les données utiles du patient 
      */
     const cage = Number(this.patientData.age)-73; 
     const csbp = Number(this.patientData.pa)-150; 
-    const ctchol = Number(this.patientData.cholesTotal)* convertCholesTotal-6; 
-    const chdl = Number(this.patientData.hdl)*convertHDL-1.4; 
+    const ctchol = Number(this.patientData.cholesTotal)-6; 
+    const chdl = Number(this.patientData.hdl)-1.4; 
 
     let smoking = 0; 
     if (this.patientData.fumeur == "Oui") {
@@ -502,38 +471,14 @@ export class PatientService {
   calculscore2diabet(cholesTotalUnit : string , hdlUnit : string, hba1Unit : string) : number{
     let score = 0; 
 
-    //pour convertir la valeur en fonction de l'unité sélectionnée
-    let convertCholesTotal = 1; 
-    let convertHDL =1; 
-    if (cholesTotalUnit=="mmol/L") {
-      convertCholesTotal = 1; 
-    } else if (cholesTotalUnit == "mg/dL") {
-      convertCholesTotal = 0.02586; 
-    }
-    if (hdlUnit=="mmol/L") {
-      convertHDL = 1; 
-    } else if (hdlUnit == "mg/dL") {
-      convertHDL =  0.02586; 
-    }
-
-    //pour convertir les % en mmol/mol, on a mmol = a * % + b 
-    let convertHba1cA = 1; 
-    let convertHba1cB = 0; 
-    if (hba1Unit=="mmol/mol") {
-      convertHba1cA = 1; 
-      convertHba1cB = 0; 
-    } else if (hba1Unit == "%") {
-      convertHba1cA = 11; 
-      convertHba1cB = -24; 
-    }
 
     /**
      * On transforme les données utiles du patient 
      */
     const cage = (Number(this.patientData.age)-60)/5; 
     const csbp = (Number(this.patientData.pa)-120)/20; 
-    const ctchol = (Number(this.patientData.cholesTotal) * convertCholesTotal-6)/1; 
-    const chdl = (Number(this.patientData.hdl) * convertHDL-1.3)/0.5;
+    const ctchol = (Number(this.patientData.cholesTotal)-6)/1; 
+    const chdl = (Number(this.patientData.hdl)-1.3)/0.5;
     let smoking = 0; 
     if (this.patientData.fumeur == "Oui") {
       smoking = 1; 
@@ -541,7 +486,7 @@ export class PatientService {
     //propre au diabetique
     const diabet = 1; 
     const cagediab = (Number(this.patientData.ageApparition)-50)/5;
-    const chba1c = (Number(this.patientData.hba1c)*convertHba1cA + convertHba1cB -31)/9.34;
+    const chba1c = (Number(this.patientData.hba1c)-31)/9.34;
     const clnegfr = (Math.log(Number(this.patientData.dfge))-4.5)/0.15;
     
     
@@ -677,5 +622,60 @@ export class PatientService {
      */
     score = risk10cal*100; 
     return score; 
+  }
+
+  //on récupère le coeff pour récupérer la valeur en µmol/L
+  convertCreatinine(creatinineUnit : string): number{
+    if (creatinineUnit=="µmol/L") {
+      return 1; 
+    } else if (creatinineUnit == "mg/dL") {
+      return 88.4; 
+    } else {
+      return 0;
+    }
+  }
+
+  //on récupère le coeff pour récupérer la valeur en mmol/L
+  convertCholesTotal(cholesTotalUnit : string) : number{
+    if (cholesTotalUnit=="g/L") {
+      return 2.586; 
+    } else if (cholesTotalUnit == "mmol/L") {
+      return 1; 
+    } else {
+      return 0; 
+    }
+  }
+
+  //on récupère le coeff pour récupérer la valeur en mmol/L
+  convertHDL(hdlUnit : string) : number{
+    if (hdlUnit=="g/L") {
+      return 2.586; 
+    } else if (hdlUnit == "mmol/L") {
+      return 1; 
+    } else {
+      return 0; 
+    }
+  }
+
+  //on récupère le coeff a de ax+b pour récupérer la valeur en mmol/mol
+  convertHb1AcA(hba1Unit : string) : number {
+     if (hba1Unit=="mmol/mol") {
+      return 1; 
+    } else if (hba1Unit == "%") {
+      return 11; 
+    } else {
+      return 0;
+    }
+  }
+  
+  //on récupère le coeff b de ax+b pour récupérer la valeur en mmol/mol
+  convertHb1AcB(hba1Unit : string) : number {
+     if (hba1Unit=="mmol/mol") {
+      return 0; 
+    } else if (hba1Unit == "%") {
+      return -24; 
+    } else {
+      return 0; 
+    }
   }
 }

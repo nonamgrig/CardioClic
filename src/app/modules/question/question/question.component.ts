@@ -44,6 +44,7 @@ export class QuestionComponent implements OnInit, OnChanges {
       this.texteService.dialog$.subscribe((msg: string) => {
       this.dialogMessage = msg;
       this.showDialog = true;
+      this.aideSelections= new Set(); 
     });
     });
   }
@@ -176,6 +177,12 @@ export class QuestionComponent implements OnInit, OnChanges {
 
       const key = this.question?.title ? this.question.title : "titre vide";
 
+       //pour récupérer les unités sélectionnées et enregistrer la valeur convertie et l'envoyer aux fonctions de calcul de score 
+      let creatinineUnit; 
+      let cholesTotalUnit;
+      let hdlUnit;
+      let hba1cUnit; 
+
       if (this.subquestionsArray.length == 0 ) {
         //on a une seule question sur la page 
         if (this.userAnswer == "") { //si la personne n'a rempli aucune valeur il n'y a rien à modifier
@@ -183,14 +190,14 @@ export class QuestionComponent implements OnInit, OnChanges {
       } else {
         //il y a plusieurs réponses à enregistrer
         this.subquestionsArray.forEach(subquestion => {
-          if (subquestion.userAnswer == "") { //si la personne n'a rempli aucune valeur il n'y a rien à modifier
-          } else {this.patientService.updateField(subquestion.key, subquestion.userAnswer);}
+          if (subquestion.userAnswer == "") { 
+            //si la personne n'a rempli aucune valeur il n'y a rien à modifier
+          } else {
+            this.patientService.updateField(subquestion.key, subquestion.userAnswer);
+          }
         })
       }
-      //pour envoyer l'unité utilisé au service pour les calculs
-      let cholesTotalUnit;
-      let hdlUnit;
-      let hba1cUnit; 
+     
 
       //pour les questions avec un calcul, on appelle la fonction de calcul dans patientService
       switch (this.question?.title) {
@@ -224,7 +231,13 @@ export class QuestionComponent implements OnInit, OnChanges {
             //this.patientService.updateField("prevention", "primaire")
           }
           break; 
-        case "aide2": //la réponse de user
+        case "aide2": 
+          if (this.selectedAnswer == 'response4') {
+            this.patientService.updateField("prevention", "Primaire")
+          }
+          break; 
+
+        case "coro": //la réponse de user
         //TO DO trancher si on veut ou pas stocker les réponses à l'aide (pour l'instant nan)
         //Lorsqu'on retourne en arrière on n'efface pas les réponses mais elles n'apparaissent pas een déjà cochée non plus 
           // Met à jour selected global (Oui si au moins 1 case cochée sinon vide)
@@ -238,36 +251,121 @@ export class QuestionComponent implements OnInit, OnChanges {
           }
           break;
         case "CKD":
-          const creatinineUnit = this.subquestionsArray[0].selectedUnit ? this.subquestionsArray[0].selectedUnit : ''; 
+          //on récupère l'unité choisie
+          creatinineUnit = this.subquestionsArray[0].selectedUnit ? this.subquestionsArray[0].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          let value =  this.subquestionsArray[0].userAnswer as string
+          let oldValue = Number(value.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          const newValue = oldValue * this.patientService.convertCreatinine(creatinineUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[0].key, arrondirSiNecessaire(newValue))
+
+          //on calcule le score 
           let DFGe = arrondirSiNecessaire(this.patientService.calculDFGe(creatinineUnit)); //'avec 2 chiffres après la virgule
           if (DFGe == "0"){
             DFGe = ""; 
           }
           this.patientService.updateField("dfge", DFGe); 
           break;
+        case "ratio" : 
+          //si on a une valeur de ratio, on doit vider ratiodispo 
+          if (this.subquestionsArray[0].userAnswer){
+            this.patientService.updateField('rationondispo', null)
+          }
+          break; 
         case "score2": 
           //Attention dépend de l'ordre du json
           cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          let valueTotal =  this.subquestionsArray[1].userAnswer as string; 
+          let oldValueTotal = Number(valueTotal.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          let newValueTotal = oldValueTotal * this.patientService.convertCholesTotal(cholesTotalUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[1].key, arrondirSiNecessaire(newValueTotal))
+
           hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          let valueHDL =  this.subquestionsArray[2].userAnswer as string; 
+          let oldValueHDL = Number(valueHDL.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          let newValueHDL = oldValueHDL* this.patientService.convertCholesTotal(hdlUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[2].key, arrondirSiNecessaire(newValueHDL))
+
+
+          //on calcule le score 
           let score2 = arrondirSiNecessaire(this.patientService.calculscore2(cholesTotalUnit, hdlUnit)); 
           if (score2 == "NaN") {this.patientService.updateField("score2", "")}
           else {this.patientService.updateField("score2", score2);} 
           break;
         case "score2op": 
+          //Attention dépend de l'ordre du json
           cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          valueTotal =  this.subquestionsArray[1].userAnswer as string; 
+          oldValueTotal = Number(valueTotal.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          newValueTotal = oldValueTotal* this.patientService.convertCholesTotal(cholesTotalUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[1].key, arrondirSiNecessaire(newValueTotal))
+
           hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          valueHDL =  this.subquestionsArray[2].userAnswer as string; 
+          oldValueHDL = Number(valueHDL.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          newValueHDL = oldValueHDL* this.patientService.convertCholesTotal(hdlUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[2].key, arrondirSiNecessaire(newValueHDL))
+
           let score2op = arrondirSiNecessaire(this.patientService.calculscore2op(cholesTotalUnit, hdlUnit)); 
           if (score2op == "NaN") {this.patientService.updateField("score2op", "")}
           else {this.patientService.updateField("score2op", score2op);} 
           break;  
         case "score2diabete": 
+          //Attention dépend de l'ordre du json
           cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          valueTotal =  this.subquestionsArray[1].userAnswer as string; 
+          oldValueTotal = Number(valueTotal.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          newValueTotal = oldValueTotal* this.patientService.convertCholesTotal(cholesTotalUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[1].key, arrondirSiNecessaire(newValueTotal))
+
           hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
-          hba1cUnit = this.subquestionsArray[3].selectedUnit ? this.subquestionsArray[3].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          valueHDL =  this.subquestionsArray[2].userAnswer as string; 
+          oldValueHDL = Number(valueHDL.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          newValueHDL = oldValueHDL* this.patientService.convertCholesTotal(hdlUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[2].key, arrondirSiNecessaire(newValueHDL))
+
+          hba1cUnit  = this.subquestionsArray[3].selectedUnit ? this.subquestionsArray[3].selectedUnit : ''; 
+          //on récupère la valeur donnée par l'utilisateur
+          let valueHbA1c =  this.subquestionsArray[2].userAnswer as string; 
+          let oldValueHbA1c = Number(valueHbA1c.replace(',', '.')); 
+
+          //on calcule la nouvelle valeur dans l'unité standard
+          let newValueHbA1c = oldValueHbA1c* this.patientService.convertHb1AcA(hba1cUnit)+this.patientService.convertHb1AcB(hba1cUnit)
+          //on enregistre la nouvelle valeur en écrasant la précédente 
+          this.patientService.updateField(this.subquestionsArray[3].key, arrondirSiNecessaire(newValueHbA1c))
+
           let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet(cholesTotalUnit, hdlUnit, hba1cUnit)); 
           if (score2diabete == "NaN") {this.patientService.updateField("score2diabete", "")}
           else {this.patientService.updateField("score2diabete", score2diabete);} 
         break; 
+
         default : 
         
           break;

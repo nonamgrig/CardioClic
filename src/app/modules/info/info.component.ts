@@ -39,12 +39,10 @@ export class InfoComponent implements OnInit, OnChanges {
     // Charger la question via le service
     const index = this.questionId - 1;  // index basé sur le questionId
     this.question = getQuestionByIndex(this.texteService.questions, index);
-    console.log("question", this.question);
     // Appliquer le pipe formatInfoText et marquer comme safe
     if (this.question?.info) {
       const formattedInfo = this.formatInfoTextPipe.transform(this.question.info); // Applique ton pipe ici
       this.sanitizedInfo = this.sanitizer.bypassSecurityTrustHtml(formattedInfo);  // Marque le contenu comme "safe"
-      console.log("sani", this.sanitizedInfo); 
     }
   }
 

@@ -2,7 +2,7 @@
     "home": {
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
-        "information":"Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé de 40 à 90 ans.\nLe nécessaire : créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif)."
+        "information":"Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 90 ans.\nLe nécessaire : créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif)."
     }, 
     "patient": {
         "age": {
@@ -88,12 +88,12 @@
     },
     "questions" : {
         "age": {
-            "question": "Quel est l'âge de votre patient ?", 
+            "question": "Quel est l'âge de votre patient(e) ?", 
             "type": "text", 
             "next": "sexe"
         }, 
         "sexe": {
-            "question": "Quel est le sexe de votre patient ?",
+            "question": "Quel est le sexe de votre patient(e) ?",
             "type": "prop", 
             "responses": {
                 "response1": "Homme", 
@@ -102,7 +102,7 @@
             "next": "prevention"
         }, 
         "prevention": {
-            "question": "Votre patient est-il en situation de Prévention primaire ou secondaire ?", 
+            "question": "Votre patient(e) est-il en situation de Prévention primaire ou secondaire ?", 
             "info" : "underline=Primaire : end n'a jamais présenté d'événement cardiovasculaire.\nunderline=Secondaire : end a déjà présenté un événement CV (syndrome coronarien, AVC...)",
             "type": "prop", 
             "responses": {
@@ -117,7 +117,7 @@
             }
         }, 
         "diabetique": {
-            "question": "Votre patient est-il diabétique ?", 
+            "question": "Votre patient(e) est-il diabétique ?", 
             "info" : "Critères diag du diabète : \n- Glycémie à jeun >= 7.0 mmol/L (>= 1.26 g/L) OU\n- HbA1c >= 6.5",
             "type": "prop", 
             "responses": {
@@ -130,9 +130,9 @@
             }
         },        
         "apparition": {
-            "question": "Répondez à l'une des deux questions ci-dessous", 
+            "question": "Répondez à l'une des deux questions ci-dessus", 
             "type": "subquestion", 
-            "subquestion" : {
+            "subquestion" : {  
                 "anneeApparition" : {
                     "question" : "Quelle est l'année d'apparition du diabète ?",
                     "type":"text", 
@@ -140,7 +140,7 @@
                     "next": ""
                 },
                 "ageApparition" : {
-                    "question" : "Quel âge avait votre patient à l'apparition du diabète ?", 
+                    "question" : "Quel âge avait votre patient(e) à l'apparition du diabète ?", 
                     "type": "text", 
                     "responses" : "",
                     "next": ""
@@ -150,7 +150,7 @@
         },
         "CKD": {
             "question": "Calcul de la clairance par la formule CKD-EPI", 
-            "info": "L'ascendance est nécessaire pour calculer la clairance selon la formule CKD-EPI (disponible ici text=Lien Formule WikiMedi link=https://wikimedi.ca/wiki/CKD-EPI_(formule) ).\nSi vous cochez \"ne souhaite pas répondre\", on utilisera par défaut la variable donnant le risque CV le moins péjoratif (c'est-à-dire XX)", 
+            "info": "L'ascendance est nécessaire pour calculer la clairance selon la formule CKD-EPI (disponible ici text=Lien Formule WikiMedi link=https://wikimedi.ca/wiki/CKD-EPI_(formule) ).\nSi vous cochez \"ne souhaite pas répondre\", le calculateur utilisera par défaut la variable donnant le risque CV le moins péjoratif (c'est-à-dire que la clairance d'un(e) patient(e) afro-caribéen(e))", 
             "type": "subquestion", 
             "subquestion" : {
                 "creatinine" : {
@@ -175,12 +175,12 @@
                 }
             },   
             "message" : {
-                "message1" : "L'ascendance de votre patient n'a pas été précisée, on suppose alors qu'il n'a pas d'ascendance afro-caribéenne car c'est le pire cas (A DIRE AUTREMENT)"
+                "message1" : "L'ascendance de votre patient(e) n'a pas été précisée, on suppose alors qu'il n'a pas d'ascendance afro-caribéenne car c'est le pire cas (A DIRE AUTREMENT)"
             },          
             "next": "ratio"
         },
         "aide1": {
-            "question": "Votre patient présente-il les antécédents suivants ?", 
+            "question": "Votre patient(e) a-t-il déjà présenté un événement cardio-vasculaire ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "subquestion1" : {
@@ -195,51 +195,93 @@
                 }
             }, 
             "message" : {
-                "message1" : "Votre patient est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient n'est dans aucune des situations décrités, il est en Prévention Primaire"
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
             },
             "next": "aide2"
         },
         "aide2": {
-            "question": "Votre pateint présente-il des lésions qualifiantes de la 'présention secondaire' suite à un des examens suivants ?", 
+            "question": "Votre pateint a-t-il déjà bénéficié de l'un des examens suivants :", 
+            "type": "prop", 
+            "responses": {
+                "response1": "Coronarographie ou coro-TDM", 
+                "response2": "Doppler TSA ou doppler artériel des MI", 
+                "response3": "Score calcique coronaire", 
+                "response4": "Aucun examen ci-dessus"
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": {
+                "next1": "coro", 
+                "next2": "doppler", 
+                "next3": "calcique", 
+                "next4": "CKD"
+            }
+        },
+        "coro" : {
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ces examens ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "subquestion1" : {
-                    "question" : "Coronarographie ou coro-TDM", 
-                    "type": "checkboxmultipleaide", 
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
                     "responses" : {
                         "response1": "Atteinte coronaire tri-tronculaire",
                         "response2": "Lésion significative >50% du tronc commun coronaire gauche",
                         "response3": "Lésion significative >70% de l'iVA proximale"
-                    },
-                    "next": ""
-                }, 
-                "subquestion2" : {
-                    "question" : "Doppler TSA ou doppler artériel des MI", 
-                    "type": "checkboxmultipleaide", 
-                    "responses" : {
-                        "response1": "Sténose artérielle significative >50%"
-                    }, 
-                    "next": ""
-                }, 
-                "subquestion3" : {
-                    "question" : "Score calcique coronaire", 
-                    "type": "checkboxmultipleaide", 
-                    "responses" : {
-                        "response1": ">400 UA"
                     }, 
                     "next": ""
                 }
             }, 
             "message" : {
-                "message1" : "Votre patient est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient n'est dans aucune des situations décrités, il est en Prévention Primaire"
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
             },
             "next": "CKD"
-        },
+        }, 
+        "dopler" : {
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Sténose artérielle significative >50%"
+                    }, 
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": "CKD"
+        }, 
+        "calcique" : {
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Score calcique coronaire >400 UA"
+                    }, 
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": "CKD"
+        }, 
         "ratio": {
-            "question": "Quel est le ratio albumine/creatinine (RAC) du patient ?",            
-            "info" : "Si vous ne disposez pas du ratio, nous utiliserons par défaut le cas le plus favorable, à savoir l'absence de protéinurie (RAC < 30mg/L) pour la suite. \nNous vous invitons dans ce cas à proposer le dosage urinaire au patient ( name=Imprimer l'ordonnance pré-remplie image=assets/img/ordonnancev0.png ) et à revenir calculer le RCV si jamais celui-ci revient positif.",
+            "question": "Quel est le ratio albumine/creatinine (RAC) de votre patient(e) ?",            
+            "info" : "Si vous ne disposez pas du ratio, nous utiliserons par défaut le cas le plus favorable, à savoir l'absence de protéinurie (RAC < 30mg/L) pour la suite. \n\nNous vous invitons dans ce cas à proposer le dosage urinaire à votre patient(e) ( name=Imprimer l'ordonnance pré-remplie image=assets/img/ordonnancev0.png ) et à revenir calculer le RCV si jamais celui-ci revient positif.",
             "type": "subquestion", 
             "subquestion" : {
                 "ratio" : {
@@ -255,21 +297,21 @@
                     "question" : "", 
                     "type": "checkboxsingle", 
                     "responses" : {
-                        "response1": "Non disponible"
+                        "response1": "Non disponible (considéré négatif)"
                     }, 
                     "next": ""
                 }
             },
             "message" : {
-                "message1" : "Ratio à faire ++", 
-                "message2" : "Ratio à faire",
-                "message3": "Ratio à considérer", 
-                "message4": "Vore patient étant diabétique, il est préférable de calculer le SCORE 2 Diabétique même si la ratio albumine/créatinine n'est pas disponible"
+                "message1" : "Il est fortement conseillé d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e) \n\n En attendant, vous pouvez continuer l'évaluation et le ratio sera considéré inférieur à 30 mg/g", 
+                "message2" : "Il est conseillé d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e) \n\n En attendant, vous pouvez continuer l'évaluation et le ratio sera considéré inférieur à 30 mg/g",
+                "message3": "Il peut être intéressant d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e). \n\n En attendant, vous pouvez continuer l'évaluation et le ratio sera considéré inférieur à 30 mg/g", 
+                "message4": "Vore patient(e) étant diabétique, il est préférable de calculer le SCORE 2 Diabétique lorsque le ratio Albumine/Créatinine n'est pas disponible."
             },
             "next": "score"
         },
         "lesion": {
-            "question": "Votre patient présente-il les pathologies suivantes ?", 
+            "question": "Votre patient(e) présente-il les pathologies suivantes ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "neuropathie" : {
@@ -301,7 +343,7 @@
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {
-                    "question" : "PA systolique (100-255mmHg)",
+                    "question" : "PA systolique (100-200mmHg)",
                     "units" : {
                         "unit1" : "mmHg"
                     },
@@ -310,20 +352,20 @@
                     "next": ""
                 },
                 "cholesTotal" : {
-                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit1" : "mmol/L",
+                        "unit2" : "g/L"                      
                     },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0.65-1.94 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit1" : "mmol/L",
+                        "unit2" : "g/L" 
                     },
                     "type":"text", 
                     "responses": "", 
@@ -357,20 +399,20 @@
                     "next": ""
                 },
                 "cholesTotal" : {
-                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit1" : "mmol/L",
+                        "unit2" : "g/L"                      
                     },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0.65-1.94 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit1" : "mmol/L",
+                        "unit2" : "g/L" 
                     },
                     "type":"text", 
                     "responses": "", 
@@ -404,20 +446,20 @@
                     "next": ""
                 },
                 "cholesTotal" : {
-                    "question" : "Cholestérol total (3-9 mmol/L) ou (150-200 mg/dL)",
+                    "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit1" : "mmol/L",
+                        "unit2" : "g/L"                    
                     },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL (0.65-1.94 mmol/L) ou (60-155 mg/dL)",
+                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0.65-1.94 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit1" : "mmol/L",
+                        "unit2" : "g/L" 
                     },
                     "type":"text", 
                     "responses": "", 
@@ -447,31 +489,43 @@
             "next": ""
         },
         "TERCV": {
-            "question": "Votre patient a un risque cardiovasculaire", 
+            "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Très Élevé",
             "preconisation" : "Préconisations adaptées au cas ?", 
+            "message" : {
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+            },  
             "next": ""
         },
         "ERCV": {
-            "question": "Votre patient a un risque cardiovasculaire", 
+            "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Élevé",
             "preconisation" : "Préconisations adaptées au cas ?",  
+            "message" : {
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+            }, 
             "next": ""
         },
         "MRCV": {
-            "question": "Votre patient a un risque cardiovasculaire", 
+            "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Modéré",
             "preconisation" : "Préconisations adaptées au cas ?", 
+            "message" : {
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+            }, 
             "next": ""
         },
         "FRCV": {
-            "question": "Votre patient a un risque cardiovasculaire", 
+            "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Faible", 
             "preconisation" : "Préconisations adaptées au cas ?", 
+            "message" : {
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+            }, 
             "next": ""
         }, 
         "infomissing": {

@@ -104,6 +104,7 @@ export class TexteService {
       this.dialogResolver = resolve;
     });
   }
+
   confirmDialog(): void {
     if (this.dialogResolver) {
       this.dialogResolver();
@@ -116,6 +117,7 @@ export class TexteService {
     //current id est le numéro de la question
     const currentQuestion = getQuestionById(this.questions, currentQuestionId); // Récupérer l'objet Question de la Map
     console.log("current question", currentQuestion); 
+    console.log("answer", answer); 
 
     if (!currentQuestion) {
       return null;  // Si la question n'existe pas, retourner null
@@ -131,22 +133,27 @@ export class TexteService {
     on regarde la valeur des différents next (il n'y pas pas de cacul ou de comparaison de la valeur)
     */
     // Si "next" est un objet, on doit choisir le bon chemin en fonction de la réponse
-    if (next && typeof next === 'object') {
+    if (next && typeof next == 'object') {
       if (answer == 'response1') {
         next = next['next1'];  
-      } else if (answer === 'response2') {
+      } else if (answer == 'response2') {
         next = next['next2'];  
-      } else if (answer === 'response3') {
+      } else if (answer == 'response3') {
         next = next['next3'];  
+      }
+      else if (answer == 'response4') {
+        next = next['next4'];  
       }
     } 
 
-    //Pour la question aide1, on a doit answer soit "Oui" soit "Non"
+    //Pour la question aide1, on a soit answer soit "Oui" soit "Non"
   if (currentQuestion.title == "aide1") {
       if (answer == "Oui"){
-        if(currentQuestion.message) {
-          await this.waitForDialogConfirmation(currentQuestion.message[0]);
-        }
+
+        //TO DO Arbitrage pop up ou pas 
+        // if(currentQuestion.message) {
+        //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
+        // }
       next = "TERCV"
     } else {
       if(currentQuestion.message) {
@@ -156,19 +163,31 @@ export class TexteService {
       //next aide2 donc inchangé 
     }
   }
-    //Pour la question aide, on a doit answer soit "Oui" soit "Non"
+    //Pour la question aide2, si on est dans aucune situation d'examen, dans ce cas on est en prevention primaire 
   if (currentQuestion.title == "aide2") {
-      if (answer == "Oui"){
-        if(currentQuestion.message) {
-          await this.waitForDialogConfirmation(currentQuestion.message[0]);
-        }
-      next = "TERCV"
-    } else {
-      if(currentQuestion.message) {
-        await this.waitForDialogConfirmation(currentQuestion.message[1]);
-        
-      }
-      //next CKD donc inchangé 
+      if (answer == 'response4'){
+        //TO DO Arbitrage pop up ou pas
+        // if(currentQuestion.message) {
+        //   await this.waitForDialogConfirmation(currentQuestion.message[1]);
+        // }
+      next = "CKD"
+    } //sinon, on va juste à la page suivante 
+  }
+
+  //on a dans answer Oui si au moins une case a été cochée 
+  if (currentQuestion.title == "coro" || currentQuestion.title == "dopler" || currentQuestion.title == "calcique") {
+    if (answer == 'Oui'){
+      //TO DO Arbitrage pop up ou pas 
+      // if(currentQuestion.message) {
+      //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
+      // }
+    next = "TERCV"
+    } else { //sinon, on est en prévention primaire
+      //TO DO pop up ou pas 
+      // if(currentQuestion.message) {
+      //   await this.waitForDialogConfirmation(currentQuestion.message[1]);
+      // }
+    next = "CKD"
     }
   }
     
@@ -207,11 +226,12 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
             nextParticulier = "TERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
-            //TO DO message pop up à faire ++
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+            //message pop up à faire ++
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[0]);
             }
+            nextParticulier = scoreUtil
           }
         } else if (currentPatient.dfge && Number(currentPatient.dfge) <= 60) { //entre 45 et 60
           if (currentPatient.ratio && Number(currentPatient.ratio) <= 30) {
@@ -220,11 +240,12 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
             nextParticulier = "ERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
-            //TO DO message pop up à faire 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+            // message pop up à faire 
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[1]);
             }
+            nextParticulier = scoreUtil
           }
         } else { //> 60 
           if (currentPatient.ratio && Number(currentPatient.ratio) <= 300) {
@@ -233,11 +254,12 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 300) {
             //direct risque
             nextParticulier = "ERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
-            //TO DO message pop up à considérer
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+            // message pop up à considérer
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[2]);
             }
+            nextParticulier = scoreUtil
           }
         }
                     
@@ -302,12 +324,13 @@ export class TexteService {
           if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
             nextParticulier = "TERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
             // message pop up pour aller quand même au score
             nextParticulier = "score2diabete"
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[3]);
             }
+            nextParticulier = "score2diabete"
           } else {
             //vers score diabete
             nextParticulier = "score2diabete"
@@ -320,7 +343,7 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) < 300) { //entre 30 et 300
             //direct risque
             nextParticulier = "lesion"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
             // message pop up pour aller quand même au score diabete
             nextParticulier = "score2diabete"
             if(currentQuestion.message) {

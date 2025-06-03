@@ -628,8 +628,8 @@ export class PatientService {
   convertCreatinine(creatinineUnit : string): number{
     if (creatinineUnit=="µmol/L") {
       return 1; 
-    } else if (creatinineUnit == "mg/dL") {
-      return 88.4; 
+    } else if (creatinineUnit == "mg/L") {
+      return 8.8402; 
     } else {
       return 0;
     }

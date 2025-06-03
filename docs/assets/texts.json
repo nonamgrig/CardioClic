@@ -157,7 +157,7 @@
                     "question" : "Créatinine",
                     "units" : {
                         "unit1" : "µmol/L", 
-                        "unit2" : "mg/dL"
+                        "unit2" : "mg/L"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -297,7 +297,7 @@
                     "question" : "", 
                     "type": "checkboxsingle", 
                     "responses" : {
-                        "response1": "Non disponible (considéré négatif)"
+                        "response1": "Non disponible (considéré <30mg/g)"
                     }, 
                     "next": ""
                 }
@@ -495,8 +495,39 @@
             "preconisation" : "Préconisations adaptées au cas ?", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
-            },  
-            "next": ""
+            },
+            "reco": {
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 0.55 g/L",
+                    "message2" : "blabla", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 130/80 mmHg",
+                    "message2" : "blabla", 
+                    "refIcon" : "pression"
+                },
+                "diabete" : {
+                    "message1" :"Diabète : Utilisation préférentielle Gliflozine / Analogue GLP1",
+                    "message2" : "blabla", 
+                    "refIcon" : "diabete"
+                },
+                "cardiologue" : {
+                    "message1" :"Suivi Cardiologique recommandé",
+                    "message2" : "Suivi annuel au moins en phase précose après événement CV", 
+                    "refIcon" : "cardiologue"
+                },
+                "sport" : {
+                    "message1" :"Activité physique à encourager !",
+                    "message2" : "Blabla", 
+                    "refIcon" : "sport"
+                },
+                "fumeur" : {
+                    "message1" :"",
+                    "message2" : "", 
+                    "refIcon" : "fumeur"
+                }
+            }
         },
         "ERCV": {
             "question": "Votre patient(e) a un risque cardiovasculaire", 
@@ -506,7 +537,38 @@
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
-            "next": ""
+            "reco": {
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 0.7 g/L",
+                    "message2" : "blabla", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 130/80 mmHg",
+                    "message2" : "blabla", 
+                    "refIcon" : "pression"
+                },
+                "diabete" : {
+                    "message1" :"Diabète : Utilisation préférentielle Gliflozine",
+                    "message2" : "blabla", 
+                    "refIcon" : "diabete"
+                },
+                "cardiologue" : {
+                    "message1" :"Pas d'indication de RCV spécialisé chez l'asymptomatique",
+                    "message2" : "", 
+                    "refIcon" : "cardiologue"
+                },
+                "sport" : {
+                    "message1" :"Activité physique à encourager !",
+                    "message2" : "Blabla", 
+                    "refIcon" : "sport"
+                },
+                "fumeur" : {
+                    "message1" :"",
+                    "message2" : "", 
+                    "refIcon" : "fumeur"
+                }
+            }
         },
         "MRCV": {
             "question": "Votre patient(e) a un risque cardiovasculaire", 
@@ -516,7 +578,38 @@
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
-            "next": ""
+            "reco": {
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 1.0 g/L",
+                    "message2" : "blabla", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 135/85 mmHg",
+                    "message2" : "blabla", 
+                    "refIcon" : "pression"
+                },
+                "diabete" : {
+                    "message1" :"Diabète : cas général (metformine première intention)",
+                    "message2" : "blabla", 
+                    "refIcon" : "diabete"
+                },
+                "cardiologue" : {
+                    "message1" :"Pas d'indication de RCV spécialisé chez l'asymptomatique",
+                    "message2" : "", 
+                    "refIcon" : "cardiologue"
+                },
+                "sport" : {
+                    "message1" :"Activité physique à encourager !",
+                    "message2" : "Blabla", 
+                    "refIcon" : "sport"
+                },
+                "fumeur" : {
+                    "message1" :"",
+                    "message2" : "", 
+                    "refIcon" : "fumeur"
+                }
+            }
         },
         "FRCV": {
             "question": "Votre patient(e) a un risque cardiovasculaire", 
@@ -526,7 +619,33 @@
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
-            "next": ""
+            "reco": {
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 1.9 g/L",
+                    "message2" : "idéalement <1.16 g/L mais à adapter au profil patient", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 135/85 mmHg",
+                    "message2" : "blabla", 
+                    "refIcon" : "pression"
+                },
+                "cardiologue" : {
+                    "message1" :"Pas d'indication de RCV spécialisé chez l'asymptomatique",
+                    "message2" : "", 
+                    "refIcon" : "cardiologue"
+                },
+                "sport" : {
+                    "message1" :"Activité physique à encourager !",
+                    "message2" : "Blabla", 
+                    "refIcon" : "sport"
+                },
+                "fumeur" : {
+                    "message1" :"",
+                    "message2" : "", 
+                    "refIcon" : "fumeur"
+                }
+            }
         }, 
         "infomissing": {
             "question": "Des informations sont manquantes, le risque cardiovasculaire ne peut pas être évalué", 
@@ -540,6 +659,62 @@
                 "next1": "back", 
                 "next2": "home"
             }
+        }
+
+    }, 
+    "reco" : {
+        "ldl" : {
+            "condition1" : {
+                "message1" :"LDL cholesterol > 1.9g/L : Score de Dutch Lipid Score",
+                "message2" : "Lien vers le score, si score >= 6 alors préconisation", 
+                "refIcon" : "ldl"
+            }, 
+            "condition2" : {
+                "message1" :"Histoire de Satine",
+                "message2" : "A rediscuter première intension ?", 
+                "refIcon" : "ldl"
+            }
+        },
+        "pression" : {
+            "condition1" : {
+                "message1" :"Aller plus loin ",
+                "message2" : "Impression de la fiche d'auto-mesure tensionnele du site ameli.fr", 
+                "refIcon" : "pression"
+            }, 
+            "condition2" : {
+                "message1" :"traitement selon le profil patient",
+                "message2" : "A rediscuter première intention", 
+                "refIcon" : "ldl"
+            }
+        },
+        "diabete" : {
+            "condition1" : {
+                "message1" :"Utilisation",
+                "message2" : "", 
+                "refIcon" : "diabete"
+            }
+        },
+        "cardiologue" : {
+            "condition1" : {
+                "message1" :"Diabéto ? questions supplémentaires ?",
+                "message2" : "cf conditions", 
+                "refIcon" : "cardilogue"
+            },
+            "condition2" : {
+                "message1" :"Néphro ? questions supplémentaires ?",
+                "message2" : "cf conditions", 
+                "refIcon" : "cardilogue"
+            }
+        },
+        "sport" : {
+            "message1" :"Activité physique à encourager !",
+            "message2" : "Blabla", 
+            "refIcon" : "sport"
+        },
+        "fumeur" : {
+            "message1" :"",
+            "message2" : "", 
+            "refIcon" : "fumeur"
         }
 
     }

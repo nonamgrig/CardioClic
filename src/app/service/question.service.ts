@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Preconisation } from './preconisation.service';
 
 
 export interface Question {
@@ -17,6 +18,7 @@ export interface Question {
   message : string[] | null; 
   preconisation : string; 
   rcv : string; 
+  reco :{ [key: string]: Preconisation } | null;
 }
 
 

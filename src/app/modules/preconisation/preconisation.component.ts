@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Question } from '../../service/question.service';
 import { TexteService } from '../../service/texte.service';
+import { Preconisation } from '../../service/preconisation.service';
 
 @Component({
   selector: 'app-preconisation',
@@ -12,7 +13,11 @@ export class PreconisationComponent implements OnInit, OnChanges {
 
   
   @Input() questionId: number = 0;
-  question: Question | undefined;
+  preco: Preconisation | undefined;
+
+  message1 = "LDL cholesterol"
+  message2= "blablablabla"
+  refIcon = "ldl"
 
   constructor(
     private texteService: TexteService,
@@ -21,27 +26,28 @@ export class PreconisationComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // Charger les questions dès le début si ce n'est pas déjà fait
     this.texteService.loadQuestions().subscribe(() => {
-      this.loadQuestion();
+      this.loadPreconisation();
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     // Si le questionId change, on recharge la question
     if (changes['questionId']) {
-      this.loadQuestion();
+      this.loadPreconisation();
     }
   }
 
-  loadQuestion(): void {
+  loadPreconisation(): void {
     // Charger la question via le service
     const index = this.questionId - 1;  // index basé sur le questionId
-    this.question = getQuestionByIndex(this.texteService.questions, index);
+    this.preco = getPreconisationByIndex(this.texteService.questions as unknown as Map<string, Preconisation>, index);
+    console.log("preco", this.preco)
   }
 }
 
 
 // Fonction pour récupérer un élément par son index dans la Map de questions
-function getQuestionByIndex(map: Map<string, Question>, index: number): Question | undefined {
+function getPreconisationByIndex(map: Map<string, Preconisation>, index: number): Preconisation | undefined {
   const entriesArray = Array.from(map);
   const entry = entriesArray[index];
   return entry ? entry[1] : undefined;

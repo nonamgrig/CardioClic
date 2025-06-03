@@ -1,7 +1,48 @@
-<div *ngIf="question">
-    <div class="preconisation" *ngIf='question.preconisation'>
-      <h2 class="title">Préconisations</h2>
-      <p class="text" [innerHTML]="question.preconisation | formatInfoText"></p>
+<div *ngIf="preco">
+  <div class="preconisation" *ngIf="preco.preconisation">
+    <h2 class="title">Préconisations</h2>
+    <p class="text" [innerHTML]="preco.preconisation | formatInfoText"></p>
+
+    <div class="reco-grid" *ngIf=" preco.reco">
+      <div class="left-column">
+        <app-reco-box *ngIf="preco.reco['ldl']"
+          [message1]="preco.reco['ldl'].message1"
+          [message2]="preco.reco['ldl'].message2"
+          [refIcon]="preco.reco['ldl'].refIcon">
+        </app-reco-box>
+
+        <app-reco-box  *ngIf="preco.reco['pression']"
+          [message1]="preco.reco['pression'].message1"
+          [message2]="preco.reco['pression'].message2"
+          [refIcon]="preco.reco['pression'].refIcon">
+        </app-reco-box>
+
+        <app-reco-box  *ngIf="preco.reco['diabete']"
+          [message1]="preco.reco['diabete'].message1"
+          [message2]="preco.reco['diabete'].message2"
+          [refIcon]="preco.reco['diabete'].refIcon">
+        </app-reco-box>
+      </div>
+
+      <div class="right-column">
+        <app-reco-box  *ngIf="preco.reco['cardiologue']"
+          [message1]="preco.reco['cardiologue'].message1"
+          [message2]="preco.reco['cardiologue'].message2"
+          [refIcon]="preco.reco['cardiologue'].refIcon">
+        </app-reco-box>
+
+        <app-reco-box  *ngIf="preco.reco['sport']"
+          [message1]="preco.reco['sport'].message1"
+          [message2]="preco.reco['sport'].message2"
+          [refIcon]="preco.reco['sport'].refIcon">
+        </app-reco-box>
+
+        <app-reco-box  *ngIf="preco.reco['fumeur']"
+          [message1]="preco.reco['fumeur'].message1"
+          [message2]="preco.reco['fumeur'].message2"
+          [refIcon]="preco.reco['fumeur'].refIcon">
+        </app-reco-box>
+      </div>
     </div>
+  </div>
 </div>
-  

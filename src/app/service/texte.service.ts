@@ -68,7 +68,8 @@ export class TexteService {
             responses: item.responses || undefined,  // Si les réponses sont définies, les ajouter
             message : item.message ? Object.values(item.message) : null, //pour créer une liste à partir des messages 
             preconisation : item.preconisation, 
-            rcv : item.rcv, 
+            rcv : item.rcv,
+            reco : item.reco ? item.reco : null
           };
 
           // Ajouter chaque question à la Map
@@ -226,7 +227,7 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
             nextParticulier = "TERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             //message pop up à faire ++
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[0]);
@@ -240,7 +241,7 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
             nextParticulier = "ERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             // message pop up à faire 
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[1]);
@@ -254,7 +255,7 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 300) {
             //direct risque
             nextParticulier = "ERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             // message pop up à considérer
             if(currentQuestion.message) {
               await this.waitForDialogConfirmation(currentQuestion.message[2]);
@@ -324,7 +325,7 @@ export class TexteService {
           if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
             nextParticulier = "TERCV"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             // message pop up pour aller quand même au score
             nextParticulier = "score2diabete"
             if(currentQuestion.message) {
@@ -343,7 +344,7 @@ export class TexteService {
           } else if (currentPatient.ratio && Number(currentPatient.ratio) < 300) { //entre 30 et 300
             //direct risque
             nextParticulier = "lesion"
-          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré négatif)") { 
+          } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             // message pop up pour aller quand même au score diabete
             nextParticulier = "score2diabete"
             if(currentQuestion.message) {

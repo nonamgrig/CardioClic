@@ -1,0 +1,41 @@
+.reco-box-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgb(249, 243, 243);
+}
+
+.main-line {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.message1 {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.toggle-icon.open {
+  transform: rotate(90deg); // flèche vers le bas
+}
+
+.message2 {
+  font-size: 0.85em;
+  margin-left: 34px; // pour l’aligner après l’image
+  margin-top: 5px;
+}

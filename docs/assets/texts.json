@@ -116,6 +116,106 @@
                 "next3": "aide1"
             }
         }, 
+        "aide1": {
+            "question": "Votre patient(e) a-t-il déjà présenté un événement cardio-vasculaire ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Infarctus et/ou stent coronaire", 
+                        "response2": "Stent ou pontage ilio-démoral ou AOMI symptomatique", 
+                        "response3": "AVC ischémique, AIT ou endarteriectomie carotidienne"
+                    }, 
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": "aide2"
+        },
+        "aide2": {
+            "question": "Votre patient a-t-il déjà bénéficié de l'un des examens suivants :", 
+            "type": "prop", 
+            "responses": {
+                "response1": "Coronarographie ou coro-TDM", 
+                "response2": "Doppler TSA ou doppler artériel des MI", 
+                "response3": "Score calcique coronaire", 
+                "response4": "Aucun examen ci-dessus"
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": {
+                "next1": "coro", 
+                "next2": "doppler", 
+                "next3": "calcique", 
+                "next4": "diabetique"
+            }
+        },
+        "coro" : {
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ces examens ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Atteinte coronaire tri-tronculaire",
+                        "response2": "Lésion significative >50% du tronc commun coronaire gauche",
+                        "response3": "Lésion significative >70% de l'iVA proximale"
+                    }, 
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": "diabetique"
+        }, 
+        "doppler" : {
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Sténose artérielle significative >50%"
+                    }, 
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": "diabetique"
+        }, 
+        "calcique" : {
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
+            "type": "subquestion", 
+            "subquestion" : {
+                "subquestion1" : {
+                    "question" : "",
+                    "type":"checkboxmultipleaide", 
+                    "responses" : {
+                        "response1": "Score calcique coronaire >400 UA"
+                    }, 
+                    "next": ""
+                }
+            }, 
+            "message" : {
+                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
+                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
+            },
+            "next": "diabetique"
+        }, 
         "diabetique": {
             "question": "Votre patient(e) est-il diabétique ?", 
             "info" : "Critères diag du diabète : \n- Glycémie à jeun >= 7.0 mmol/L (>= 1.26 g/L) OU\n- HbA1c >= 6.5",
@@ -178,107 +278,7 @@
                 "message1" : "L'ascendance de votre patient(e) n'a pas été précisée, on suppose alors qu'il n'a pas d'ascendance afro-caribéenne car c'est le pire cas (A DIRE AUTREMENT)"
             },          
             "next": "ratio"
-        },
-        "aide1": {
-            "question": "Votre patient(e) a-t-il déjà présenté un événement cardio-vasculaire ?", 
-            "type": "subquestion", 
-            "subquestion" : {
-                "subquestion1" : {
-                    "question" : "",
-                    "type":"checkboxmultipleaide", 
-                    "responses" : {
-                        "response1": "Infarctus et/ou stent coronaire", 
-                        "response2": "Stent ou pontage ilio-démoral ou AOMI symptomatique", 
-                        "response3": "AVC ischémique, AIT ou endarteriectomie carotidienne"
-                    }, 
-                    "next": ""
-                }
-            }, 
-            "message" : {
-                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
-            },
-            "next": "aide2"
-        },
-        "aide2": {
-            "question": "Votre pateint a-t-il déjà bénéficié de l'un des examens suivants :", 
-            "type": "prop", 
-            "responses": {
-                "response1": "Coronarographie ou coro-TDM", 
-                "response2": "Doppler TSA ou doppler artériel des MI", 
-                "response3": "Score calcique coronaire", 
-                "response4": "Aucun examen ci-dessus"
-            }, 
-            "message" : {
-                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
-            },
-            "next": {
-                "next1": "coro", 
-                "next2": "doppler", 
-                "next3": "calcique", 
-                "next4": "CKD"
-            }
-        },
-        "coro" : {
-            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ces examens ?", 
-            "type": "subquestion", 
-            "subquestion" : {
-                "subquestion1" : {
-                    "question" : "",
-                    "type":"checkboxmultipleaide", 
-                    "responses" : {
-                        "response1": "Atteinte coronaire tri-tronculaire",
-                        "response2": "Lésion significative >50% du tronc commun coronaire gauche",
-                        "response3": "Lésion significative >70% de l'iVA proximale"
-                    }, 
-                    "next": ""
-                }
-            }, 
-            "message" : {
-                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
-            },
-            "next": "CKD"
-        }, 
-        "dopler" : {
-            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
-            "type": "subquestion", 
-            "subquestion" : {
-                "subquestion1" : {
-                    "question" : "",
-                    "type":"checkboxmultipleaide", 
-                    "responses" : {
-                        "response1": "Sténose artérielle significative >50%"
-                    }, 
-                    "next": ""
-                }
-            }, 
-            "message" : {
-                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
-            },
-            "next": "CKD"
-        }, 
-        "calcique" : {
-            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
-            "type": "subquestion", 
-            "subquestion" : {
-                "subquestion1" : {
-                    "question" : "",
-                    "type":"checkboxmultipleaide", 
-                    "responses" : {
-                        "response1": "Score calcique coronaire >400 UA"
-                    }, 
-                    "next": ""
-                }
-            }, 
-            "message" : {
-                "message1" : "Votre patient(e) est dans l'une des situations décrites, il est en Prévention Secondaire", 
-                "message2" : "Votre patient(e) n'est dans aucune des situations décrites, il est en Prévention Primaire"
-            },
-            "next": "CKD"
-        }, 
+        },        
         "ratio": {
             "question": "Quel est le ratio albumine/creatinine (RAC) de votre patient(e) ?",            
             "info" : "Si vous ne disposez pas du ratio, nous utiliserons par défaut le cas le plus favorable, à savoir l'absence de protéinurie (RAC < 30mg/L) pour la suite. \n\nNous vous invitons dans ce cas à proposer le dosage urinaire à votre patient(e) ( name=Imprimer l'ordonnance pré-remplie image=assets/img/ordonnancev0.png ) et à revenir calculer le RCV si jamais celui-ci revient positif.",

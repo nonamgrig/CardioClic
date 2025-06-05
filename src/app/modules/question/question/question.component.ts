@@ -250,6 +250,19 @@ export class QuestionComponent implements OnInit, OnChanges {
             this.patientService.updateField("prevention", "Primaire")
           }
           break;
+        case "calcique": //la réponse de user
+        //TO DO trancher si on veut ou pas stocker les réponses à l'aide (pour l'instant nan)
+        //Lorsqu'on retourne en arrière on n'efface pas les réponses mais elles n'apparaissent pas een déjà cochée non plus 
+          // Met à jour selected global (Oui si au moins 1 case cochée sinon vide)
+          this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
+          if (this.selectedAnswer == 'Oui') {
+            //prévention secondaire
+            this.patientService.updateField("prevention", "Secondaire")
+          } else {
+            //prévention primaire
+            this.patientService.updateField("prevention", "Primaire")
+          }
+          break;
         case "CKD":
           //on récupère l'unité choisie
           creatinineUnit = this.subquestionsArray[0].selectedUnit ? this.subquestionsArray[0].selectedUnit : ''; 

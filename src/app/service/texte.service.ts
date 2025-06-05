@@ -171,12 +171,12 @@ export class TexteService {
         // if(currentQuestion.message) {
         //   await this.waitForDialogConfirmation(currentQuestion.message[1]);
         // }
-      next = "CKD"
+      next = "diabetique"
     } //sinon, on va juste à la page suivante 
   }
 
   //on a dans answer Oui si au moins une case a été cochée 
-  if (currentQuestion.title == "coro" || currentQuestion.title == "dopler" || currentQuestion.title == "calcique") {
+  if (currentQuestion.title == "coro" || currentQuestion.title == "doppler" || currentQuestion.title == "calcique") {
     if (answer == 'Oui'){
       //TO DO Arbitrage pop up ou pas 
       // if(currentQuestion.message) {

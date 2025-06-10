@@ -197,6 +197,13 @@ export class QuestionComponent implements OnInit, OnChanges {
           }
         })
       }
+
+      let valueTotal; 
+      let oldValueTotal; 
+      let newValueTotal
+      let valueHDL; 
+      let oldValueHDL; 
+      let newValueHDL; 
      
 
       //pour les questions avec un calcul, on appelle la fonction de calcul dans patientService
@@ -313,21 +320,21 @@ export class QuestionComponent implements OnInit, OnChanges {
           //Attention dépend de l'ordre du json
           cholesTotalUnit = this.subquestionsArray[1].selectedUnit ? this.subquestionsArray[1].selectedUnit : ''; 
           //on récupère la valeur donnée par l'utilisateur
-          let valueTotal =  this.subquestionsArray[1].userAnswer as string; 
-          let oldValueTotal = valueTotal ? Number(valueTotal.replace(',', '.')) : 0; 
+          valueTotal =  this.subquestionsArray[1].userAnswer as string; 
+          oldValueTotal = valueTotal ? Number(valueTotal.replace(',', '.')) : 0; 
 
           //on calcule la nouvelle valeur dans l'unité standard
-          let newValueTotal = oldValueTotal * this.patientService.convertCholesTotal(cholesTotalUnit)
+          newValueTotal = oldValueTotal * this.patientService.convertCholesTotal(cholesTotalUnit)
           //on enregistre la nouvelle valeur en écrasant la précédente 
           this.patientService.updateField(this.subquestionsArray[1].key, arrondirSiNecessaire(newValueTotal))
 
           hdlUnit = this.subquestionsArray[2].selectedUnit ? this.subquestionsArray[2].selectedUnit : ''; 
           //on récupère la valeur donnée par l'utilisateur
-          let valueHDL =  this.subquestionsArray[2].userAnswer as string; 
-          let oldValueHDL = valueHDL ? Number(valueHDL.replace(',', '.')) : 0; 
+          valueHDL =  this.subquestionsArray[2].userAnswer as string; 
+          oldValueHDL = valueHDL ? Number(valueHDL.replace(',', '.')) : 0; 
 
           //on calcule la nouvelle valeur dans l'unité standard
-          let newValueHDL = oldValueHDL* this.patientService.convertCholesTotal(hdlUnit)
+          newValueHDL = oldValueHDL* this.patientService.convertCholesTotal(hdlUnit)
           //on enregistre la nouvelle valeur en écrasant la précédente 
           this.patientService.updateField(this.subquestionsArray[2].key, arrondirSiNecessaire(newValueHDL))
 

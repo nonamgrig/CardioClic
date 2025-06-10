@@ -168,9 +168,12 @@ export class PatientService {
     console.log('Patient réinitialisé à null.');
   }
 
+  checkAgeApparition(ageApparition : string) : boolean{
+    return Number(ageApparition)<= Number(this.patientData.age)
+  }
+
   calculAgeApparition(anneeApparition :string): number {
     let age =0; 
-    //TO DO a finir 
     const anneeEnCours = new Date().getFullYear();
     const anneeNaissance = Number(anneeEnCours) - Number(this.patientData.age); 
     age = Number(anneeApparition) - Number(anneeNaissance); 

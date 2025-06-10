@@ -2,10 +2,10 @@
   <div class="main-line" (click)="toggleSection()">
     <img [src]="'assets/img/' + refIcon + '.png'" alt="icon medicament" class="icon" />
     <p class="message1">{{ message1 }}</p>
-    <span class="toggle-icon" [class.open]="is2Open">></span>
+    <span *ngIf="!hidden" class="toggle-icon" [class.open]="is2Open">></span>
   </div>
 
   <div class="message2" *ngIf="is2Open">
-    {{ message2 }}
+    <p [innerHTML]="sanitizedMessage2"></p>
   </div>
 </div>

@@ -19,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { FormatInfoTextPipe } from './pipe/format-info-text.pipe';
 import { PreconisationComponent } from './modules/preconisation/preconisation.component';
 import { RecoBoxComponent } from './modules/shared/reco/reco-box/reco-box.component';
+import { ContactbarComponent } from './modules/shared/contactbar/contactbar/contactbar.component';
+import { EndEvalComponent } from './modules/shared/end/end-eval/end-eval.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { RecoBoxComponent } from './modules/shared/reco/reco-box/reco-box.compon
     BackComponent,
     FormatInfoTextPipe,
     PreconisationComponent,
-    RecoBoxComponent
+    RecoBoxComponent,
+    ContactbarComponent,
+    EndEvalComponent
   ],
   imports: [
     BrowserModule,

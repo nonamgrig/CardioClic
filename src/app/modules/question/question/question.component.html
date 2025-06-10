@@ -48,7 +48,8 @@
         
             <div *ngIf="subquestion.type == 'text'" >
                 <div class="input-container">
-                    <input [(ngModel)]="subquestion.userAnswer" [placeholder]="patient[subquestion.key] ? patient[subquestion.key] : 'Entrez une valeur'">
+                    <input [(ngModel)]="subquestion.userAnswer" [placeholder]="'Entrez une valeur'">
+                     <!--[placeholder]="patient[subquestion.key] ? patient[subquestion.key] : 'Entrez une valeur'"> -->
                     <div *ngIf="subquestion.units" class="unit-select-container">
                         <select [(ngModel)]="subquestion.selectedUnit" class="form-select">
                             <option *ngFor="let unit of subquestion.units" [value]="unit">{{ unit }}</option>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, Subject } from 'rxjs';
 import { Question } from './question.service';
 import { PatientService } from './patient.service';
+import { FormatInfoTextPipe } from '../pipe/format-info-text.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class TexteService {
   constructor(
     private http: HttpClient, 
     private patientService : PatientService, 
+    private formatInfoTextPipe : FormatInfoTextPipe
   ) {}
 
   // Méthode pour charger les textes depuis le fichier JSON
@@ -50,7 +52,7 @@ export class TexteService {
           let nextQuestionKey = null;
 
           // Si "next" est un objet (cas spécial de la question "diabete")
-          if (typeof item.next === 'object') {
+          if (typeof item.next == 'object') {
             nextQuestionKey = item.next;  
           } else if (item.next) {
             nextQuestionKey = item.next;  
@@ -97,7 +99,7 @@ export class TexteService {
     this.dialogTrigger.next(message);
   }
 
-  //pou attendre l'action sur la dialogue box
+  //pour attendre l'action sur la dialogue box
   waitForDialogConfirmation(message: string): Promise<void> {
     this.triggerDialog(message);
   
@@ -126,8 +128,17 @@ export class TexteService {
 
     const currentPatient = this.patientService.getCurrentPatient()
     console.log("le patient dans test", currentPatient)
-  
     let next = currentQuestion.nextQuestionKey; //on récupère le next de cette question
+
+    //si le champ text n'a pas été complétée, on ne doit pas pouvoir aller à la page suivante 
+    if (currentQuestion.type == "text" && currentPatient[currentQuestion.title] == null) {
+      if(currentQuestion.message) {
+        await this.waitForDialogConfirmation(currentQuestion.message[0]);
+      }
+      next = currentQuestion.title
+    }
+  
+  
 
     /*---------------------------------------------
     Pour les questions qui s'enchainent en fonction de la réponse de la question précédente 
@@ -148,53 +159,65 @@ export class TexteService {
     } 
 
     //Pour la question aide1, on a soit answer soit "Oui" soit "Non"
-  if (currentQuestion.title == "aide1") {
-      if (answer == "Oui"){
+    if (currentQuestion.title == "aide1") {
+        if (answer == "Oui"){
+          //TO DO Arbitrage pop up ou pas 
+          // if(currentQuestion.message) {
+          //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
+          // }
+        next = "TERCV"
+      } else {
+        if(currentQuestion.message) {
+          //TODO
+        }
+        //next aide2 donc inchangé 
+      }
+    }
+    //Pour la question aide2, si on est dans aucune situation d'examen, dans ce cas on est en prevention primaire 
+    if (currentQuestion.title == "aide2") {
+        if (answer == 'response4'){
+          //TO DO Arbitrage pop up ou pas
+          // if(currentQuestion.message) {
+          //   await this.waitForDialogConfirmation(currentQuestion.message[1]);
+          // }
+        next = "diabetique"
+      } //sinon, on va juste à la page suivante 
+    }
 
+    //on a dans answer Oui si au moins une case a été cochée 
+    if (currentQuestion.title == "coro" || currentQuestion.title == "doppler" || currentQuestion.title == "calcique") {
+      if (answer == 'Oui'){
         //TO DO Arbitrage pop up ou pas 
         // if(currentQuestion.message) {
         //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
         // }
       next = "TERCV"
-    } else {
-      if(currentQuestion.message) {
-        //TODO
-        
-      }
-      //next aide2 donc inchangé 
-    }
-  }
-    //Pour la question aide2, si on est dans aucune situation d'examen, dans ce cas on est en prevention primaire 
-  if (currentQuestion.title == "aide2") {
-      if (answer == 'response4'){
-        //TO DO Arbitrage pop up ou pas
+      } else { //sinon, on est en prévention primaire
+        //TO DO pop up ou pas 
         // if(currentQuestion.message) {
         //   await this.waitForDialogConfirmation(currentQuestion.message[1]);
         // }
-      next = "diabetique"
-    } //sinon, on va juste à la page suivante 
-  }
-
-  //on a dans answer Oui si au moins une case a été cochée 
-  if (currentQuestion.title == "coro" || currentQuestion.title == "doppler" || currentQuestion.title == "calcique") {
-    if (answer == 'Oui'){
-      //TO DO Arbitrage pop up ou pas 
-      // if(currentQuestion.message) {
-      //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
-      // }
-    next = "TERCV"
-    } else { //sinon, on est en prévention primaire
-      //TO DO pop up ou pas 
-      // if(currentQuestion.message) {
-      //   await this.waitForDialogConfirmation(currentQuestion.message[1]);
-      // }
-    next = "CKD"
+      next = "CKD"
+      }
     }
-  }
     
+    //si on ne remplit pas les infos CKD, on doit rester sur cette page
+    if (currentQuestion.title == "CKD") {
+      if (currentPatient.creatinine == 0) {
+        if(currentQuestion.message) {
+          await this.waitForDialogConfirmation(currentQuestion.message[0]);
+        }
+        next = "CKD"
+      } else if (currentPatient.dfge == 0) {
+        if(currentQuestion.message) {
+          await this.waitForDialogConfirmation(currentQuestion.message[0]);
+        }
+        next = "CKD"
+      }
+    }
 
     /*---------------------------------------------
-    Pour les questions qui nécessite de calculer un score et ou la valeur obtenu influe sur la question suivante
+    Pour les questions qui nécessitent de calculer un score et où la valeur obtenu influe sur la question suivante
     on utilise l'algorithme si dessous pour déterminer le nextParticulier à la situation en fonction de la question
      */
     let nextParticulier; 
@@ -207,13 +230,10 @@ export class TexteService {
       scoreUtil = "score2op"; 
     }
 
-    //TO DO : si les datas ne sont pas complétées, on ne doit pas pouvoir récupérer un risque à la fin 
-    //utiliser la page, info manquante, ou des contrôles sur les champs textes ? 
-
     if (currentPatient.diabetique =="Non") {
       //pour certaines questions, on doit influer sur la question suivante en fonction des réponses et des résultats
       if (currentQuestion.title == "CKD") {
-        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 30 ) {
+        if (currentPatient.dfge && Number(currentPatient.dfge) > 0 &&  Number(currentPatient.dfge) < 30 ) {
           //directement vers très haut risque 
           nextParticulier = "TERCV"; 
         } else {
@@ -265,10 +285,17 @@ export class TexteService {
         }
                     
       } else if (currentQuestion.title == "score2" || currentQuestion.title == "score2op" ) {
-        if(currentQuestion.title == "score2" && (currentPatient.score2?.toString() == "")){
-          nextParticulier = "infomissing"
-        } else if (currentQuestion.title == "score2op" && (currentPatient.score2op?.toString() == "")){
-          nextParticulier = "infomissing"
+        if(currentQuestion.title == "score2" && (currentPatient.score2?.toString() == "" || currentPatient.score2 == 0)){
+          
+          if(currentQuestion.message) {
+            await this.waitForDialogConfirmation(currentQuestion.message[0]);
+          }
+          nextParticulier = "score2"
+        } else if (currentQuestion.title == "score2op" && (currentPatient.score2op?.toString() == ""  || currentPatient.score2op == 0)){
+          if(currentQuestion.message) {
+            await this.waitForDialogConfirmation(currentQuestion.message[0]);
+          }
+          nextParticulier = "score2op"
         } else 
           // en fonction du résultat du calcul du score 2 ou score 2 OP et de l'âge 
           if (currentPatient.age && Number(currentPatient.age)< 70){
@@ -310,10 +337,19 @@ export class TexteService {
           }
 
         }
-    } else { //diabétique OUI
+    } else if (currentPatient.diabetique =="Oui"){ //diabétique OUI
       
-      if (currentQuestion.title == "CKD") {
-        if (currentPatient.dfge &&  Number(currentPatient.dfge) < 45 ) {
+      if (currentQuestion.title == "apparition") {
+        if (currentPatient.ageApparition== null) {
+          //si on a pas d'age d'apparition, on affiche un message d'erreur 
+          if(currentQuestion.message) {
+            nextParticulier ="apparition";
+            await this.waitForDialogConfirmation(currentQuestion.message[0]);
+            
+          }
+        }
+      } else if (currentQuestion.title == "CKD") {
+        if (currentPatient.dfge &&  Number(currentPatient.dfge) > 0 && Number(currentPatient.dfge) < 45 ) {
           //directement vers très haut risque 
           nextParticulier = "TERCV"; 
         } else {
@@ -365,8 +401,11 @@ export class TexteService {
             nextParticulier = "score2diabete"
         }
       } else if (currentQuestion.title == "score2diabete") {
-        if (currentPatient.score2diabete?.toString() == ""){
-          nextParticulier = "infomissing"
+        if (currentPatient.score2diabete?.toString() == ""  || currentPatient.score2diabete == 0){
+          if(currentQuestion.message) {
+            await this.waitForDialogConfirmation(currentQuestion.message[0]);
+          }
+          nextParticulier = "score2diabete"
         } else 
         // en fonction du résultat du calcul du score et de l'âge 
         if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 5) 
@@ -392,7 +431,7 @@ export class TexteService {
 
     //si un nextPartiuclier existe il est prioritaire par rapport au next d'origine
     if (nextParticulier) {
-      console.log("new nextid"); 
+      console.log("new nextParticulier", nextParticulier); 
       nextId = getIndexFromKey(this.questions, nextParticulier) + 1
     } else {
       nextId =  getIndexFromKey(this.questions, next) + 1
@@ -405,12 +444,16 @@ export class TexteService {
 
   //récupérer un text spécifique en fonction de la clé
   getText(key: string): string {
-    const keys = key.split('.'); 
-    let result = this.texts; 
-    for (let k of keys) {
-      result = result[k]; 
+    if(this.texts) {
+      const keys = key.split('.'); 
+      let result = this.texts; 
+      for (let k of keys) {
+        result = result[k]; 
+      }
+      return result || key; 
+    } else {
+      return ''
     }
-    return result || key; 
   }
 
   //Initialiser les texts

@@ -23,4 +23,12 @@ export interface Reco {
 export class PreconisationService {
 
   constructor() { }
+
+    // Fonction pour récupérer un élément par son index dans la Map de questions
+  getPreconisationByIndex(map: Map<string, Preconisation>, index: number): Preconisation | undefined {
+    const entriesArray = Array.from(map);
+    const entry = entriesArray[index];
+    return entry ? entry[1] : undefined;
+  }
+
 }

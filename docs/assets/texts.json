@@ -2,7 +2,7 @@
     "home": {
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
-        "information":"Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 90 ans.\nLe nécessaire : créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif)."
+        "information":"Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 90 ans.\nunderline=Le nécessaire :end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif). \n\n bold=Cardio'Clic est un outil d'aide à la décision médicale. Il ne se substitue en rien au jugement clinique de l'utilisateur.end \n\nCardio'Clic est un outil d'aide à la décision, il ne se substitue en rien au jugement clinique de l'utilisateur. \n\n L'outil est encore en phase de test. Aidez-nous à l'améliorer : text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire"
     }, 
     "patient": {
         "age": {
@@ -90,6 +90,9 @@
         "age": {
             "question": "Quel est l'âge de votre patient(e) ?", 
             "type": "text", 
+            "message": {
+                "message1": "Information manquante, remplir l'âge du patient"
+            },
             "next": "sexe"
         }, 
         "sexe": {
@@ -218,7 +221,7 @@
         }, 
         "diabetique": {
             "question": "Votre patient(e) est-il diabétique ?", 
-            "info" : "Critères diag du diabète : \n- Glycémie à jeun >= 7.0 mmol/L (>= 1.26 g/L) OU\n- HbA1c >= 6.5",
+            "info" : "Critères du diagnostic du diabète (l'un ou l'autre): \n- Glycémie à jeun ≥7.0 mmol/L (≥1.26 g/L) \n- HbA1c ≥6.5",
             "type": "prop", 
             "responses": {
                 "response1": "Oui", 
@@ -231,7 +234,11 @@
         },        
         "apparition": {
             "question": "Répondez à l'une des deux questions ci-dessus", 
+            "info" : "Si l'âge d'apparition du diabète est renseigné, on ne prendra pas en compte l'année d'apparition.",
             "type": "subquestion", 
+            "message":{
+                "message1" : "Les informations renseignées sont incorrectes, veuillez vérifier notamment l'âge du patient."
+            },
             "subquestion" : {  
                 "anneeApparition" : {
                     "question" : "Quelle est l'année d'apparition du diabète ?",
@@ -250,7 +257,7 @@
         },
         "CKD": {
             "question": "Calcul de la clairance par la formule CKD-EPI", 
-            "info": "L'ascendance est nécessaire pour calculer la clairance selon la formule CKD-EPI (disponible ici text=Lien Formule WikiMedi link=https://wikimedi.ca/wiki/CKD-EPI_(formule) ).\nSi vous cochez \"ne souhaite pas répondre\", le calculateur utilisera par défaut la variable donnant le risque CV le moins péjoratif (c'est-à-dire que la clairance d'un(e) patient(e) afro-caribéen(e))", 
+            "info": "L'ascendance est nécessaire pour calculer la clairance selon la formule CKD-EPI (disponible ici text=Lien Formule WikiMedi link=https://wikimedi.ca/wiki/CKD-EPI_(formule) ).\nSi vous cochez \"ne souhaite pas répondre\", le calculateur utilisera par défaut la variable donnant le risque CV le moins péjoratif (c'est-à-dire la clairance d'un(e) patient(e) afro-caribéen(e))", 
             "type": "subquestion", 
             "subquestion" : {
                 "creatinine" : {
@@ -275,7 +282,7 @@
                 }
             },   
             "message" : {
-                "message1" : "L'ascendance de votre patient(e) n'a pas été précisée, on suppose alors qu'il n'a pas d'ascendance afro-caribéenne car c'est le pire cas (A DIRE AUTREMENT)"
+                "message1" : "Information manquante pour calculer la clairance"
             },          
             "next": "ratio"
         },        
@@ -340,7 +347,10 @@
         "score2": {
             "question": "Calcul du SCORE2", 
             "info" : "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2 est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2 risk prediction algorithms link=https://doi.org/10.1093/eurheartj/ehab309 \n\n name=Table SCORE2 image=assets/img/score2.png",
-            "type": "subquestion", 
+            "type": "subquestion",
+            "message": {
+                "message1": "Des informations sont manquantes pour calculer le score."
+            }, 
             "subquestion" : {
                 "pa" : {
                     "question" : "PA systolique (100-200mmHg)",
@@ -362,7 +372,7 @@
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0.65-1.94 mmol/L)",
+                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0,65-1,94 mmol/L)",
                     "units" : {
                         "unit1" : "mmol/L",
                         "unit2" : "g/L" 
@@ -380,7 +390,6 @@
                     },  
                     "next": ""
                 }
-                
             },   
             "next": "FRCV"
         }, 
@@ -388,6 +397,9 @@
             "question": "Calcul du SCORE2-OP", 
             "info": "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2-OP est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2-OP risk prediction algorithms link=https://doi.org/10.1093/eurheartj/ehab312 \n\n name=Table SCORE2-OP image=assets/img/score2.png",
             "type": "subquestion", 
+            "message": {
+                "message1": "Des informations sont manquantes pour calculer le score."
+            },
             "subquestion" : {
                 "pa" : {
                     "question" : "PA systolique (100-255mmHg)",
@@ -409,7 +421,7 @@
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0.65-1.94 mmol/L)",
+                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0,65-1,94 mmol/L)",
                     "units" : {
                         "unit1" : "mmol/L",
                         "unit2" : "g/L" 
@@ -427,7 +439,6 @@
                     },  
                     "next": ""
                 }
-                
             },   
             "next": "FRCV"
         },
@@ -456,7 +467,7 @@
                     "next": ""
                 }, 
                 "hdl" : {
-                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0.65-1.94 mmol/L)",
+                    "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0,65-1,94 mmol/L)",
                     "units" : {
                         "unit1" : "mmol/L",
                         "unit2" : "g/L" 
@@ -486,30 +497,33 @@
                 }
                 
             },   
+            "message": {
+                "message1": "Des informations sont manquantes pour calculer le score."
+            },
             "next": ""
         },
         "TERCV": {
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Très Élevé",
-            "preconisation" : "Préconisations adaptées au cas ?", 
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             },
             "reco": {
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 0.55 g/L",
-                    "message2" : "blabla", 
+                    "message2" : "", 
                     "refIcon" : "ldl"
                 },
                 "pression" : {
                     "message1" :"Pression artérielle ≤ 130/80 mmHg",
-                    "message2" : "blabla", 
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
                     "refIcon" : "pression"
                 },
                 "diabete" : {
                     "message1" :"Diabète : Utilisation préférentielle Gliflozine / Analogue GLP1",
-                    "message2" : "blabla", 
+                    "message2" : "", 
                     "refIcon" : "diabete"
                 },
                 "cardiologue" : {
@@ -519,11 +533,11 @@
                 },
                 "sport" : {
                     "message1" :"Activité physique à encourager !",
-                    "message2" : "Blabla", 
+                    "message2" : "", 
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"",
+                    "message1" :"Encourager à arrêter de fumer",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
@@ -533,24 +547,24 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Élevé",
-            "preconisation" : "Préconisations adaptées au cas ?",  
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.",  
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
             "reco": {
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 0.7 g/L",
-                    "message2" : "blabla", 
+                    "message2" : "", 
                     "refIcon" : "ldl"
                 },
                 "pression" : {
                     "message1" :"Pression artérielle ≤ 130/80 mmHg",
-                    "message2" : "blabla", 
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
                     "refIcon" : "pression"
                 },
                 "diabete" : {
                     "message1" :"Diabète : Utilisation préférentielle Gliflozine",
-                    "message2" : "blabla", 
+                    "message2" : "", 
                     "refIcon" : "diabete"
                 },
                 "cardiologue" : {
@@ -560,11 +574,11 @@
                 },
                 "sport" : {
                     "message1" :"Activité physique à encourager !",
-                    "message2" : "Blabla", 
+                    "message2" : "", 
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"",
+                    "message1" :"Encourager à arrêter de fumer",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
@@ -574,24 +588,24 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Modéré",
-            "preconisation" : "Préconisations adaptées au cas ?", 
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
             "reco": {
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 1.0 g/L",
-                    "message2" : "blabla", 
+                    "message2" : "", 
                     "refIcon" : "ldl"
                 },
                 "pression" : {
                     "message1" :"Pression artérielle ≤ 135/85 mmHg",
-                    "message2" : "blabla", 
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
                     "refIcon" : "pression"
                 },
                 "diabete" : {
                     "message1" :"Diabète : cas général (metformine première intention)",
-                    "message2" : "blabla", 
+                    "message2" : "", 
                     "refIcon" : "diabete"
                 },
                 "cardiologue" : {
@@ -601,11 +615,11 @@
                 },
                 "sport" : {
                     "message1" :"Activité physique à encourager !",
-                    "message2" : "Blabla", 
+                    "message2" : "", 
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"",
+                    "message1" :"Encourager à arrêter de fumer",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
@@ -615,19 +629,19 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Faible", 
-            "preconisation" : "Préconisations adaptées au cas ?", 
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
             "reco": {
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 1.9 g/L",
-                    "message2" : "idéalement <1.16 g/L mais à adapter au profil patient", 
+                    "message2" : "Idéalement <1.16 g/L mais à adapter au profil patient", 
                     "refIcon" : "ldl"
                 },
                 "pression" : {
                     "message1" :"Pression artérielle ≤ 135/85 mmHg",
-                    "message2" : "blabla", 
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
                     "refIcon" : "pression"
                 },
                 "cardiologue" : {
@@ -637,30 +651,16 @@
                 },
                 "sport" : {
                     "message1" :"Activité physique à encourager !",
-                    "message2" : "Blabla", 
+                    "message2" : "", 
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"",
+                    "message1" :"Encourager à arrêter de fumer",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
             }
-        }, 
-        "infomissing": {
-            "question": "Des informations sont manquantes, le risque cardiovasculaire ne peut pas être évalué", 
-            "info" : "S'il manque l'une des données patient, vous pourrez recommencer le test une fois les examens nécessaires réalisés",
-            "type": "prop", 
-            "responses": {
-                "response1": "Revenir à la question précédente", 
-                "response2": "Terminer l'évaluation"
-            }, 
-            "next": {
-                "next1": "back", 
-                "next2": "home"
-            }
         }
-
     }, 
     "reco" : {
         "ldl" : {
@@ -678,7 +678,7 @@
         "pression" : {
             "condition1" : {
                 "message1" :"Aller plus loin ",
-                "message2" : "Impression de la fiche d'auto-mesure tensionnele du site ameli.fr", 
+                "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
                 "refIcon" : "pression"
             }, 
             "condition2" : {
@@ -696,11 +696,16 @@
         },
         "cardiologue" : {
             "condition1" : {
+                "message1" :"Suivi Cardiologique à considérer",
+                "message2" : "", 
+                "refIcon" : "cardilogue"
+            },
+            "condition2" : {
                 "message1" :"Diabéto ? questions supplémentaires ?",
                 "message2" : "cf conditions", 
                 "refIcon" : "cardilogue"
             },
-            "condition2" : {
+            "condition3" : {
                 "message1" :"Néphro ? questions supplémentaires ?",
                 "message2" : "cf conditions", 
                 "refIcon" : "cardilogue"
@@ -708,13 +713,17 @@
         },
         "sport" : {
             "message1" :"Activité physique à encourager !",
-            "message2" : "Blabla", 
+            "message2" : "", 
             "refIcon" : "sport"
         },
         "fumeur" : {
             "message1" :"",
             "message2" : "", 
             "refIcon" : "fumeur"
+        }, 
+        "dyslipidemie" : {
+            "message": "Statine en première intention \nStatine + ezetimibe en 2eme intention",
+            "refIcon": "ldl"
         }
 
     }

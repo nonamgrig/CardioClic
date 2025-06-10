@@ -17,8 +17,7 @@ export class HomeComponent {
     private patientService : PatientService) {
   }
 
-  ngOnInit() {
-    //Charger les textes au démarrage de l'application
+  async ngOnInit() {
     this.texteService.loadTexts().subscribe(texts => {
       this.texteService.setTexts(texts); 
       this.text=texts; 

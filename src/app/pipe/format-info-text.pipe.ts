@@ -30,7 +30,7 @@ export class FormatInfoTextPipe implements PipeTransform {
       }
     );
 
-    // Liens externes : text=... lien=...
+    // Liens externes : text=... link=...
     escaped = escaped.replace(
       /text=([^\n\r]*?)\s+link=(https?:\/\/[^\s<]+)/g,
       (match, text, url) => {
@@ -38,11 +38,16 @@ export class FormatInfoTextPipe implements PipeTransform {
       }
     );
 
-    // Listes
-    escaped = escaped.replace(/^- (.*)$/gm, '<li>$1</li>');
-    if (escaped.includes('<li>')) {
-      escaped = escaped.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
-    }
+    // Gestion des listes : construire un bloc <ul> avec les <li>
+    escaped = escaped.replace(/(?:^- .*(?:\n|$))+?/gm, (match) => {
+      const items = match
+        .trim()
+        .split('\n')
+        .filter(line => line.startsWith('- '))
+        .map(line => `<li>${line.substring(2).trim()}</li>`)
+        .join('');
+      return `<ul>${items}</ul>`;
+    });
 
     // Sauts de ligne
     escaped = escaped.replace(/\n/g, '<br>');

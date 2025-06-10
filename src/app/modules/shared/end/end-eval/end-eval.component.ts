@@ -1,24 +1,18 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Question } from '../../service/question.service';
-import { TexteService } from '../../service/texte.service';
-import { Preconisation, PreconisationService } from '../../service/preconisation.service';
-import { Patient } from '../../service/patient.service';
+import { Preconisation, PreconisationService } from '../../../../service/preconisation.service';
+import { TexteService } from '../../../../service/texte.service';
 
 @Component({
-  selector: 'app-preconisation',
+  selector: 'app-end-eval',
   standalone: false,
-  templateUrl: './preconisation.component.html',
-  styleUrl: './preconisation.component.less'
+  templateUrl: './end-eval.component.html',
+  styleUrl: './end-eval.component.less'
 })
-export class PreconisationComponent implements OnInit, OnChanges {
+export class EndEvalComponent implements OnInit, OnChanges {
 
   
   @Input() questionId: number = 0;
   preco: Preconisation | undefined;
-  allBoxesOpen: boolean = false;
-  reco : any; //les recomendations 
-
-   @Input() patient! : Patient; //on récupère le patient 
 
   constructor(
     private texteService: TexteService,
@@ -27,13 +21,9 @@ export class PreconisationComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     // Charger les questions dès le début si ce n'est pas déjà fait
-    this.texteService.loadTexts().subscribe(texts => {
-      this.reco=texts.reco; 
-    });
     this.texteService.loadQuestions().subscribe(() => {
       this.loadPreconisation();
     });
-    console.log('patient', this.patient); 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,9 +40,11 @@ export class PreconisationComponent implements OnInit, OnChanges {
     console.log("preco", this.preco)
   }
 
-  toggleAllBoxes() {
-    this.allBoxesOpen = !this.allBoxesOpen;
+
+  terminerEvaluation() : void {
+    //fonction pour envoyer les datas 
+    //dans le POC, on envoie vers le formulaire
+    this.texteService.waitForDialogConfirmation("Merci d'avoir utiliser Cardio'Clic ! \n\nL'outil est encore en phase de test, si vous voulez nous aider à l'améliorer, répondez à ce court questionnaire pour nous donner votre avis : text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire")
   }
-
-
 }
+

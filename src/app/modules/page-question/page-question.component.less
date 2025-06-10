@@ -13,7 +13,7 @@
         overflow: hidden;          // ou auto si tu veux scroller
         padding: 20px;
         background-color: rgb(249, 243, 243);
-      }
+    }
     
     .right-section {
         width: 300px;
@@ -21,14 +21,30 @@
         padding: 15px;
         background-color: rgb(123, 84, 113);
     }
+
+    .question {
+        margin-left : 50px;
+        margin-top: 20px; 
+    }
     
     .centered-component{
         display : flex; 
         justify-content: center; 
-        align-items: flex-start; 
-        padding: 20px;
+        align-items: center; 
+        padding: 40px;
         width: 100%; 
         box-sizing : border-box; 
+    }
+    .centered-component app-info {
+        flex: 1;
+        max-width: 100%;
+    }
+
+    .centered-button {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        width: 100%;
     }
 }
 

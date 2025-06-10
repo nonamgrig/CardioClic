@@ -2,11 +2,13 @@
 <div class="container2">
     <div class="left-section">
         <app-back (click)="goBack()"></app-back>
-        <app-question
-            *ngIf= "questionId" 
-            [questionId]="questionId" 
-            [patient]="patient">           
-        </app-question>
+        <div class="question">
+            <app-question
+                *ngIf= "questionId" 
+                [questionId]="questionId" 
+                [patient]="patient">           
+            </app-question>
+        </div>
         <div class="centered-component">
             <app-info
             *ngIf= "questionId" 
@@ -14,16 +16,23 @@
             </app-info>
             <app-preconisation
             *ngIf= "questionId" 
-            [questionId]="questionId">
+            [questionId]="questionId"
+            [patient]="patient">
             </app-preconisation>
+            
+        </div>
+        <div class="centered-button">
+            <app-end-eval
+                *ngIf="questionId"
+                [questionId]="questionId">
+            </app-end-eval>
         </div>
     </div>
     <div class="right-section">
         <app-patient
         [patient]="patient"></app-patient>
     </div>
-
-    
 </div>
 
+<app-contactbar></app-contactbar>
 

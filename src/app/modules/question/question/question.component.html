@@ -12,7 +12,7 @@
             <input [(ngModel)]="userAnswer" [placeholder]="patient[question.title] ? patient[question.title] : 'Entrez une valeur'">
             
             <div *ngIf="question.units" class="unit-select-container">
-                <select [(ngModel)]="selectedUnit" class="form-select">
+                <select [(ngModel)]="question.selectedUnit" class="form-select">
                     <option *ngFor="let unit of question.units" [value]="unit">{{ unit }}</option>
                 </select>
             </div>
@@ -21,16 +21,16 @@
     </div>
 
     <div *ngIf="question.type == 'RCV'" >
-        <div  class="rcv-container-tres" *ngIf="question.rcv == 'RCV Très Élevé'" >
+        <div  class="rcv-container-tres" *ngIf="question.rcv == 'Risque Cardiovasculaire Très Élevé'" >
             <h2 class="rcv"> {{question.rcv}}</h2>
         </div>
-        <div class="rcv-container-eleve" *ngIf="question.rcv == 'RCV Élevé'" >
+        <div class="rcv-container-eleve" *ngIf="question.rcv == 'Risque Cardiovasculaire Élevé'" >
             <h2 class="rcv"> {{question.rcv}}</h2>
         </div>
-        <div class="rcv-container-modere" *ngIf="question.rcv == 'RCV Modéré'" >
+        <div class="rcv-container-modere" *ngIf="question.rcv == 'Risque Cardiovasculaire Modéré'" >
             <h2 class="rcv"> {{question.rcv}}</h2>
         </div>
-        <div class="rcv-container-faible" *ngIf="question.rcv == 'RCV Faible'" >
+        <div class="rcv-container-faible" *ngIf="question.rcv == 'Risque Cardiovasculaire Faible'" >
             <h2 class="rcv"> {{question.rcv}}</h2>
         </div>
     </div>

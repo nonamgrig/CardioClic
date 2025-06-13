@@ -66,6 +66,12 @@ export class QuestionComponent implements OnInit, OnChanges {
     // Charger la question via le service
     const index = this.questionId - 1;  // index basé sur le questionId
     this.question = getQuestionByIndex(this.texteService.questions, index);
+    // Si la question a des unités (clé 'units'), extraire les valeurs de l'objet et les convertir en tableau
+    if (this.question?.units && typeof this.question?.units == 'object') {
+      const unitsArray = Object.values(this.question.units);
+      this.question.units =unitsArray; // Extraire les valeurs et les mettre dans un tableau
+      this.question.selectedUnit = unitsArray[0]; // Sélectionner par défaut la première unité
+    }
   }
 
   // Fonction pour transformer l'objet responses en tableau
@@ -103,7 +109,7 @@ export class QuestionComponent implements OnInit, OnChanges {
         };
   
         // Si la question a des unités (clé 'units'), extraire les valeurs de l'objet et les convertir en tableau
-        if (question.units && typeof question.units === 'object') {
+        if (question.units && typeof question.units == 'object') {
           const unitsArray = Object.values(question.units);
           question.units =unitsArray; // Extraire les valeurs et les mettre dans un tableau
           question.selectedUnit = unitsArray[0]; // Sélectionner par défaut la première unité

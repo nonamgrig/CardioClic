@@ -158,6 +158,16 @@ export class TexteService {
       }
     } 
 
+    //Pour la question age, si on a pas un age entre 40 et 89 ans inclus on ne peut pas calculer les scores 
+    if (currentQuestion.title == "age"){
+      if(Number(currentPatient.age) < 40 || Number(currentPatient.age) > 89) {
+         if(currentQuestion.message) {
+        await this.waitForDialogConfirmation(currentQuestion.message[1]);
+      }
+      next = currentQuestion.title
+      }
+    }
+
     //Pour la question aide1, on a soit answer soit "Oui" soit "Non"
     if (currentQuestion.title == "aide1") {
         if (answer == "Oui"){

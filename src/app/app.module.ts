@@ -21,6 +21,7 @@ import { PreconisationComponent } from './modules/preconisation/preconisation.co
 import { RecoBoxComponent } from './modules/shared/reco/reco-box/reco-box.component';
 import { ContactbarComponent } from './modules/shared/contactbar/contactbar/contactbar.component';
 import { EndEvalComponent } from './modules/shared/end/end-eval/end-eval.component';
+import { DetailComponent } from './modules/preconisation/detail/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EndEvalComponent } from './modules/shared/end/end-eval/end-eval.compone
     PreconisationComponent,
     RecoBoxComponent,
     ContactbarComponent,
-    EndEvalComponent
+    EndEvalComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

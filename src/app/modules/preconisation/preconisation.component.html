@@ -36,21 +36,23 @@
 
       <div class="right-column">
         
+        <!-- Cas secondaire dans les reco condition 1 -->
         <app-reco-box  *ngIf="preco.reco['cardiologue'] && patient.prevention=='Secondaire'"
-          [message1]="preco.reco['cardiologue'].message1"
-          [message2]="preco.reco['cardiologue'].message2"
-          [refIcon]="preco.reco['cardiologue'].refIcon"
-          [is2Open]="allBoxesOpen"
-          [hidden]="preco.reco['cardiologue'].message2==''">
-        </app-reco-box>
-        <!-- Cas primaire dans les reco condition 1 -->
-        <app-reco-box  *ngIf="preco.reco['cardiologue'] && patient.prevention=='Primaire'"
           [message1]="reco['cardiologue'].condition1.message1"
           [message2]="reco['cardiologue'].condition1.message2"
           [refIcon]="preco.reco['cardiologue'].refIcon"
           [is2Open]="allBoxesOpen"
           [hidden]="reco['cardiologue'].condition1.message2==''">
         </app-reco-box>
+
+        <app-reco-box  *ngIf="preco.reco['cardiologue'] && patient.prevention!=='Secondaire' "
+          [message1]="preco.reco['cardiologue'].message1"
+          [message2]="preco.reco['cardiologue'].message2"
+          [refIcon]="preco.reco['cardiologue'].refIcon"
+          [is2Open]="allBoxesOpen"
+          [hidden]="preco.reco['cardiologue'].message2==''">
+        </app-reco-box>
+        
 
         <app-reco-box  *ngIf="preco.reco['sport']"
           [message1]="preco.reco['sport'].message1"
@@ -75,10 +77,22 @@
         <h2 class="title">Les cibles en détail</h2>
       </div>
       <h3>Dyslipidémie</h3>
-      <app-reco-box *ngIf="reco['dyslipidemie']"
-          [message1]="reco['dyslipidemie'].message"
-          [refIcon]="reco['dyslipidemie'].refIcon">
-      </app-reco-box>
+      <img [src]="'assets/img/' + reco['dyslipidemie'].refIcon + '.png'" alt="icon medicament" class="icon" />
+      <app-detail *ngIf="reco['dyslipidemie']"
+          [reco]="reco['dyslipidemie']">
+      </app-detail>
+
+      <h3>HTA</h3>
+      <img [src]="'assets/img/' + reco['HTA'].refIcon + '.png'" alt="icon medicament" class="icon" />
+      <app-detail *ngIf="reco['HTA']"
+          [reco]="reco['HTA']">
+      </app-detail>
+
+      <h3>diabétique</h3>
+      <img [src]="'assets/img/' + reco['diabetique'].refIcon + '.png'" alt="icon medicament" class="icon" />
+      <app-detail *ngIf="reco['diabetique']"
+          [reco]="reco['diabetique']">
+      </app-detail>
     </div>
 
     

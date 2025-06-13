@@ -510,7 +510,7 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Très Élevé",
-            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.", 
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             },
@@ -551,7 +551,7 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Élevé",
-            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.",  
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.",  
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -592,7 +592,7 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Modéré",
-            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.", 
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -633,7 +633,7 @@
             "question": "Votre patient(e) a un risque cardiovasculaire", 
             "type": "RCV", 
             "rcv" : "RCV Faible", 
-            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent à un avis médical.", 
+            "preconisation" : "Les recommendations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -728,7 +728,12 @@
         "dyslipidemie" : {
             "message": "Statine en première intention \nStatine + ezetimibe en 2eme intention",
             "refIcon": "ldl"
+        }, 
+        "HTA" : {
+            "message": "Importance du contrôle automesure PA au domicile",
+            "refIcon": "pression"
         }
+
 
     }
 }

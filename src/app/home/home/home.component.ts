@@ -23,7 +23,6 @@ export class HomeComponent {
       this.text=texts; 
       console.log('texte chargé', this.text)
     });
-    
   }
 
   onGo(event:Event) {

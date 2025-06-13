@@ -1,12 +1,13 @@
 .contactbar {
   background-color: rgb(9, 9, 9);
   height: 100px;
+  width: 1250px;
+  margin: 0 auto;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0;
-  margin-left: 50px;
-  margin-right: 50px;
+  box-sizing: border-box;
 
   .contactbar-left,
   .contactbar-right {
@@ -17,6 +18,7 @@
       list-style: none;
       display: flex;
       align-items: center;
+      color: white; // optionnel selon ton design
     }
   }
 
@@ -24,11 +26,11 @@
     justify-content: flex-end;
 
     .contactbar-logo {
-      margin-top : 10px; 
-      margin-right: 10px;
-      height: 80px;       
+      height: 80px;
       width: auto;
       object-fit: contain;
+      margin-top: 10px;
+      margin-right: 10px;
       display: block;
     }
   }

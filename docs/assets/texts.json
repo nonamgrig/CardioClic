@@ -2,7 +2,11 @@
     "home": {
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
-        "information":"Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 90 ans.\nunderline=Le nécessaire :end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif). \n\n bold=Cardio'Clic est un outil d'aide à la décision médicale. Il ne se substitue en rien au jugement clinique de l'utilisateur.end \n\nCardio'Clic est un outil d'aide à la décision, il ne se substitue en rien au jugement clinique de l'utilisateur. \n\n L'outil est encore en phase de test. Aidez-nous à l'améliorer : text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire"
+        "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end \n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 90 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif). \n\n L'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire :end text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire", 
+        "lien1": "Calcul de la clairance : text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)",
+        "lien2": "SCORE2 : text=SCORE2 link=https://academic.oup.com/eurheartj/article/42/25/2439/6297709#google_vignette", 
+        "lien3": "SCORE2OP : text=SCORE2OP link=https://academic.oup.com/eurheartj/article/42/25/2455/6297711", 
+        "lien4": "SCORE2Diabete : text=SCORE2Diabete link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false"
     }, 
     "patient": {
         "age": {
@@ -444,7 +448,7 @@
         },
         "score2diabete": {
             "question": "Calcul du SCORE 2 Diabete", 
-            "info": "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2-OP est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2-OP risk prediction algorithms link=https://doi.org/10.1093/eurheartj/ehab312 \n\n name=Table SCORE2 DIABETE image=assets/img/score2diabete.png",
+            "info": "PA de consultation dans les conditions de repos, ou PA moyennée d'automesure\n\nLe calculateur de risque SCORE2-Diabete est basé sur l'algorithme publié par la European Society of Cardiology dans le European Heart Journal : text=SCORE2-Diabete risk prediction algorithms link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false \n\n name=Table SCORE2 DIABETE image=assets/img/score2diabete.png",
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {

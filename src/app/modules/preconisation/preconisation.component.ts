@@ -33,7 +33,6 @@ export class PreconisationComponent implements OnInit, OnChanges {
     this.texteService.loadQuestions().subscribe(() => {
       this.loadPreconisation();
     });
-    console.log('patient', this.patient); 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -47,11 +46,18 @@ export class PreconisationComponent implements OnInit, OnChanges {
     // Charger la question via le service
     const index = this.questionId - 1;  // index basé sur le questionId
     this.preco = this.preconisationService.getPreconisationByIndex(this.texteService.questions as unknown as Map<string, Preconisation>, index);
-    console.log("preco", this.preco)
+    console.log("preco load", this.preco)
   }
 
   toggleAllBoxes() {
     this.allBoxesOpen = !this.allBoxesOpen;
+  }
+
+  //Fonctionnement des onglets
+  selectedTab: string = 'dyslipidemie'; // Onglet affiché par défaut
+
+  selectTab(tab: string) {
+    this.selectedTab = tab;
   }
 
 

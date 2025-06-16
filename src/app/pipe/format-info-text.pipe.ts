@@ -51,7 +51,7 @@ export class FormatInfoTextPipe implements PipeTransform {
 
     // Sauts de ligne
     escaped = escaped.replace(/\n/g, '<br>');
-    console.log('HTML généré :', escaped);
+    // console.log('HTML généré :', escaped);
 
     return escaped;
   }

@@ -35,6 +35,7 @@ export interface Patient {
   score2 : number | null;
   score2op : number | null; 
   score2diabete : number | null;  //stocke le score en fonction de la méthode de calul 
+  risque : string |null; 
 }
 
 @Injectable({
@@ -65,7 +66,8 @@ export class PatientService {
     fumeur: null,
     score2: null,
     score2op: null,
-    score2diabete: null
+    score2diabete: null, 
+    risque : null
   };
   
 
@@ -104,7 +106,7 @@ export class PatientService {
     'age', 'sexe', 'diabetique', 'ageApparition', 'prevention',
     'creatinine', 'ascendance', 'dfge', 'ratio', 'rationondispo', 
     'neuropathie', 'retinopathie', 'pa', 'cholesTotal',
-    'hdl', 'hba1c', 'fumeur', 'score2', 'score2op', 'score2diabete'
+    'hdl', 'hba1c', 'fumeur', 'score2', 'score2op', 'score2diabete', 'risque'
   ];
 
   hidden :   (keyof Patient)[]  = [
@@ -159,7 +161,8 @@ export class PatientService {
       fumeur: null,
       score2: null,
       score2op: null,
-      score2diabete: null
+      score2diabete: null, 
+      risque: null
     };
   
     // Émet la nouvelle valeur (réinitialisée)
@@ -228,7 +231,7 @@ export class PatientService {
   }
 
 
-  calculscore2(cholesTotalUnit : string, hdlUnit : string) : number{
+  calculscore2() : number{
     let score = 0; 
 
     /**
@@ -348,7 +351,7 @@ export class PatientService {
     return score; 
   }
 
-  calculscore2op(cholesTotalUnit : string , hdlUnit: string) : number{
+  calculscore2op() : number{
     let score = 0; 
 
 
@@ -471,7 +474,7 @@ export class PatientService {
   }
 
 
-  calculscore2diabet(cholesTotalUnit : string , hdlUnit : string, hba1Unit : string) : number{
+  calculscore2diabet() : number{
     let score = 0; 
 
 

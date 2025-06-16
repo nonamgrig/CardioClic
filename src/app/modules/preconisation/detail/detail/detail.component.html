@@ -1,17 +1,26 @@
 <div class="detail">
     <p class="text"  *ngIf="message" [innerHTML]="message" (click)="handleImageClick($event)"></p>
-    <h2 class="title">Fiche Patient</h2>
-    <p [innerHTML]="fiche"></p>
-    <h2 class="title"> Traimement</h2>
-    <p [innerHTML]="traitement"></p>
-    <h2 class="title">Ordonance de suirveillance type</h2>
-    <p [innerHTML]="ordonance"></p>
-    <h2 class="title">Mémo</h2>
-    <p [innerHTML]="encart"></p>
+    
+    <!-- <h2 class="title">Fiche Patient</h2>
+    <p [innerHTML]="fiche"></p> -->
+    
+    <div class="box">
+        <h2 class="title">Traimements recommandés</h2>
+        <p [innerHTML]="traitement"></p>
+    </div>
+    
+    <div class="box">
+        <h2 class="title">Ordonance de suirveillance type</h2>
+        <p [innerHTML]="ordonance"></p>
+    </div>
+    
+    <div class="box-encart">
+        <p [innerHTML]="encart"></p>
+    </div>
 
   
-      <!-- Popup modal-->
-      <div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
+    <!-- Popup modal-->
+    <div class="image-modal" *ngIf="showImageModal" (click)="closeImageModal()">
         <img [src]="modalImageSrc" (click)="$event.stopPropagation()" alt="Image d'information" />
-      </div> 
+    </div> 
 </div>

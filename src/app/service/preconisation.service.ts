@@ -9,6 +9,7 @@ export interface Preconisation {
   preconisation : string; 
   rcv : string; 
   reco : { [key: string]: Reco } | null; 
+  recalcul : string; 
 }
 
 export interface Reco {

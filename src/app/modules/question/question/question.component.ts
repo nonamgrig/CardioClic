@@ -216,9 +216,9 @@ export class QuestionComponent implements OnInit, OnChanges {
       switch (this.question?.title) {
         case "apparition": //calculer l'age à l'apparition du diabète 
         //si un âge d'apparition est enregistré, il prévaut sur l'année d'apparition
-          if (this.subquestionsArray[1].userAnswer){ //si on a un age d'apparition
+          if (this.subquestionsArray[2].userAnswer){ //si on a un age d'apparition
             //on vérifie si l'âge renseigné est inférieur ou égal à l'âge du patient 
-            if (!this.patientService.checkAgeApparition(this.subquestionsArray[1].userAnswer as string)){
+            if (!this.patientService.checkAgeApparition(this.subquestionsArray[2].userAnswer as string)){
               //si on a pas un age d'apparition correct, on supprime la donnée
               this.patientService.updateField("ageApparition", null);
             }
@@ -349,9 +349,28 @@ export class QuestionComponent implements OnInit, OnChanges {
             this.patientService.updateField("score2", "");
           } else {
             //on calcule le score 
-            let score2 = arrondirSiNecessaire(this.patientService.calculscore2(cholesTotalUnit, hdlUnit)); 
+            let score2 = arrondirSiNecessaire(this.patientService.calculscore2()); 
             if (score2 == "NaN") {this.patientService.updateField("score2", "")}
             else {this.patientService.updateField("score2", score2);} 
+
+            //on détermine le risque à partir du score
+            if(Number(this.patient.age) <50){
+              if (Number(score2)<2.5){
+                this.patientService.updateField("risque", "faible")
+              } else if (Number(score2)<7.5){
+                this.patientService.updateField("risque", "modéré")
+              } else {
+                this.patientService.updateField("risque", "élevé")
+              }
+            } else { //entre 50 et 69
+              if (Number(score2)<5){
+                this.patientService.updateField("risque", "faible")
+              } else if (Number(score2)<10){
+                this.patientService.updateField("risque", "modéré")
+              } else {
+                this.patientService.updateField("risque", "élevé")
+              }
+            }
           }
           break;
         case "score2op": 
@@ -379,10 +398,19 @@ export class QuestionComponent implements OnInit, OnChanges {
           if (oldValueTotal == 0 || oldValueHDL == 0 || this.subquestionsArray[3].userAnswer == undefined) {
             this.patientService.updateField("score2op", "");
           } else {
-            let score2op = arrondirSiNecessaire(this.patientService.calculscore2op(cholesTotalUnit, hdlUnit)); 
+            let score2op = arrondirSiNecessaire(this.patientService.calculscore2op()); 
             if (score2op == "NaN") {this.patientService.updateField("score2op", "")}
             else {this.patientService.updateField("score2op", score2op);} 
-          }
+
+            //on détermine le risque à partir du score
+            if (Number(score2op)<7.5){
+              this.patientService.updateField("risque", "faible")
+            } else if (Number(score2op)<15){
+              this.patientService.updateField("risque", "modéré")
+            } else {
+              this.patientService.updateField("risque", "élevé")
+            }
+          }            
           break;  
         case "score2diabete": 
           //Attention dépend de l'ordre du json
@@ -421,9 +449,20 @@ export class QuestionComponent implements OnInit, OnChanges {
           if (oldValueTotal == 0 || oldValueHDL == 0 || oldValueHbA1c == 0 || this.subquestionsArray[4].userAnswer == undefined) {
             this.patientService.updateField("score2diabete", "");
           } else {
-            let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet(cholesTotalUnit, hdlUnit, hba1cUnit)); 
+            let score2diabete = arrondirSiNecessaire(this.patientService.calculscore2diabet()); 
             if (score2diabete == "NaN") {this.patientService.updateField("score2diabete", "")}
             else {this.patientService.updateField("score2diabete", score2diabete);} 
+            
+            //on détermine le risque à partir du score
+            if (Number(score2diabete)<5){
+              this.patientService.updateField("risque", "faible")
+            } else if (Number(score2diabete)<10){
+              this.patientService.updateField("risque", "modéré")
+            } else if (Number(score2diabete)<20){
+              this.patientService.updateField("risque", "élevé")
+            } else {
+              this.patientService.updateField("risque", "très élevé")
+            }
           }
         break; 
 

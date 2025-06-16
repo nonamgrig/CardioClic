@@ -254,6 +254,12 @@
                     "responses": "", 
                     "next": ""
                 },
+                "ou" : {
+                    "question": "OU", 
+                    "type":"prop", 
+                    "responses" : "", 
+                    "next" : ""
+                }, 
                 "ageApparition" : {
                     "question" : "Quel âge avait votre patient(e) à l'apparition du diabète ?", 
                     "type": "text", 
@@ -545,7 +551,7 @@
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"Encourager à arrêter de fumer",
+                    "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
@@ -586,11 +592,12 @@
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"Encourager à arrêter de fumer",
+                    "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
-            }
+            }, 
+            "recalcul": "2 ans"
         },
         "MRCV": {
             "question": "Votre patient(e) a un", 
@@ -627,11 +634,12 @@
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"Encourager à arrêter de fumer",
+                    "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
-            }
+            }, 
+            "recalcul": "3 ans"
         },
         "FRCV": {
             "question": "Votre patient(e) a un", 
@@ -663,11 +671,12 @@
                     "refIcon" : "sport"
                 },
                 "fumeur" : {
-                    "message1" :"Encourager à arrêter de fumer",
+                    "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
                 }
-            }
+            }, 
+            "recalcul": "5 ans"
         }
     }, 
     "reco" : {
@@ -745,7 +754,7 @@
             "encart": "Conduite à tenir si myalgie sous statine, CAT si élévation des enzymes hépatiques sous statine"
         }, 
         "diabetique" : {
-            "refIcon": "pression",
+            "refIcon": "diabete",
             "message": "Cible d'HBA1c définie selon le profil patient name=HbA1c cible selon HAS image=assets/img/Hb1AcCible.png",
             "fiche": "Revoir avec les diabéto les principes d'éducation thérapeutique, lutte contre le surpoids, mesures diététiques ++, activité physique régulière...", 
             "traitement": "En premier interntion metformine + adapté selon le profil de risque CV et les comorbidités plus que selon l'HbA1c (selon HAS 2024)",

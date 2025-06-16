@@ -71,7 +71,8 @@ export class TexteService {
             message : item.message ? Object.values(item.message) : null, //pour créer une liste à partir des messages 
             preconisation : item.preconisation, 
             rcv : item.rcv,
-            reco : item.reco ? item.reco : null
+            reco : item.reco ? item.reco : null, 
+            recalcul : item.recalcul || undefined, 
           };
 
           // Ajouter chaque question à la Map
@@ -158,6 +159,8 @@ export class TexteService {
       }
     } 
 
+    
+
     //Pour la question age, si on a pas un age entre 40 et 89 ans inclus on ne peut pas calculer les scores 
     if (currentQuestion.title == "age"){
       if(Number(currentPatient.age) < 40 || Number(currentPatient.age) > 89) {
@@ -175,7 +178,7 @@ export class TexteService {
           // if(currentQuestion.message) {
           //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
           // }
-        next = "TERCV"
+        next = "TERCV";
       } else {
         if(currentQuestion.message) {
           //TODO
@@ -201,7 +204,7 @@ export class TexteService {
         // if(currentQuestion.message) {
         //   await this.waitForDialogConfirmation(currentQuestion.message[0]);
         // }
-      next = "TERCV"
+      next = "TERCV";
       } else { //sinon, on est en prévention primaire
         //TO DO pop up ou pas 
         // if(currentQuestion.message) {
@@ -256,7 +259,8 @@ export class TexteService {
             nextParticulier = "ERCV"
           } else if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
-            nextParticulier = "TERCV"
+            nextParticulier = "TERCV";
+            
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             //message pop up à faire ++
             if(currentQuestion.message) {
@@ -308,44 +312,13 @@ export class TexteService {
           nextParticulier = "score2op"
         } else 
           // en fonction du résultat du calcul du score 2 ou score 2 OP et de l'âge 
-          if (currentPatient.age && Number(currentPatient.age)< 70){
-            //on regarde le résultat du score 2
-            if (Number(currentPatient.age) <50) {
-              if (currentPatient.score2 && Number(currentPatient.score2) < 2.5) {
-                //direct risque
-                nextParticulier = "FRCV"
-              } else if (currentPatient.score2 && Number(currentPatient.score2) < 7.5) {
-                //direct risque
-                nextParticulier = "MRCV"
-              } else { //>= 7.5
-                //direct risque
-                nextParticulier = "ERCV"
-              }
-            } else { //age entre 50 et 69
-              if (currentPatient.score2 && Number(currentPatient.score2) < 5) {
-                //direct risque
-                nextParticulier = "FRCV"
-              } else if (currentPatient.score2 && Number(currentPatient.score2) < 10) {
-                //direct risque
-                nextParticulier = "MRCV"
-              } else { //>= 10
-                //direct risque
-                nextParticulier = "ERCV"
-              }
-            }
-          } else { // age >=70 avec score2op
-            if (currentPatient.score2op && Number(currentPatient.score2op) < 7.5) {
-              //direct risque
-              nextParticulier = "FRCV"
-            } else if (currentPatient.score2op && Number(currentPatient.score2op) < 15) {
-              //direct risque
-              nextParticulier = "MRCV"
-            } else { //>= 15
-              //direct risque
-              nextParticulier = "ERCV"
-            }
+          if (currentPatient.risque =="faible") {
+            nextParticulier="FRCV"; 
+          } else if (currentPatient.risque =="modéré") {
+            nextParticulier="MRCV"; 
+          } else if (currentPatient.risque =="élévé") {
+            nextParticulier="ERCV"; 
           }
-
         }
     } else if (currentPatient.diabetique =="Oui"){ //diabétique OUI
       
@@ -370,7 +343,7 @@ export class TexteService {
         if (currentPatient.dfge && Number(currentPatient.dfge)< 60) { //entre 45 et 60
           if (currentPatient.ratio && Number(currentPatient.ratio) > 30) {
             //direct risque
-            nextParticulier = "TERCV"
+            nextParticulier = "TERCV";
           } else if  (currentPatient.rationondispo && currentPatient.rationondispo == "Non disponible (considéré <30mg/g)") { 
             // message pop up pour aller quand même au score
             nextParticulier = "score2diabete"
@@ -416,24 +389,29 @@ export class TexteService {
             await this.waitForDialogConfirmation(currentQuestion.message[0]);
           }
           nextParticulier = "score2diabete"
-        } else 
-        // en fonction du résultat du calcul du score et de l'âge 
-        if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 5) 
-        {
-          //direct risque
-          nextParticulier = "FRCV"
-        } else if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 10) {
-          //direct risque
-          nextParticulier = "MRCV"
-        } 
-        else if (currentPatient.score2diabete && Number(currentPatient.score2diabete) < 20) {
-          //direct risque
-          nextParticulier = "ERCV"
-        }else { //>= 20
-          //direct risque
-          nextParticulier = "TERCV"
+        } else {
+          if (currentPatient.risque =="faible") {
+            nextParticulier="FRCV"; 
+          } else if (currentPatient.risque =="modéré") {
+            nextParticulier="MRCV"; 
+          } else if (currentPatient.risque =="élevé") {
+            nextParticulier="ERCV"; 
+          } else if (currentPatient.risque =="très élevé") {
+            nextParticulier="TERCV"; 
+          }
         }
       }
+    }
+
+    //pour enregistrer dans le patient la valeur du risque obtenu
+    if (next=="FRCV" || nextParticulier =="FRCV"){
+      this.patientService.updateField("risque", "faible")
+    } else if (next=="MRCV"  ||  nextParticulier =="MRCV"){
+      this.patientService.updateField("risque", "modéré")
+    } else if (next=="ERCV"  ||  nextParticulier =="ERCV"){
+      this.patientService.updateField("risque", "élevé")
+    } else if (next=="TERCV"  || nextParticulier =="TERCV") {
+      this.patientService.updateField("risque", "très élevé")
     }
 
     

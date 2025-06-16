@@ -19,6 +19,7 @@ export interface Question {
   preconisation : string; 
   rcv : string; 
   reco :{ [key: string]: Preconisation } | null;
+  recalcul : string | null; 
 }
 
 

@@ -323,7 +323,7 @@ export class TexteService {
     } else if (currentPatient.diabetique =="Oui"){ //diabétique OUI
       
       if (currentQuestion.title == "apparition") {
-        if (currentPatient.ageApparition== null) {
+        if (currentPatient.ageApparition == null) {
           //si on a pas d'age d'apparition, on affiche un message d'erreur 
           if(currentQuestion.message) {
             nextParticulier ="apparition";

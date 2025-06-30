@@ -216,7 +216,14 @@ export class QuestionComponent implements OnInit, OnChanges {
       switch (this.question?.title) {
         case "apparition": //calculer l'age à l'apparition du diabète 
         //si un âge d'apparition est enregistré, il prévaut sur l'année d'apparition
-          if (this.subquestionsArray[2].userAnswer){ //si on a un age d'apparition
+
+          if (this.subquestionsArray[0].userAnswer && this.subquestionsArray[2].userAnswer) {
+            if (this.patientService.checkApparationAgeAnnee(this.subquestionsArray[0].userAnswer as string, this.subquestionsArray[2].userAnswer as string)) {
+              //si on a l'age d'apparition et l'année qui correspondent alors on ne fait rien
+            } else { //si ça ne correspond pas, on supprime la donnée 
+              this.patientService.updateField("ageApparition", null);
+            }
+          } else if (this.subquestionsArray[2].userAnswer){ //si on a un age d'apparition
             //on vérifie si l'âge renseigné est inférieur ou égal à l'âge du patient 
             if (!this.patientService.checkAgeApparition(this.subquestionsArray[2].userAnswer as string)){
               //si on a pas un age d'apparition correct, on supprime la donnée
@@ -243,6 +250,8 @@ export class QuestionComponent implements OnInit, OnChanges {
         //TO DO trancher si on veut ou pas stocker les réponses à l'aide (pour l'instant nan)
         //Lorsqu'on retourne en arrière on n'efface pas les réponses mais elles n'apparaissent pas een déjà cochée non plus 
           // Met à jour selected global (Oui si au moins 1 case cochée sinon vide)
+          console.log("sub", this.subquestionsArray)
+          console.log("aideSelections", this.aideSelections)
           this.selectedAnswer = this.aideSelections.size > 0 ? 'Oui' : '';
           if (this.selectedAnswer == 'Oui') {
             //prévention secondaire 

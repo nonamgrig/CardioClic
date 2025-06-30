@@ -2,12 +2,26 @@
     "home": {
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
-        "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end L'utilisation de cet outil n'engage pas la responsabilités de ses auteurs.\n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 90 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif). \n\n L'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire :end text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire", 
+        "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end L'utilisation de cet outil n'engage pas la responsabilités de ses auteurs.\n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 89 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif). \n\n L'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire (PAS ENCORE DISPONIBLE) :end text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire", 
         "lien1": "Calcul de la clairance : text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)",
         "lien2": "SCORE2 : text=SCORE2 link=https://academic.oup.com/eurheartj/article/42/25/2439/6297709#google_vignette", 
         "lien3": "SCORE2OP : text=SCORE2OP link=https://academic.oup.com/eurheartj/article/42/25/2455/6297711", 
         "lien4": "SCORE2Diabete : text=SCORE2Diabete link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false"
     }, 
+    "tools" : {
+        "info1" : {
+            "question" : "Quand ré-évaluer le risque cardiovasculaire d'un patient ?", 
+            "answer" : "Le risque cardiovasculaire peut être recalculé à tout moment si un facteur de risque majeur est modifié. \nEn fonction de la gravité du risque précédement obtenu ré-évaluer le risque (Élevé : 2 ans, Modéré : 3 ans, Faible : 5 ans)"
+        }, 
+        "info2" : {
+            "question" : "Que faire en cas de myalgie sous statine ?", 
+            "answer" : "CAT : Arrêt temporaire, bilan CPK, réévaluation du traitement. Conseils : surveiller douleurs musculaires persistantes."
+        },
+        "info3" : {
+            "question" : "Que faire en cas de cytolyse sous statine ?", 
+            "answer" : "CAT : Arrêter la statine, contrôler les transaminases, rechercher autres causes. Conseils : réintroduire à dose plus faible si possible."
+        } 
+    },
     "patient": {
         "age": {
             "headline" : "Age",
@@ -96,7 +110,7 @@
             "type": "text", 
             "message": {
                 "message1": "Information manquante, remplir l'âge du patient",
-                "message2": "L'évaluation du risque cardiovasculaire n'est disponible que pour les patients entre 40 et 89 ans"
+                "message2": "L'évaluation du risque cardiovasculaire avec les calculateurs de risques utilisés dans Cardio'Clic n'est validée que pour les patients dont l'âge est commpris entre 40 et 89 ans. \n\nPour tout questionnement spécifique pour un patient en dehors de ces âges, un avis spécialisé pourrait être sollicité."
             },
             "units" : {
                 "unit2" : "ans"
@@ -140,6 +154,14 @@
                         "response3": "AVC ischémique, AIT ou endarteriectomie carotidienne"
                     }, 
                     "next": ""
+                },
+                "subquestion2" : {
+                    "question" : "",
+                    "type":"checkboxsingle", 
+                    "responses" : {
+                        "response1": "Aucun des événements ci-dessus"
+                    }, 
+                    "next": ""
                 }
             }, 
             "message" : {
@@ -169,7 +191,7 @@
             }
         },
         "coro" : {
-            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ces examens ?", 
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à cet examen ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "subquestion1" : {
@@ -181,6 +203,14 @@
                         "response3": "Lésion significative >70% de l'artère interventriculaire antérieure (IVA) proximale"
                     }, 
                     "next": ""
+                }, 
+                "subquestion2" : {
+                    "question" : "",
+                    "type":"checkboxsingle", 
+                    "responses" : {
+                        "response1": "Aucune des lésions ci-dessus"
+                    }, 
+                    "next": ""
                 }
             }, 
             "message" : {
@@ -190,7 +220,7 @@
             "next": "diabetique"
         }, 
         "doppler" : {
-            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à cet examen ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "subquestion1" : {
@@ -198,6 +228,14 @@
                     "type":"checkboxmultipleaide", 
                     "responses" : {
                         "response1": "Sténose artérielle significative >50%"
+                    }, 
+                    "next": ""
+                }, 
+                "subquestion2" : {
+                    "question" : "",
+                    "type":"checkboxsingle", 
+                    "responses" : {
+                        "response1": "Aucune des lésions ci-dessus"
                     }, 
                     "next": ""
                 }
@@ -209,7 +247,7 @@
             "next": "diabetique"
         }, 
         "calcique" : {
-            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à ses examens ?", 
+            "question": "Votre patient(e) présente-il des lésions qualifiantes de la 'prévention secondaire' suite à cet examen ?", 
             "type": "subquestion", 
             "subquestion" : {
                 "subquestion1" : {
@@ -217,6 +255,14 @@
                     "type":"checkboxmultipleaide", 
                     "responses" : {
                         "response1": "Score calcique coronaire >400 UA"
+                    }, 
+                    "next": ""
+                }, 
+                "subquestion2" : {
+                    "question" : "",
+                    "type":"checkboxsingle", 
+                    "responses" : {
+                        "response1": "Aucune des lésions ci-dessus"
                     }, 
                     "next": ""
                 }
@@ -241,11 +287,11 @@
             }
         },        
         "apparition": {
-            "question": "Répondez à l'une des deux questions ci-dessus", 
+            "question": "Répondez à l'une des deux questions ci-dessous", 
             "info" : "Si l'âge d'apparition du diabète est renseigné, on ne prendra pas en compte l'année d'apparition.",
             "type": "subquestion", 
             "message":{
-                "message1" : "Les informations renseignées sont incorrectes, veuillez vérifier notamment l'âge du patient."
+                "message1" : "Les informations renseignées sont incorrectes, veuillez vérifier que vous l'information complétée correspond à l'âge du patient"
             },
             "subquestion" : {  
                 "anneeApparition" : {
@@ -302,7 +348,7 @@
         },        
         "ratio": {
             "question": "Quel est le ratio albumine/creatinine (RAC) de votre patient(e) ?",            
-            "info" : "Si vous ne disposez pas du ratio, nous utiliserons par défaut le cas le plus favorable, à savoir l'absence de protéinurie (RAC < 30mg/L) pour la suite. \n\nNous vous invitons dans ce cas à proposer le dosage urinaire à votre patient(e) ( name=Imprimer l'ordonnance pré-remplie image=assets/img/ordonnancev0.png ) et à revenir calculer le RCV si jamais celui-ci revient positif.",
+            "info" : "Si vous ne disposez pas du ratio, nous utiliserons par défaut le cas le plus favorable, à savoir l'absence de protéinurie (RAC < 30mg/L) pour la suite. \n\nNous vous invitons dans ce cas à proposer le dosage urinaire à votre patient(e) et à revenir calculer le RCV si jamais celui-ci revient supérieur à 30 mg/g",
             "type": "subquestion", 
             "subquestion" : {
                 "ratio" : {
@@ -324,9 +370,9 @@
                 }
             },
             "message" : {
-                "message1" : "Il est fortement conseillé d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e) \n\n En attendant, vous pouvez continuer l'évaluation et le ratio sera considéré inférieur à 30 mg/g", 
-                "message2" : "Il est conseillé d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e) \n\n En attendant, vous pouvez continuer l'évaluation et le ratio sera considéré inférieur à 30 mg/g",
-                "message3": "Il peut être intéressant d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e). \n\n En attendant, vous pouvez continuer l'évaluation et le ratio sera considéré inférieur à 30 mg/g", 
+                "message1" : "Il est fortement conseillé d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e) \n\n En attendant, vous pouvez continuer l'évaluation, nous prendrons le cas le plus favorable avec le ratio considéré inférieur à 30 mg/g", 
+                "message2" : "Il est conseillé d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e) \n\n En attendant, vous pouvez continuer l'évaluation, nous prendrons le cas le plus favorable avec le ratio considéré inférieur à 30 mg/g",
+                "message3": "Il peut être intéressant d'obtenir le ratio Albumine/Créatinine dans la situation de votre patient(e). \n\n En attendant, vous pouvez continuer l'évaluation, nous prendrons le cas le plus favorable avec le ratio considéré inférieur à 30 mg/g", 
                 "message4": "Vore patient(e) étant diabétique, il est préférable de calculer le SCORE 2 Diabétique lorsque le ratio Albumine/Créatinine n'est pas disponible."
             },
             "next": "score"
@@ -525,21 +571,6 @@
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             },
             "reco": {
-                "ldl" : {
-                    "message1" :"LDL cholesterol ≤ 0.55 g/L",
-                    "message2" : "", 
-                    "refIcon" : "ldl"
-                },
-                "pression" : {
-                    "message1" :"Pression artérielle ≤ 130/80 mmHg",
-                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
-                    "refIcon" : "pression"
-                },
-                "diabete" : {
-                    "message1" :"Diabète : Utilisation préférentielle Gliflozine / Analogue GLP1",
-                    "message2" : "", 
-                    "refIcon" : "diabete"
-                },
                 "cardiologue" : {
                     "message1" :"Suivi Cardiologique à considérer",
                     "message2" : "", 
@@ -554,6 +585,21 @@
                     "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
+                },
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 0.55 g/L",
+                    "message2" : "", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 130/80 mmHg",
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
+                    "refIcon" : "pression"
+                },
+                "diabete" : {
+                    "message1" :"Diabète : Utilisation préférentielle Gliflozine / Analogue GLP1",
+                    "message2" : "", 
+                    "refIcon" : "diabete"
                 }
             }
         },
@@ -566,6 +612,21 @@
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
             "reco": {
+                "cardiologue" : {
+                    "message1" :"Consultation cardiologique non indiquée chez le patient asymptomatique",
+                    "message2" : "", 
+                    "refIcon" : "cardiologue"
+                },
+                "sport" : {
+                    "message1" :"Activité physique à encourager !",
+                    "message2" : "", 
+                    "refIcon" : "sport"
+                },
+                "fumeur" : {
+                    "message1" :"Objectif zéro tabac",
+                    "message2" : "", 
+                    "refIcon" : "fumeur"
+                },
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 0.7 g/L",
                     "message2" : "", 
@@ -580,7 +641,19 @@
                     "message1" :"Diabète : Utilisation préférentielle Gliflozine",
                     "message2" : "", 
                     "refIcon" : "diabete"
-                },
+                }
+            }, 
+            "recalcul": "2 ans"
+        },
+        "MRCV": {
+            "question": "Votre patient(e) a un", 
+            "type": "RCV", 
+            "rcv" : "Risque Cardiovasculaire Modéré",
+            "preconisation" : "Les recommandations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
+            "message" : {
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+            }, 
+            "reco": {
                 "cardiologue" : {
                     "message1" :"Consultation cardiologique non indiquée chez le patient asymptomatique",
                     "message2" : "", 
@@ -595,19 +668,7 @@
                     "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
-                }
-            }, 
-            "recalcul": "2 ans"
-        },
-        "MRCV": {
-            "question": "Votre patient(e) a un", 
-            "type": "RCV", 
-            "rcv" : "Risque Cardiovasculaire Modéré",
-            "preconisation" : "Les recommandations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
-            "message" : {
-                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
-            }, 
-            "reco": {
+                }, 
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 1.0 g/L",
                     "message2" : "", 
@@ -622,21 +683,6 @@
                     "message1" :"Diabète : cas général (metformine première intention)",
                     "message2" : "", 
                     "refIcon" : "diabete"
-                },
-                "cardiologue" : {
-                    "message1" :"Consultation cardiologique non indiquée chez le patient asymptomatique",
-                    "message2" : "", 
-                    "refIcon" : "cardiologue"
-                },
-                "sport" : {
-                    "message1" :"Activité physique à encourager !",
-                    "message2" : "", 
-                    "refIcon" : "sport"
-                },
-                "fumeur" : {
-                    "message1" :"Objectif zéro tabac",
-                    "message2" : "", 
-                    "refIcon" : "fumeur"
                 }
             }, 
             "recalcul": "3 ans"
@@ -649,17 +695,7 @@
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
-            "reco": {
-                "ldl" : {
-                    "message1" :"LDL cholesterol ≤ 1.9 g/L",
-                    "message2" : "Idéalement <1.16 g/L mais à adapter au profil patient", 
-                    "refIcon" : "ldl"
-                },
-                "pression" : {
-                    "message1" :"Pression artérielle ≤ 135/85 mmHg",
-                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
-                    "refIcon" : "pression"
-                },
+            "reco": {                
                 "cardiologue" : {
                     "message1" :"Consultation cardiologique non indiquée chez le patient asymptomatique",
                     "message2" : "", 
@@ -674,6 +710,16 @@
                     "message1" :"Objectif zéro tabac",
                     "message2" : "", 
                     "refIcon" : "fumeur"
+                },
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 1.9 g/L",
+                    "message2" : "Idéalement <1.16 g/L mais à adapter au profil patient", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 135/85 mmHg",
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
+                    "refIcon" : "pression"
                 }
             }, 
             "recalcul": "5 ans"

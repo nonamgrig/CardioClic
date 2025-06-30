@@ -1,4 +1,4 @@
-<div *ngIf="preco">
+<div *ngIf="preco" id="sectionToPrint" >
   <div *ngIf="preco.preconisation"> 
       <div class="preconisation" *ngIf="preco.preconisation">
       <div class="preco-header">
@@ -9,34 +9,6 @@
 
       <div class="reco-grid" *ngIf=" preco.reco">
         <div class="left-column">
-          <app-reco-box *ngIf="preco.reco['ldl']"
-            [message1]="preco.reco['ldl'].message1"
-            [message2]="preco.reco['ldl'].message2"
-            [refIcon]="preco.reco['ldl'].refIcon"
-            [is2Open]="allBoxesOpen"
-            [hidden]="preco.reco['ldl'].message2==''">
-          </app-reco-box>
-
-          <app-reco-box  *ngIf="preco.reco['pression']"
-            [message1]="preco.reco['pression'].message1"
-            [message2]="preco.reco['pression'].message2"
-            [refIcon]="preco.reco['pression'].refIcon"
-            [is2Open]="allBoxesOpen"
-            [hidden]="preco.reco['pression'].message2==''">
-          </app-reco-box>
-
-          <app-reco-box  *ngIf="preco.reco['diabete']"
-            [message1]="preco.reco['diabete'].message1"
-            [message2]="preco.reco['diabete'].message2"
-            [refIcon]="preco.reco['diabete'].refIcon"[is2Open]="allBoxesOpen"
-            [is2Open]="allBoxesOpen"
-            [hidden]="preco.reco['diabete'].message2==''">
-          </app-reco-box>        
-        </div>
-        
-
-        <div class="right-column">
-          
           <!-- Cas secondaire dans les reco condition 1 -->
           <app-reco-box  *ngIf="preco.reco['cardiologue'] && patient.prevention=='Secondaire'"
             [message1]="reco['cardiologue'].condition1.message1"
@@ -71,17 +43,44 @@
             [hidden]="preco.reco['fumeur'].message2==''">
           </app-reco-box>
         </div>
+        
+
+        <div class="right-column">
+          <app-reco-box *ngIf="preco.reco['ldl']"
+            [message1]="preco.reco['ldl'].message1"
+            [message2]="preco.reco['ldl'].message2"
+            [refIcon]="preco.reco['ldl'].refIcon"
+            [is2Open]="allBoxesOpen"
+            [hidden]="preco.reco['ldl'].message2==''">
+          </app-reco-box>
+
+          <app-reco-box  *ngIf="preco.reco['pression']"
+            [message1]="preco.reco['pression'].message1"
+            [message2]="preco.reco['pression'].message2"
+            [refIcon]="preco.reco['pression'].refIcon"
+            [is2Open]="allBoxesOpen"
+            [hidden]="preco.reco['pression'].message2==''">
+          </app-reco-box>
+
+          <app-reco-box  *ngIf="preco.reco['diabete']"
+            [message1]="preco.reco['diabete'].message1"
+            [message2]="preco.reco['diabete'].message2"
+            [refIcon]="preco.reco['diabete'].refIcon"[is2Open]="allBoxesOpen"
+            [is2Open]="allBoxesOpen"
+            [hidden]="preco.reco['diabete'].message2==''">
+          </app-reco-box>          
+        </div>
       </div>
 
-      <div class="fiche-patient">
-        <h2 class="title">Imprimer des fiches patient éducatives ciblées pour votre patient</h2>
-        <img [src]="'assets/img/fiche.png'" alt="icon fiche" class="icon" />
+      <div class="fiche-patient no-print">
+        <h2 class="title">Imprimer des fiches patient éducatives ciblées pour votre patient (EN COURS)</h2>
+        <img [src]="'assets/img/fiche.png'" alt="icon fiche" class="icon" (click)="downloadPDF()"/>
       </div>
     </div>
 
 
-    <h2 class="title-medecin">Recommandations plus détaillées</h2>
-    <div class="reco-medecin">
+    <h2 class="title-medecin no-print">Recommandations plus détaillées</h2>
+    <div class="reco-medecin no-print">
       
         <!-- Onglets -->
         <div class="tab-buttons">

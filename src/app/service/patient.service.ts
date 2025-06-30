@@ -175,6 +175,14 @@ export class PatientService {
     return Number(ageApparition)<= Number(this.patientData.age)
   }
 
+  //on vérifie si l'age d'apparition et l'année d'apparition concordent 
+  checkApparationAgeAnnee(anneeApparition : string, ageApparition : string ) : boolean {
+    let age =0; 
+    const anneeEnCours = new Date().getFullYear();
+    const anneeNaissance = Number(anneeEnCours) - Number(this.patientData.age); 
+    return Number(anneeApparition) == Number(ageApparition)+anneeNaissance 
+  }
+
   calculAgeApparition(anneeApparition :string): number {
     let age =0; 
     const anneeEnCours = new Date().getFullYear();

@@ -1,6 +1,6 @@
 import { Component, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { FormatInfoTextPipe } from '../../pipe/format-info-text.pipe';
 import { TexteService } from '../../service/texte.service';
 
@@ -18,6 +18,9 @@ export class AboutComponent {
   lien3 : any; 
   lien4: any; 
 
+  liens: { original: string, formatted: SafeHtml }[] = [];
+
+
   constructor(
       private location: Location,
       private texteService: TexteService,
@@ -26,23 +29,24 @@ export class AboutComponent {
   ) { }
   
   ngOnInit(): void {
-    // Charger les questions dès le début si ce n'est pas déjà fait
     this.texteService.loadTexts().subscribe(texts => {
-      this.texteService.setTexts(texts); 
-      this.text=texts; 
-      if (this.text.home) {
-        const formattedLien1 = this.formatInfoTextPipe.transform(this.text.home.lien1); 
-        this.lien1 = this.sanitizer.bypassSecurityTrustHtml(formattedLien1);  
+      this.texteService.setTexts(texts);
+      this.text = texts;
 
-        const formattedLien2 = this.formatInfoTextPipe.transform(this.text.home.lien2); 
-        this.lien2 = this.sanitizer.bypassSecurityTrustHtml(formattedLien2);  
-        const formattedLien3 = this.formatInfoTextPipe.transform(this.text.home.lien3); 
-        this.lien3 = this.sanitizer.bypassSecurityTrustHtml(formattedLien3);  
-        const formattedLien4 = this.formatInfoTextPipe.transform(this.text.home.lien4); 
-        this.lien4 = this.sanitizer.bypassSecurityTrustHtml(formattedLien4);  
+      if (this.text.home) {
+        this.liens = Object.entries(this.text.home)
+          .filter(([key]) => key.startsWith('lien'))
+          .map(([_, value]) => {
+            const formatted = this.formatInfoTextPipe.transform(value as string);
+            return {
+              original: value as string,
+              formatted: this.sanitizer.bypassSecurityTrustHtml(formatted)
+            };
+          });
       }
     });
   }
+
 
   goBack():void{
     this.location.back(); 

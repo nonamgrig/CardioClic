@@ -22,6 +22,7 @@ import { RecoBoxComponent } from './modules/shared/reco/reco-box/reco-box.compon
 import { ContactbarComponent } from './modules/shared/contactbar/contactbar/contactbar.component';
 import { EndEvalComponent } from './modules/shared/end/end-eval/end-eval.component';
 import { DetailComponent } from './modules/preconisation/detail/detail/detail.component';
+import { ToolsComponent } from './modules/tools/tools/tools.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DetailComponent } from './modules/preconisation/detail/detail/detail.co
     RecoBoxComponent,
     ContactbarComponent,
     EndEvalComponent,
-    DetailComponent
+    DetailComponent,
+    ToolsComponent
   ],
   imports: [
     BrowserModule,

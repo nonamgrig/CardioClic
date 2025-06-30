@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Question } from '../../service/question.service';
 import { TexteService } from '../../service/texte.service';
 import { Preconisation, PreconisationService } from '../../service/preconisation.service';
 import { Patient } from '../../service/patient.service';
+import html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-preconisation',
@@ -60,5 +60,35 @@ export class PreconisationComponent implements OnInit, OnChanges {
     this.selectedTab = tab;
   }
 
+  downloadPDF() {
+    const section = document.getElementById('sectionToPrint');
+    if (!section) return;
 
+    // Masquer les éléments .no-print
+    const noPrintElems = section.querySelectorAll('.no-print');
+    noPrintElems.forEach(el => el.classList.add('hidden-temp'));
+
+    let date = new Date();
+
+    let jour = String(date.getDate()).padStart(2, '0');
+    let mois = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+    let annee = date.getFullYear();
+
+    let dateFormattee = `${jour}-${mois}-${annee}`;
+
+    // Configuration HTML2PDF
+    const opt = {
+      margin:       0,
+      filename:     'RCV_'+dateFormattee+ '_patient.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+
+    // Générer le PDF
+    html2pdf().set(opt).from(section).save().then(() => {
+      // Ré-afficher les .no-print
+      noPrintElems.forEach(el => el.classList.remove('hidden-temp'));
+    });
+  }
 }

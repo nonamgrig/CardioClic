@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div class="container2">
-    <div class="left-section">
-        <app-back (click)="goBack()"></app-back>
+<div class="container2" id="sectionToPrint">
+    <div class="left-section" >
+        <app-back class="no-print" (click)="goBack()"></app-back>
         <div class="question">
             <app-question
                 *ngIf= "questionId" 
@@ -29,7 +29,7 @@
             </app-end-eval>
         </div>
     </div>
-    <div class="right-section">
+    <div class="right-section" >
         <app-patient
         [patient]="patient"></app-patient>
     </div>

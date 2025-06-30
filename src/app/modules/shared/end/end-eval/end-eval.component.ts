@@ -57,8 +57,8 @@ export class EndEvalComponent implements OnInit, OnChanges {
 
     //fonction pour envoyer les datas 
     //dans le POC, on envoie vers le formulaire
-    this.texteService.waitForDialogConfirmation("La version de test de Cardio'Clic n'enregistre aucune donnée, cependant pour garder une trace du risque calculé vous pouvez copier coller le résultat ci-dessous."+
-      "\n\nLe risque cardiovasculaire du patient XX est "  + this.patient?.risque + ". \n Evaluation réalisée le " + dateStr)
+    this.texteService.waitForDialogConfirmation("La version de test de Cardio'Clic n'enregistre aucune donnée, cependant pour garder une trace du risque calculé vous pouvez copier-coller le résultat ci-dessous :"+
+      "\n\nLe risque cardiovasculaire du patient XXX est "  + this.patient?.risque + ". \n Evaluation réalisée le " + dateStr)  
   }
 
   private formatDate(date: Date): string {

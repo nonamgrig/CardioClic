@@ -11,11 +11,16 @@
         <div class="input-container">
             <input [(ngModel)]="userAnswer" [placeholder]="patient[question.title] ? patient[question.title] : 'Entrez une valeur'">
             
-            <div *ngIf="question.units" class="unit-select-container">
+            <div *ngIf="question.units && question.units.length == 1" class="unit-single">
+            {{ question.units[0] }}
+            </div>
+
+            <div *ngIf="question.units && question.units.length > 1" class="unit-select-container">
                 <select [(ngModel)]="question.selectedUnit" class="form-select">
                     <option *ngFor="let unit of question.units" [value]="unit">{{ unit }}</option>
                 </select>
             </div>
+
         </div>    
         <button class="valider" (click)="onAnswerSubmit()">Valider</button>
     </div>
@@ -50,7 +55,11 @@
                 <div class="input-container">
                     <input [(ngModel)]="subquestion.userAnswer" [placeholder]="'Entrez une valeur'">
                      <!--[placeholder]="patient[subquestion.key] ? patient[subquestion.key] : 'Entrez une valeur'"> -->
-                    <div *ngIf="subquestion.units" class="unit-select-container">
+                    <div *ngIf="subquestion.units && subquestion.units.length == 1" class="unit-single">
+                    {{ subquestion.units[0] }}
+                    </div>
+
+                    <div *ngIf="subquestion.units && subquestion.units.length > 1" class="unit-select-container">
                         <select [(ngModel)]="subquestion.selectedUnit" class="form-select">
                             <option *ngFor="let unit of subquestion.units" [value]="unit">{{ unit }}</option>
                         </select>

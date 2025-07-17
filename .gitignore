@@ -43,3 +43,6 @@ Thumbs.db
 
 
 Déployer.docx
+
+# cacher les sources
+/src/

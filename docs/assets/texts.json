@@ -2,7 +2,8 @@
     "home": {
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
-        "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end L'utilisation de cet outil n'engage pas la responsabilités de ses auteurs.\n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 89 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif). \n\n L'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire (PAS ENCORE DISPONIBLE) :end text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire", 
+        "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end L'utilisation de cet outil n'engage pas la responsabilités de ses auteurs.\n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 89 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif).", 
+        "test": "Cardio'Clic est un outil d'aide à la décision médicale. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end\n\nL'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire (PAS ENCORE DISPONIBLE) :end text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire",
         "lien1": "Calcul de la clairance : text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)",
         "lien2": "SCORE2 : text=SCORE2 link=https://academic.oup.com/eurheartj/article/42/25/2439/6297709#google_vignette", 
         "lien3": "SCORE2OP : text=SCORE2OP link=https://academic.oup.com/eurheartj/article/42/25/2455/6297711", 
@@ -423,9 +424,9 @@
                 },
                 "cholesTotal" : {
                     "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
-                    "units" : {
-                        "unit1" : "mmol/L",
-                        "unit2" : "g/L"                      
+                    "units" : {                        
+                        "unit1" : "mmol/L", 
+                        "unit2" : "g/L"                
                     },
                     "type":"text", 
                     "responses": "", 
@@ -434,8 +435,8 @@
                 "hdl" : {
                     "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0,65-1,94 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L",
-                        "unit2" : "g/L" 
+                        "unit1" : "mmol/L", 
+                        "unit2" : "g/L"     
                     },
                     "type":"text", 
                     "responses": "", 
@@ -473,8 +474,8 @@
                 "cholesTotal" : {
                     "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L",
-                        "unit2" : "g/L"                      
+                        "unit1" : "mmol/L", 
+                        "unit2" : "g/L"                        
                     },
                     "type":"text", 
                     "responses": "", 
@@ -483,8 +484,8 @@
                 "hdl" : {
                     "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0,65-1,94 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L",
-                        "unit2" : "g/L" 
+                        "unit1" : "mmol/L", 
+                        "unit2" : "g/L"   
                     },
                     "type":"text", 
                     "responses": "", 
@@ -519,8 +520,8 @@
                 "cholesTotal" : {
                     "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L",
-                        "unit2" : "g/L"                    
+                        "unit1" : "mmol/L", 
+                        "unit2" : "g/L"                      
                     },
                     "type":"text", 
                     "responses": "", 
@@ -529,8 +530,8 @@
                 "hdl" : {
                     "question" : "HDL cholesterol (0,27-0,97 g/L) ou (0,65-1,94 mmol/L)",
                     "units" : {
-                        "unit1" : "mmol/L",
-                        "unit2" : "g/L" 
+                        "unit1" : "mmol/L", 
+                        "unit2" : "g/L"    
                     },
                     "type":"text", 
                     "responses": "", 
@@ -566,7 +567,7 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Très Élevé",
-            "preconisation" : "Les recommandations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             },
@@ -607,7 +608,7 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Élevé",
-            "preconisation" : "Les recommandations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.",  
+            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -649,7 +650,49 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Modéré",
-            "preconisation" : "Les recommandations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "message" : {
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+            }, 
+            "reco": {
+                "cardiologue" : {
+                    "message1" :"Consultation cardiologique non indiquée chez le patient asymptomatique",
+                    "message2" : "", 
+                    "refIcon" : "cardiologue"
+                },
+                "sport" : {
+                    "message1" :"Activité physique à encourager !",
+                    "message2" : "", 
+                    "refIcon" : "sport"
+                },
+                "fumeur" : {
+                    "message1" :"Objectif zéro tabac",
+                    "message2" : "", 
+                    "refIcon" : "fumeur"
+                }, 
+                "ldl" : {
+                    "message1" :"LDL cholesterol ≤ 1.0 g/L",
+                    "message2" : "", 
+                    "refIcon" : "ldl"
+                },
+                "pression" : {
+                    "message1" :"Pression artérielle ≤ 135/85 mmHg",
+                    "message2" : "Pour aller plus loin, imprimer la fiche du site ameli.fr text=Auto-mesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
+                    "refIcon" : "pression"
+                },
+                "diabete" : {
+                    "message1" :"Diabète : cas général (metformine première intention)",
+                    "message2" : "", 
+                    "refIcon" : "diabete"
+                }
+            }, 
+            "recalcul": "3 ans"
+        },
+        "FMRCV": {
+            "question": "Votre patient(e) a un", 
+            "type": "RCV", 
+            "rcv" : "Risque Cardiovasculaire Faible à Modéré",
+            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -691,7 +734,7 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Faible", 
-            "preconisation" : "Les recommandations ci-dessous sont adaptées en fonction de votre patient(e). Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 

@@ -3,25 +3,46 @@
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
         "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end L'utilisation de cet outil n'engage pas la responsabilités de ses auteurs.\n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 89 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif).", 
-        "test": "Cardio'Clic est un outil d'aide à la décision médicale. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end\n\nL'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire (PAS ENCORE DISPONIBLE) :end text=Formulaire link=https://fr.wikipedia.org/wiki/Formulaire",
-        "lien1": "Calcul de la clairance : text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)",
+        "test": "Cardio'Clic est un outil d'aide à la décision médicale. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end\n\nL'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire :end text=Formulaire link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz",
+
+        "lien1": "bold=Société Européenne de Cardiologie end", 
         "lien2": "SCORE2 : text=SCORE2 link=https://academic.oup.com/eurheartj/article/42/25/2439/6297709#google_vignette", 
         "lien3": "SCORE2OP : text=SCORE2OP link=https://academic.oup.com/eurheartj/article/42/25/2455/6297711", 
-        "lien4": "SCORE2Diabete : text=SCORE2Diabete link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false"
+        "lien4": "SCORE2Diabete : text=SCORE2Diabete link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false", 
+
+        "lien5" : "bold=HAS end", 
+        "lien6" : "Diabète", 
+        "lien8": "text= Fiche synthèse Diabète - HAS 2025 link=https://www.has-sante.fr/upload/docs/application/pdf/2025-07/parcours_de_soins_du_patient_adulte_vivant_avec_un_diabete_de_type_2_-_14_messages_cles_pour_ameliorer_votre_pratique.pdf", 
+        "lien9": "text= Parcours de soins du patient adulte vivant avec un diabète de type 2 - HAS 2025 link=https://www.has-sante.fr/upload/docs/application/pdf/2025-07/parcours_de_soins_du_patient_adulte_vivant_avec_un_diabete_de_type_2_-_guide_2025-07-15_16-42-8_797.pdf", 
+
+
+
+
+        "lien10": "Calcul de la clairance : text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)"
+        
     }, 
     "tools" : {
         "info1" : {
             "question" : "Quand ré-évaluer le risque cardiovasculaire d'un patient ?", 
-            "answer" : "Le risque cardiovasculaire peut être recalculé à tout moment si un facteur de risque majeur est modifié. \nEn fonction de la gravité du risque précédement obtenu ré-évaluer le risque (Élevé : 2 ans, Modéré : 3 ans, Faible : 5 ans)"
+            "answer" : "Proposition empirique de réévaluation périodique du risque CV tous les 5 ans (intervalle pouvant être raccourci en cas de résultat en zone frontière). Intérêt de renouveler l'évaluation en cas de modification significative d'un facteur de risque CV."
         }, 
         "info2" : {
             "question" : "Que faire en cas de myalgie sous statine ?", 
-            "answer" : "CAT : Arrêt temporaire, bilan CPK, réévaluation du traitement. Conseils : surveiller douleurs musculaires persistantes."
+            "answer1" : "Rappel prévalence Rhabdomyolyses :  1 à 3 / 100 000 patient-année, Myalgies (SAMS - Statin associated muscle symptoms) : 10-15 %",
+            "answer2" : "Dosage CK : avant traitement si possible, puis uniquement en cas de myalgies \n\n",
+            "answer3" : "Si myalgies \n - CK >10N (c.-à-d. 10 fois la limite supérieure de la norme du laboratoire) : STOP statine, check fonction rénale, redoser / 2 semaines jusqu'à normalisation. Contre -indication théorique à la reprise si la relation de cause à effet est formellement établie en l'absence de facteur favorisant intercurrent réversible. \n - CK 4 à 10N : STOP statine pour 6 semaines, redoser / 2 semaines. Re-challenge avec statine de haute efficacité à faible dose (= atorvastatine 10mg ou rosuvastatine 5mg) +/- en alternance 1 jour sur 2. \n - CK < 4N  STOP statine pour 2 à 4 semaines. Re-challenge avec une autre molécule de statine. Si réapparition des symptômes, tester une statine de haute efficacité à faible dose (= atorvastatine 10mg ou rosuvastatine 5mg) +/- en alternance 1 jour sur 2.", 
+            "answer4" : " Mémo : Si objectif LDL non atteint à la posologie maximale tolérée, ajouter ezetimibe 10mg/jour. Considérer en théorie la mise sous traitement anti-PCSK9 (mais problématiques actuelles de disponibilité des traitements). \n\n   ",
+            "answer5" : "En cas de dosage des CK chez le patient asymptomatique (bien que non recommandé) : \n - CK 4-10N asymptomatique : continuer et redoser à 2 semaines. Rechercher une étiologie alternative de myolyse. \n - CK <4N asymptomatique : continuer le traitement + dire au patient de reporter d'éventuels symptômes musculaires, surveillance clinique régulière. \n\n ", 
+            "answer6" : "name=Algorithm for the treatment of muscular symptoms during statin treatment. image=assets/img/myalgie.png", 
+            "answer7" : "underline= Source :end  text=ESC Dyslipidémies 2019 link=https://doi.org/10.1093/eurheartj/ehz455"
         },
         "info3" : {
-            "question" : "Que faire en cas de cytolyse sous statine ?", 
-            "answer" : "CAT : Arrêter la statine, contrôler les transaminases, rechercher autres causes. Conseils : réintroduire à dose plus faible si possible."
-        } 
+            "question" : "Que faire en cas de cytolyse hépatique sous statine ?", 
+            "answer9" : "Hépatiques : \n - Dosage ALAT : avant traitement et une fois à 2 mois, puis pas de nécessité de dosage systématique \n - ALAT < 3N : continuer et redoser à 1 mois \n - ALAT > 3N : STOP statine et redoser à 1 mois \n --> normalisé : reprise ½ dose (ou re-challenge avec statine de haute efficacité à faible dose (= atorvastatine 10mg ou rosuvastatine 5mg) +/- en alternance 1 jour sur 2 \n --> toujours élevé : chercher autre étiologie de cytolyse."
+        }, 
+        "fiche" : {
+            "question" : "Fiches Informations Patient à télécharger"
+        }
     },
     "patient": {
         "age": {
@@ -115,7 +136,7 @@
             "type": "text", 
             "message": {
                 "message1": "Information manquante, remplir l'âge du patient",
-                "message2": "L'évaluation du risque cardiovasculaire avec les calculateurs de risques utilisés dans Cardio'Clic n'est validée que pour les patients dont l'âge est commpris entre 40 et 89 ans. \n\nPour tout questionnement spécifique pour un patient en dehors de ces âges, un avis spécialisé pourrait être sollicité."
+                "message2": "L'évaluation du risque cardiovasculaire avec les calculateurs de risques utilisés dans Cardio'Clic n'est validée que pour les patients dont l'âge est compris entre 40 et 89 ans. \n\nPour tout questionnement spécifique pour un patient en dehors de ces âges, un avis spécialisé pourrait être sollicité."
             },
             "units" : {
                 "unit2" : "ans"
@@ -419,9 +440,13 @@
             }, 
             "subquestion" : {
                 "pa" : {
-                    "question" : "PA systolique (100-200mmHg)",
+                    "question" : "PA systolique",
                     "units" : {
                         "unit1" : "mmHg"
+                    },
+                    "limit" : {
+                        "min" : "100", 
+                        "max" : "255"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -433,6 +458,14 @@
                         "unit1" : "g/L",
                         "unit2" : "mmol/L"                      
                     },
+                    "limit" : {
+                        "min" : "1.16", 
+                        "max" : "3.48"
+                    },
+                    "limit1" : {
+                        "min" : "3", 
+                        "max" : "9"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
@@ -442,6 +475,14 @@
                     "units" : {
                         "unit1" : "g/L",
                         "unit2" : "mmol/L"    
+                    },
+                    "limit" : {
+                        "min" : "0.27", 
+                        "max" : "0.97"
+                    },
+                    "limit1" : {
+                        "min" : "0.65", 
+                        "max" : "1.94"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -468,9 +509,13 @@
             },
             "subquestion" : {
                 "pa" : {
-                    "question" : "PA systolique (100-255mmHg)",
+                    "question" : "PA systolique",
                     "units" : {
                         "unit1" : "mmHg"
+                    },
+                    "limit" : {
+                        "min" : "100", 
+                        "max" : "255"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -480,7 +525,15 @@
                     "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
                         "unit1" : "g/L",
-                        "unit2" : "mmol/L"                         
+                        "unit2" : "mmol/L"                      
+                    },
+                    "limit" : {
+                        "min" : "1.16", 
+                        "max" : "3.48"
+                    },
+                    "limit1" : {
+                        "min" : "3", 
+                        "max" : "9"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -491,6 +544,14 @@
                     "units" : {
                         "unit1" : "g/L",
                         "unit2" : "mmol/L"    
+                    },
+                    "limit" : {
+                        "min" : "0.27", 
+                        "max" : "0.97"
+                    },
+                    "limit1" : {
+                        "min" : "0.65", 
+                        "max" : "1.94"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -514,9 +575,13 @@
             "type": "subquestion", 
             "subquestion" : {
                 "pa" : {
-                    "question" : "PA systolique (100-255mmHg)",
+                    "question" : "PA systolique",
                     "units" : {
                         "unit1" : "mmHg"
+                    },
+                    "limit" : {
+                        "min" : "100", 
+                        "max" : "255"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -526,7 +591,15 @@
                     "question" : "Cholestérol total (1,16-3,48 g/L) ou (3-9 mmol/L)",
                     "units" : {
                         "unit1" : "g/L",
-                        "unit2" : "mmol/L"                       
+                        "unit2" : "mmol/L"                      
+                    },
+                    "limit" : {
+                        "min" : "1.16", 
+                        "max" : "3.48"
+                    },
+                    "limit1" : {
+                        "min" : "3", 
+                        "max" : "9"
                     },
                     "type":"text", 
                     "responses": "", 
@@ -538,15 +611,31 @@
                         "unit1" : "g/L",
                         "unit2" : "mmol/L"    
                     },
+                    "limit" : {
+                        "min" : "0.27", 
+                        "max" : "0.97"
+                    },
+                    "limit1" : {
+                        "min" : "0.65", 
+                        "max" : "1.94"
+                    },
                     "type":"text", 
                     "responses": "", 
                     "next": ""
                 },
                 "hba1c" : {
-                    "question" : "HbA1c (1 - 150 mmol/mol)",
+                    "question" : "HbA1c (3 - 10 %) (1 - 150 mmol/mol)",
                     "units" : {
-                        "unit1" : "mmol/mol", 
-                        "unit2" : "%"
+                        "unit1" : "%",
+                        "unit2" : "mmol/mol"
+                    },
+                    "limit" : {
+                        "min" : "3", 
+                        "max" : "10"
+                    },
+                    "limit1" : {
+                        "min" : "1", 
+                        "max" : "150"
                     },
                     "type":"text", 
                     "responses": "",   
@@ -572,9 +661,9 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Très Élevé",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
-                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz"
             },
             "reco": {
                 "cardiologue" : {
@@ -613,13 +702,13 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Élevé",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
-                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz"
             }, 
             "reco": {
                 "cardiologue" : {
-                    "message1" :"Consultation cardiologique non indiquée chez le patient asymptomatique",
+                    "message1" :"Consultation cardiologique généralement non indiquée chez le patient asymptomatique",
                     "message2" : "", 
                     "refIcon" : "cardiologue"
                 },
@@ -655,9 +744,9 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Modéré",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
-                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz"
             }, 
             "reco": {
                 "cardiologue" : {
@@ -697,9 +786,9 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Faible à Modéré",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
-                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz"
             }, 
             "reco": {
                 "cardiologue" : {
@@ -739,9 +828,9 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Faible", 
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
-                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
+                "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz"
             }, 
             "reco": {                
                 "cardiologue" : {
@@ -761,7 +850,7 @@
                 },
                 "ldl" : {
                     "message1" :"LDL cholesterol ≤ 1.9 g/L",
-                    "message2" : "Idéalement <1.16 g/L mais à adapter au profil patient", 
+                    "message2" : "Idéalement on propose de cibler <1.16 g/L, mais à adapter au profil et aux souhaits du patient dans le cadre d'une décision médicale partagée, en privilégiant en premier lieu les mesures non pharmacologiques", 
                     "refIcon" : "ldl"
                 },
                 "pression" : {
@@ -814,8 +903,8 @@
         },                
         "nephrologue" : {
             "condition1": {
-                "message1" :"Adressage au nephrologue pas nécessaire hors cas cité",
-                "message2" : "Rapport albumine/créatinine (RAC) > 500mg/g (56,6mg/mmol)\nMicro-albuminurie persistante (RAC > 30mg/g ou 3,4 mg/mmol) chez diabétique\nDFG < 30 ml/min/1.73m2\nDFG en diminution de plus de 10% par an\nHyperkalémie > 5.5 mmol/L de façon répétée\nNéphropathie héréditaire ou kystique", 
+                "message1" :"Adressage au néphrologue non nécéssaire en dehors des situations ci-dessous :",
+                "message2" : "Rapport albumine/créatinine (RAC) > 500mg/g (> 56,6mg/mmol)\nMicro-albuminurie persistante (RAC > 30mg/g ou > 3,4 mg/mmol) chez diabétique\nDFG < 30 ml/min/1.73m2\nDiminution rapide du DFG de plus de 10% par an\nHyperkalémie > 5.5 mmol/L de façon répétée\nNéphropathie héréditaire ou kystique", 
                 "refIcon" : "cardiologue"
             }, 
             "condition2": {
@@ -824,7 +913,7 @@
                 "refIcon" : "cardiologue"
             }, 
             "condition3": {
-                "message1" :"Adressage au néphrologue nécessaire",
+                "message1" :"Adressage au néphrologue recommandé",
                 "message2" : "", 
                 "refIcon" : "cardiologue"
             }
@@ -841,27 +930,29 @@
         }, 
         "dyslipidemie" : {
             "refIcon": "ldl",
-            "message": "Rappels des mesures hygiénodiététiques (systématiques et à poursuivre au long cours quels que soient les traitements médicamenteux associés)", 
-            "traitement": "Traitement de première ligne : statine en monothérapie (débuter avec statine de faible intensité si proche de la cible, moyenne intensité sinon, et titrer selon la réponse pour atteindre la cible).\n\nTraitement de seconde ligne : association fixe statine + ezetimibe 10mg/jour (pour faciliter l’observance) ",
-            "ordonance" :"à 1 mois : Bilan lipidique à jeun, ASAT/ALAT, CPK (uniquement en cas de symptomatologie musculaire).\nname=Imprimer ordonnance type (pas encore disponible) image=assets/img/ordonnancev0.png \n\nUne fois la cible atteinte, un contrôle annuel est suffisant (peu de variabilité si l'observance est bonne).", 
-            "fiche" : "",
+            "message" : "",
+            "fiche": "Rappels des mesures hygiénodiététiques (systématiques et à poursuivre au long cours quels que soient les traitements médicamenteux associés)", 
+            "traitement": "Traitement de première ligne : statine en monothérapie (débuter avec statine de faible intensité si proche de la cible, moyenne intensité sinon, et titrer selon la réponse pour atteindre la cible).\n\nTraitement de seconde ligne : association statine + ezetimibe 10mg/jour (une association fixe facilite l’observance) ",
+            "ordonnance" :"à 1 mois : Bilan lipidique à jeun, ASAT/ALAT, CPK (uniquement en cas de symptômes musculaire).\nUne fois la cible atteinte, un contrôle annuel est suffisant.", 
+            "exemple" : "Ordonnance type Bilan Lipidique.doc" ,
             "encart": "Prévenir le patient du risque de myalgies (effet secondaire non exceptionnel mais sans gravité dans l’immense majorité des cas, qui conduit le plus souvent à diminuer la posologie ou changer de molécule). Intolérance musculaire vraie au statine chez moins d’1 patient sur 20."
         }, 
         "HTA" : {
             "refIcon": "pression",
-            "message": "Importance du contrôle automesure PA au domicile",
-            "fiche": "L'HTA ne donne pas de symptôme mais responsable d'un vieillissement prématuré des artères et d'accidents vasculaires cérébraux ou cardiaques. Mesures hygiéno-diététiques importantes : hydratation quotidienne abondante visant environ 1,5 litres d'apports hydriques/jour, régime hyposodé modéré <6g/jour, activité physique régulière...\n text=Fiche Patient link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
-            "traitement": "En premier intention, parmi IEC ou ARA2, ICA, Thiazidique. Idéalement en monothérapie à faible dose d'emblée. Privilégier les associations fixes pour favoriser l'observance.",
-            "ordonance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
+            "fiche": "L'HTA ne donne pas de symptôme mais est responsable d'un vieillissement prématuré des artères qui peut provoquer des accidents vasculaires cérébraux ou cardiaques.\n Mesures hygiéno-diététiques importantes : hydratation quotidienne abondante visant environ 1,5 litres d'apports hydriques/jour, régime hyposodé modéré (<6g/jour), activité physique régulière...\n\n Rappeler l'importance du contrôle automesure tensionnelle au domicile text=Fiche de relevé pour le patient ameli.fr link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
+            "traitement": "En première intention, parmi IEC ou ARA2, Inhibiteurs calciques, diurétique Thiazidique. Idéalement en bithérapie à faible dose d'emblée. Privilégier les associations fixes pour faciliter l'observance.",
+            "ordonnance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
+            "exemple" : "Ordonnance type contrôle iono IEC_ARA2_Thiazide.doc" ,
             "encart": "Conduite à tenir si myalgie sous statine, CAT si élévation des enzymes hépatiques sous statine"
         }, 
         "diabetique" : {
             "refIcon": "diabete",
             "message": "Cible d'HBA1c définie selon le profil patient name=HbA1c cible selon HAS image=assets/img/Hb1AcCible.png",
             "fiche": "Revoir avec les diabéto les principes d'éducation thérapeutique, lutte contre le surpoids, mesures diététiques ++, activité physique régulière...", 
-            "traitement": "En première intention metformine + adapté selon le profil de risque CV et les comorbidités plus que selon l'HbA1c (selon HAS 2024)",
-            "ordonance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
-            "encart": "Mémo gliflozines (intro jusqu'à clairance 20 mL/kg/min, risque infectieux génito-urinaire, acidocétose chez insulinopéniques, -20% de la dose d'insuline \n Mémo analogues du GLP1 (nausées/vomissements initiaux, perte de poids ++, -30% de la dose d'insuline)"
+            "traitement": "En première intention metformine, mais dorénavant le traitement est prioritairement adapté selon le profil de risque CV et les comorbidités que selon la seule valeur d'HbA1c (selon HAS 2024)",
+            "ordonnance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
+            "exemple" : "Ordonnance type contrôle iono IEC_ARA2_Thiazide.doc" ,
+            "encart": "Mémo gliflozines (introduction possible jusqu'à clairance 20 mL/kg/min pour l'empagliflozine, léger surrisque infectieux génito-urinaire (notamment mycotique), risque majoré d'acidocétose chez les patients sévèrement insulinopéniques, diminuer de 20% de la dose d'insuline chez le patient bien équilibré \n Mémo analogues du GLP1 (nausées/vomissements initiaux, perte de poids ++, diminuer de 30% de la dose d'insuline chez le patient bien équilibré)"
         }
 
 

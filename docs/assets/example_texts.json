@@ -560,7 +560,7 @@
             "question": "Votre patient(e) a un (la page de résultat est inclu dans l'enchaînement des questions)", 
             "type": "RCV (pour déterminer que c'est une page de résultat et pas une question)", 
             "rcv" : "Risque Cardiovasculaire Très Élevé text affiché dans le résultat",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
                 "message1" : "Pop up quand on termine l'évaluation. L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             },
@@ -601,7 +601,7 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Élevé",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -643,7 +643,7 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Modéré",
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -685,7 +685,7 @@
             "question": "Votre patient(e) a un", 
             "type": "RCV", 
             "rcv" : "Risque Cardiovasculaire Faible", 
-            "preconisation" : "Les préconisations ci-dessous sont adaptées en fonction des réponses au questions. Elles ne se substituent pas à un avis médical.", 
+            "preconisation" : "Les préconisations ci-dessous découlent des réponses fournies par l'utilisateur. Elles sont présentées à titre indicatif et ne se substituent pas au jugement clinique du médecin utilisateur.", 
             "message" : {
                 "message1" : "L'outil Cardio'Clic est encore en phase de tests. <br> Aidez-nous à l'améliorer en nous donnant votre avis : text=Formulaire Cardio'Clic link=https://fr.wikipedia.org/wiki/Formulaire"
             }, 
@@ -781,7 +781,7 @@
         "dyslipidemie" : {
             "refIcon": "ldl",
             "traitement": "info dans traitement",
-            "ordonance" :"info dans ordonnance de suivi", 
+            "ordonnance" :"info dans ordonnance de suivi", 
             "fiche": "texte d'entête ?", 
             "encart": "encart d'attention"
         }, 
@@ -790,7 +790,7 @@
             "message": "Importance du contrôle automesure PA au domicile ",
             "fiche": "L'HTA ne donne pas de symptôme mais responsable d'un vieillissement prématuré des artères et d'accidents vasculaires cérébraux ou cardiaques. Mesures hygiéno-diététiques importantes : hydratation quotidienne abondante visant environ 1,5 litres d'apports hydriques/jour, régime hyposodé modéré <6g/jour, activité physique régulière...\n text=Fiche Patient link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
             "traitement": "En premier intention, parmi IEC ou ARA2, ICA, Thiazidique. Idéalement en monothérapie à faible dose d'emblée. Privilégier les associations fixes pour favoriser l'observance.",
-            "ordonance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
+            "ordonnance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
             "encart": "Conduite à tenir si myalgie sous statine, CAT si élévation des enzymes hépatiques sous statine"
         }, 
         "diabetique" : {
@@ -798,7 +798,7 @@
             "message": "Cible d'HBA1c définie selon le profil patient name=HbA1c cible selon HAS image=assets/img/Hb1AcCible.png",
             "fiche": "Revoir avec les diabéto les principes d'éducation thérapeutique, lutte contre le surpoids, mesures diététiques ++, activité physique régulière...", 
             "traitement": "En premier interntion metformine + adapté selon le profil de risque CV et les comorbidités plus que selon l'HbA1c (selon HAS 2024)",
-            "ordonance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
+            "ordonnance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
             "encart": "Mémo gliflozines (intro jusqu'à clairance 20 mL/kg/min, risque infectieux génito-urinaire, acidocétose chez insulinopéniques, -20% de la dose d'insuline \n Mémo analogues du GLP1 (nausées/vomissements initiaux, perte de poids ++, -30% de la dose d'insuline)"
         }
 

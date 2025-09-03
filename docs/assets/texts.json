@@ -3,22 +3,27 @@
         "title": "Quel est le risque cardiovasculaire de mon patient ?",
         "subtitle": "Evaluons-le en quelques clics", 
         "information":"Cardio'Clic est un outil d'aide à la décision médicale et vous permet d'évaluer le risque cardiovasculaire de votre patient. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end L'utilisation de cet outil n'engage pas la responsabilités de ses auteurs.\n\n Cardio'Clic est adapté à tout(e) patient(e), diabétique ou non, en prévention primaire ou secondaire, âgé(e) de 40 à 89 ans.\nunderline=Le nécessaire:end créatinine, bilan lipidique, HbA1c si diabétique et ratio albumine/créatinine urinaire idéalement (facultatif).", 
-        "test": "Cardio'Clic est un outil d'aide à la décision médicale. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end\n\nL'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire :end text=Formulaire link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz",
+        "test": "Cardio'Clic est un outil d'aide à la décision médicale. bold=Il ne se substitue en rien au jugement clinique de l'utilisateur.end\n\nL'outil est actuellement en phase de test. Votre retour d'expérience, avis et idées d'amélioration nous sont précieuses. \n bold=Aidez-nous en remplissant ce formulaire (durée moins de 5 min)s:end text=Ouvrir le Formulaire link=https://sphinx.chu-nantes.fr/v4/s/dlm6oz",
 
-        "lien1": "bold=Société Européenne de Cardiologie end", 
-        "lien2": "SCORE2 : text=SCORE2 link=https://academic.oup.com/eurheartj/article/42/25/2439/6297709#google_vignette", 
-        "lien3": "SCORE2OP : text=SCORE2OP link=https://academic.oup.com/eurheartj/article/42/25/2455/6297711", 
-        "lien4": "SCORE2Diabete : text=SCORE2Diabete link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false", 
+        "lien1": "bold=Calcul de la clairance : end text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)", 
+        
+        
+        "esc2": "bold=SCORE2 risk prediction algorithms: end new models to estimate 10-year risk of cardiovascular disease in Europe. SCORE2 working group and ESC Cardiovascular risk collaboration. European Heart Journal, ehab309: text=Lien Reco link=https://academic.oup.com/eurheartj/article/42/25/2439/6297709#google_vignette", 
+        "esc3": "bold=SCORE2-OP risk prediction algorithms: end estimating incident cardiovascular event risk in older persons in four geographical risk regions. SCORE2-OP working group and ESC Cardiovascular risk collaboration. European Heart Journal, ehab312 : text=Lien Reco link=https://academic.oup.com/eurheartj/article/42/25/2455/6297711", 
+        "esc4": "bold=SCORE2-Diabetes: end 10-year cardiovascular risk estimation in type 2 diabetes in Europe, SCORE2-Diabetes Working Group and the ESC Cardiovascular Risk Collaboration. European Heart Journal (2023) 44, 2544-2556 : text=Lien Reco link=https://academic.oup.com/eurheartj/article/44/28/2544/7185610?login=false", 
 
-        "lien5" : "bold=HAS end", 
-        "lien6" : "Diabète", 
-        "lien8": "text= Fiche synthèse Diabète - HAS 2025 link=https://www.has-sante.fr/upload/docs/application/pdf/2025-07/parcours_de_soins_du_patient_adulte_vivant_avec_un_diabete_de_type_2_-_14_messages_cles_pour_ameliorer_votre_pratique.pdf", 
-        "lien9": "text= Parcours de soins du patient adulte vivant avec un diabète de type 2 - HAS 2025 link=https://www.has-sante.fr/upload/docs/application/pdf/2025-07/parcours_de_soins_du_patient_adulte_vivant_avec_un_diabete_de_type_2_-_guide_2025-07-15_16-42-8_797.pdf", 
+        "esc5" : "bold=Dyslipidémie : end Recommandation ESC Dyslipidémies 2025 - Mise à jour ciblée (2025 Focused Update of the 2019 ESC/EAS Guidelines for the management of dyslipidaemias. Mach, François et al. Atherosclerosis, August 2025) text=Lien Reco link=https://www.atherosclerosis-journal.com/article/S0021-9150(25)01377-2/fulltext)", 
+        "esc6" : "bold=HTA : end Recommandation ESC HTA 2024  ( JW McEvoy et al. 2024 ESC Guidelines for the management of elevated blood pressure and hypertension. European Heart Journal, October 2024) text=Lien Reco link=https://doi.org/10.1093/eurheartj/ehae178",
+        
+
+        
+        "has9": "bold=Diabète : end text= Fiche synthèse Diabète - HAS 2025 link=https://www.has-sante.fr/upload/docs/application/pdf/2025-07/parcours_de_soins_du_patient_adulte_vivant_avec_un_diabete_de_type_2_-_14_messages_cles_pour_ameliorer_votre_pratique.pdf", 
+        "has10": "bold=Diabète : end text= Parcours de soins du patient adulte vivant avec un diabète de type 2 - HAS 2025 link=https://www.has-sante.fr/upload/docs/application/pdf/2025-07/parcours_de_soins_du_patient_adulte_vivant_avec_un_diabete_de_type_2_-_guide_2025-07-15_16-42-8_797.pdf"
 
 
 
 
-        "lien10": "Calcul de la clairance : text=Formule calcul CKD-EPI link=https://wikimedi.ca/wiki/CKD-EPI_(formule)"
+        
         
     }, 
     "tools" : {
@@ -807,8 +812,8 @@
                     "refIcon" : "fumeur"
                 }, 
                 "ldl" : {
-                    "message1" :"LDL cholesterol ≤ 1.0 g/L",
-                    "message2" : "", 
+                    "message1" :"Traitement pharmacologique hypolipémiant généralement non indiqué",
+                    "message2" : "En présence d'un risque CV faible à modéré, hormis en cas de LDL cholestérol > 1.9g/L. Une cible de LDL cholestérol < 1.16 g/L voire 1.0 g/L est associé à un risque CV réduit. Mesures hygiéno-diététiques de première intention. Prise en considération des préférences du patient et processus de décision partagée.", 
                     "refIcon" : "ldl"
                 },
                 "pression" : {
@@ -931,26 +936,27 @@
         "dyslipidemie" : {
             "refIcon": "ldl",
             "message" : "",
-            "fiche": "Rappels des mesures hygiénodiététiques (systématiques et à poursuivre au long cours quels que soient les traitements médicamenteux associés)", 
-            "traitement": "Traitement de première ligne : statine en monothérapie (débuter avec statine de faible intensité si proche de la cible, moyenne intensité sinon, et titrer selon la réponse pour atteindre la cible).\n\nTraitement de seconde ligne : association statine + ezetimibe 10mg/jour (une association fixe facilite l’observance) ",
-            "ordonnance" :"à 1 mois : Bilan lipidique à jeun, ASAT/ALAT, CPK (uniquement en cas de symptômes musculaire).\nUne fois la cible atteinte, un contrôle annuel est suffisant.", 
+            "fiche": "Rappel systématique des mesures hygiéno-diététiques usuelles (à poursuivre au long cours quels que soient les traitements médicamenteux associés)", 
+            "traitement": "- Traitement de première intention : statine en monothérapie.\n- Traitement de seconde intention : association statine + ezetimibe 10mg/jour (une association fixe facilite l’observance) ",
+            "ordonnance" :"entre 1 et 2 mois : Bilan lipidique à jeun, ASAT/ALAT, CPK (uniquement en cas de symptômes musculaire).\nUne fois la cible atteinte, un contrôle annuel est suffisant.", 
             "exemple" : "Ordonnance type Bilan Lipidique.doc" ,
-            "encart": "Prévenir le patient du risque de myalgies (effet secondaire non exceptionnel mais sans gravité dans l’immense majorité des cas, qui conduit le plus souvent à diminuer la posologie ou changer de molécule). Intolérance musculaire vraie au statine chez moins d’1 patient sur 20."
+            "encart": "Prévenir le patient du risque de myalgies (effet secondaire non exceptionnel mais sans gravité dans l’immense majorité des cas, qui conduit le plus souvent à diminuer la posologie ou changer de molécule). Intolérance musculaire vraie au statine chez moins d’1 patient sur 20.", 
+            "flecheencart" : "Population avec risque majoré de myalgies sous statines : sujets > 65 ans, femmes, sujets d'ascendance asiatique ou afro-caribéenne, obésité, hypothyroidie, diabète, patients sous amiodarone ou inhibiteur calcique, insuffisance rénale ou hépatique chronique, consommation éthylique à risque, pratique sportive importante. \n Source : text=NIH Prevalence of statin intolerance: a meta-analysis link=https://pubmed.ncbi.nlm.nih.gov/35169843/"
         }, 
         "HTA" : {
             "refIcon": "pression",
-            "fiche": "L'HTA ne donne pas de symptôme mais est responsable d'un vieillissement prématuré des artères qui peut provoquer des accidents vasculaires cérébraux ou cardiaques.\n Mesures hygiéno-diététiques importantes : hydratation quotidienne abondante visant environ 1,5 litres d'apports hydriques/jour, régime hyposodé modéré (<6g/jour), activité physique régulière...\n\n Rappeler l'importance du contrôle automesure tensionnelle au domicile text=Fiche de relevé pour le patient ameli.fr link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
-            "traitement": "En première intention, parmi IEC ou ARA2, Inhibiteurs calciques, diurétique Thiazidique. Idéalement en bithérapie à faible dose d'emblée. Privilégier les associations fixes pour faciliter l'observance.",
+            "fiche": "Rappel systématique des mesures hygiéno-diététiques usuelles (à poursuivre au long cours quels que soient les traitements médicamenteux associés). \n\n L'HTA ne donne pas de symptôme mais est responsable d'un vieillissement prématuré des artères qui peut provoquer des accidents vasculaires cérébraux ou cardiaques.\n Mesures hygiéno-diététiques importantes : hydratation quotidienne abondante visant environ 1,5 litres d'apports hydriques/jour, régime hyposodé modéré (<6g/jour), activité physique régulière...\n\n Rappeler l'importance du contrôle de la pression artérielle par automesure au domicile dans des conditions de repos text=Imprimer la fiche de recueil d'automesure tensionnelle link=https://www.ameli.fr/sites/default/files/2018403_releve_amt_accompagnement_hta-v2.pdf", 
+            "traitement": "- Traitement de première intention au choix parmi :  ARA2 (-sartans) ou IEC (-pril) / inhibiteur calcique non bradycardisant (-dipine) /  diurétique thiazidique (hydrochlorothiazide) ou thiazide-like (indapamide). \n- Il est dorénavant recommandé de privilégier d'initier d'emblée une bithérapie à faible dose (meilleur rapport efficacité/tolérance) et de titrer secondairement la posologie selon la réponse. Réévaluation précoce (1 mois) et titration rapide pour atteindre la cible en moins de 6 mois. \n- Privilégier les associations fixes pour favoriser l'observance. \n- Si bithérapie insuffisante : trithérapie associant les 3 classes citées supra. \n- Si trithérapie insuffisante = HTA résistante : s'assurer de l'observance médicamenteuse et hygiéno-diététique,  indication d'un avis cardiologique pour bilan d'HTA secondaire. Traitement de 4eme ligne = antagoniste des récepteurs au minéralocorticoïdes (spironolactone).",
             "ordonnance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
-            "exemple" : "Ordonnance type contrôle iono IEC_ARA2_Thiazide.doc" ,
-            "encart": "Conduite à tenir si myalgie sous statine, CAT si élévation des enzymes hépatiques sous statine"
+            "exemple" : "Ordonnance type contrôle iono IEC_ARA2_Thiazide.doc" 
         }, 
         "diabetique" : {
             "refIcon": "diabete",
             "message": "Cible d'HBA1c définie selon le profil patient name=HbA1c cible selon HAS image=assets/img/Hb1AcCible.png",
-            "fiche": "Revoir avec les diabéto les principes d'éducation thérapeutique, lutte contre le surpoids, mesures diététiques ++, activité physique régulière...", 
-            "traitement": "En première intention metformine, mais dorénavant le traitement est prioritairement adapté selon le profil de risque CV et les comorbidités que selon la seule valeur d'HbA1c (selon HAS 2024)",
-            "ordonnance": "Ionogramme + créatinine à 7 jours d'introduction d'un IEC/ARA2 ou Thiazidique",
+            "fiche": "Rappel systématique des mesures hygiéno-diététiques usuelles (à poursuivre au long cours quels que soient les traitements médicamenteux associés)", 
+            "traitement": "Le traitement usuel de première intention reste la metformine dans le cas général. Mais il est dorénavant recommandé d'adapter le traitement aux profil du patient et aux comorbidités. Notamment, si le recours aux gliflozines ou aux analogues du GLP1 est indiqué par la présence d'une comorbidité (insuffisance cardiaque, insuffisance rénale) ou d'un risque cardiovasculaire élevé ou très élevé), ils doivent être prescrits indépendamment de la valeur d'HBA1c (source HAS 2024-2025).",
+            "ordonnance": "Suivi usuel du patient diabétique (HBA1c...)",
+            "fleche" : "bold=Prise en charge requise end \n - grossesse ou projet de grossesse à court terme\n La patiente sera vue régulièrement par une équipe pluridisciplinaire (médecin généraliste, médecin spécialisé en diabétologie, gynécologue/gynécologue-obstétricien, sage-femme, infirmier pour l’ETP, diététicien) pour le suivi de grossesse et l’accouchement. \n\n bold=Avis ponctuel requis dès le diagnostic end\n - diabète de présentation inhabituelle avec signes d’alerte faisant suspecter une autre forme de diabète \n - diabète avec hyperglycémie majeure d’emblée (HbA1c > 9 %) \n - découverte au diagnostic d’une complication micro ou macrovasculaire \n\n bold= Avis ponctuel requis au cours du suivi end\n - instauration ou optimisation d’une insulinothérapie avec schéma à plusieurs injections \n - adaptation thérapeutique en cas d’hypoglycémies itératives ou sévères \n - après une complication micro et macrovasculaire aiguë ou évolutive \n - difficulté à atteindre l’objectif glycémique ou pondéral après 6 à 12 mois de prise en charge en MG \n - situation d’obésité de classe III (IMC ≥ 40) \n - diabète gestationnel : au diagnostic et lorsque l’insulinothérapie est envisagée \n\n bold= Autres motifs de recours possible end  \n - réparation et initiation d’une thérapeutique susceptible d’induire une hypoglycémie (insuline, sulfamide) \n - toute situation où le médecin traitant l’estime nécessaire",
             "exemple" : "Ordonnance type contrôle iono IEC_ARA2_Thiazide.doc" ,
             "encart": "Mémo gliflozines (introduction possible jusqu'à clairance 20 mL/kg/min pour l'empagliflozine, léger surrisque infectieux génito-urinaire (notamment mycotique), risque majoré d'acidocétose chez les patients sévèrement insulinopéniques, diminuer de 20% de la dose d'insuline chez le patient bien équilibré \n Mémo analogues du GLP1 (nausées/vomissements initiaux, perte de poids ++, diminuer de 30% de la dose d'insuline chez le patient bien équilibré)"
         }
